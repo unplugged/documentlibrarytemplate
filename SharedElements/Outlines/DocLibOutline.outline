@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE outline SYSTEM 'xmlschemas/domino_8_5_3.dtd'>
+<outline name='DocLibOutline' alias='DocLibOutline' xmlns='http://www.lotus.com/dxl'
+ version='8.5' maintenanceversion='3.0' replicaid='80257AC2002D6A1A' hide='v3 v4strict'
+ publicaccess='false' designerversion='7' language='en'>
+<noteinfo noteid='1aa' unid='5D30381D599C3ED6852566520045D715' sequence='23'>
+<created><datetime dst='true'>19980731T084250,45-04</datetime></created>
+<modified><datetime>20121126T081603,45+00</datetime></modified>
+<revised><datetime dst='true'>20100824T141209,52-04</datetime></revised>
+<lastaccessed><datetime>20121126T081603,45+00</datetime></lastaccessed>
+<addedtofile><datetime>20121126T081603,45+00</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Lotus Notes Template Development/O=Lotus Notes</name></updatedby>
+<outlineentry label='All Documents' alias='All Documents' type='namedelementlink'
+ targetframe='NotesView'><namedelementlink type='view' name='($All)'/></outlineentry>
+<outlineentry label='By Author' alias='By Authoer' type='namedelementlink'
+ targetframe='NotesView'><namedelementlink type='view' name='ByAuthor'/></outlineentry>
+<outlineentry label='By Alternate Name' alias='By Alternate Name' type='namedelementlink'
+ targetframe='NotesView'><namedelementlink type='view' name='By Alternate Name'/></outlineentry>
+<outlineentry label='By Category' alias='By Category' type='namedelementlink'
+ targetframe='NotesView'><namedelementlink type='view' name='ByCategory'/></outlineentry>
+<outlineentry label='Review Status' alias='Review Status' type='namedelementlink'
+ targetframe='NotesView'><namedelementlink type='view' name='ReviewStatus'/></outlineentry>
+<outlineentry label='My Favorites' alias='My Favorites' type='namedelementlink'
+ targetframe='NotesView' hide='web'><namedelementlink type='folder' name='My Favorite Documents'/></outlineentry>
+<outlineentry type='otherviews' targetframe='NotesView'/>
+<outlineentry type='otherprivateviews' targetframe='NotesView' hide='web'/>
+<outlineentry type='otherfolders' targetframe='NotesView'/>
+<outlineentry type='otherprivatefolders' targetframe='NotesView' hide='web'/></outline>
+

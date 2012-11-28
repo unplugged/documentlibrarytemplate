@@ -1,0 +1,116 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE subform SYSTEM 'xmlschemas/domino_8_5_3.dtd'>
+<subform name='DoclibResponseBanner' xmlns='http://www.lotus.com/dxl' version='8.5'
+ maintenanceversion='3.0' replicaid='80257AC2002D6A1A' designerversion='6'
+ language='en'>
+<noteinfo noteid='1ce' unid='ADB4C92BA953E2D585256681004947F9' sequence='24'>
+<created><datetime dst='true'>19980916T092025,53-04</datetime></created>
+<modified><datetime>20121126T081603,61+00</datetime></modified>
+<revised><datetime dst='true'>20100824T141209,68-04</datetime></revised>
+<lastaccessed><datetime>20121126T081603,61+00</datetime></lastaccessed>
+<addedtofile><datetime>20121126T081603,61+00</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Lotus Notes Template Development/O=Lotus Notes</name></updatedby>
+<wassignedby><name>CN=Lotus Notes Template Development/O=Lotus Notes</name></wassignedby>
+<body><richtext>
+<pardef id='1' leftmargin='1in' hide='notes web'/>
+<par def='1'><run><font size='8pt' style='bold'/></run></par>
+<table cellbordercolor='#bba58b' rightmargin='98%' widthtype='fixedleft' refwidth='7.9688in'><tablecolumn
+ width='1.6875in'/><tablecolumn width='6.2813in'/>
+<tablerow>
+<tablecell borderwidth='2px' bgcolor='#e9e3db'>
+<cellbackground repeat='resize'><imageref name='DocHeader.gif'/></cellbackground>
+<pardef id='3' align='center' leftmargin='1%' keepwithnext='true' keeptogether='true'/>
+<par def='3'><run><font size='18pt' style='bold' color='#7f604f'/>Response</run></par>
+<pardef id='4' align='center' leftmargin='1%' hide='web' keepwithnext='true'
+ keeptogether='true'><code event='hidewhen'><formula>formname != "Response"</formula></code></pardef>
+<par def='4'><run><font size='9pt' style='bold' color='#7f604f'/>to Main Document</run></par>
+<pardef id='5' align='center' leftmargin='1%' hide='web' keepwithnext='true'
+ keeptogether='true'><code event='hidewhen'><formula>formname = "Response"</formula></code></pardef>
+<par def='5'><run><font size='9pt' style='bold' color='#7f604f'/>to Response</run></par>
+<par def='3'><run><font size='9pt' style='bold' color='#806210'/></run></par>
+<par def='3'><run><font size='9pt' style='bold'/></run><run><font size='9pt'
+ style='bold'/><sharedfieldref name='tmpFrom'/></run><run><font size='9pt'
+ style='bold'/></run></par>
+<par def='3'><run><font size='9pt' color='gray'/></run><run><font size='9pt'/><field
+ type='datetime' kind='computedfordisplay' name='DateComposed' description='Date this document was composed'
+ htmlid='DateComposed'><datetimeformat date='monthday' time='hourminute' zone='never'/><code
+ event='defaultvalue'><formula>@Created</formula></code></field></run><run
+><font size='9pt' color='gray'/> </run><run><font size='9pt'/><field type='datetime'
+ kind='computedfordisplay' name='timeComposed' htmlid='timeComposed'><datetimeformat
+ show='time' date='yearmonthday' time='hourminute' zone='never'/><code event='defaultvalue'><formula
+>@Created</formula></code></field></run><run><font size='9pt' style='bold'/></run></par>
+<par def='3'><run><font size='9pt' style='bold'/></run></par>
+<pardef id='6' align='center' leftmargin='1%' keepwithnext='true' keeptogether='true'><code
+ event='hidewhen'><formula>Readers = ""</formula></code></pardef>
+<par def='6'><run><font size='9pt'/></run><run><font size='9pt' style='bold'/><sharedfieldref
+ name='Private'/></run><run><font size='9pt' style='bold' color='gray'/></run></par>
+<pardef id='7' align='center' leftmargin='1%' keepwithnext='true' keeptogether='true'><code
+ event='hidewhen'><formula>ExpireDate = ""</formula></code></pardef>
+<par def='7'><run><font size='9pt' style='bold'/></run><run><font size='9pt'
+ style='bold'/><sharedfieldref name='Expire'/></run><run><font size='9pt'/></run></par></tablecell>
+<tablecell borderwidth='2px' bgcolor='#e9e3db'>
+<pardef id='8' leftmargin='1%' keepwithnext='true' keeptogether='true'/>
+<par def='8'><run><font size='9pt' style='bold' color='white'/></run></par>
+<table widthtype='fitmargins' leftmargin='0.1000in' refwidth='6.1813in'><tablecolumn
+ width='1.0500in'/><tablecolumn width='100%'/>
+<tablerow>
+<tablecell borderwidth='0px'>
+<pardef id='10' leftmargin='0.0104in' spaceafter='1.5' keepwithnext='true'
+ keeptogether='true'/>
+<par def='10'><run><font size='9pt' style='bold'/>Subject:</run></par></tablecell>
+<tablecell borderwidth='0px'>
+<pardef id='11' leftmargin='0.0104in' hide='read preview' keepwithnext='true'
+ keeptogether='true'/>
+<par def='11'><run><font size='9pt'/><field usenotesstyle='false' height='0.2000in'
+ width='4in' multiline='true' borderstyle='single' type='text' kind='editable'
+ name='Subject' description='Enter a short description of this response.'
+ htmlid='Subject'><code event='htmlattributes'><formula>"size=50"</formula></code><code
+ event='inputtranslation'><formula>@Trim(Subject)</formula></code></field></run><run
+><font size='9pt' style='bold' color='#813f62'/></run></par>
+<pardef id='12' leftmargin='0.0104in' hide='edit previewedit' keepwithnext='true'
+ keeptogether='true'/>
+<par def='12'><run><font size='9pt' style='bold' color='#813f62'/></run><run
+><font size='9pt' style='bold'/><field type='text' kind='computedfordisplay'
+ name='dspSubject'><code event='defaultvalue'><formula>Subject</formula></code></field></run><run
+><font size='9pt' style='bold'/></run></par>
+<pardef id='13' leftmargin='0.0104in' keepwithnext='true' keeptogether='true'/>
+<par def='13'><run><font size='9pt' style='bold' color='white'/></run></par></tablecell></tablerow>
+<tablerow>
+<tablecell borderwidth='0px'>
+<par def='10'><run><font size='9pt' style='bold'/>Response to:</run></par></tablecell>
+<tablecell borderwidth='0px'>
+<par def='13'><run><font size='9pt' color='#813f62'/><field type='text' kind='computedfordisplay'
+ name='DoclinkParent'><code event='defaultvalue'><formula>@If(@IsNewDoc; @Unavailable; $Ref)</formula></code></field></run><run
+><font size='9pt'/> </run><run><font size='9pt' color='gray'/><field type='text'
+ kind='computedwhencomposed' name='ParentSubject' htmlid='ParentSubject'><code
+ event='defaultvalue'><formula>@If(formname = "Response"; OriginalSubject; Subject)</formula></code></field></run><run
+><font size='9pt' style='bold' color='white'/></run></par>
+<par def='13'><run><font size='9pt' style='bold' color='white'/></run></par></tablecell></tablerow>
+<tablerow>
+<tablecell borderwidth='0px'>
+<pardef id='14' leftmargin='0.0104in' keepwithnext='true' keeptogether='true'/>
+<par def='14'><run><font size='9pt' style='bold'/>Category:</run></par></tablecell>
+<tablecell borderwidth='0px'>
+<par def='13'><run><font size='9pt'/></run><run><font size='9pt' color='gray'/><field
+ type='text' allowmultivalues='true' kind='computedwhencomposed' name='Categories'
+ description='Press ENTER for list of keywords or to add a new keyword.' listinputseparators='comma'
+ listdisplayseparator='comma' htmlid='Categories'><keywords ui='dialoglist'
+ allownew='true'/><code event='defaultvalue'><formula>Categories</formula></code></field></run><run
+><font size='9pt' style='bold' color='white'/></run></par>
+<par def='13'><run><font size='9pt' style='bold' color='white'/></run></par></tablecell></tablerow>
+<tablerow>
+<tablecell borderwidth='0px'>
+<pardef id='15' leftmargin='0.0104in' hide='read notes' keepwithnext='true'
+ keeptogether='true'/>
+<par def='15'><run><font size='9pt' style='bold'/>Attach a file:</run></par></tablecell>
+<tablecell borderwidth='0px'>
+<pardef id='16' leftmargin='0.0104in' hide='read notes' keepwithnext='true'
+ keeptogether='true'/>
+<par def='16'><run><font size='9pt' style='bold'/></run><embeddedfileuploadcontrol
+/><run><font size='9pt' style='bold'/></run></par></tablecell></tablerow></table>
+<par def='8'><run><font size='9pt' style='bold' color='white'/></run></par></tablecell></tablerow></table>
+<pardef id='17' leftmargin='1in'/>
+<par def='17'/></richtext></body>
+<item name='$SignatureStatus'><text>1</text></item>
+<item name='$$ScriptName' summary='false' sign='true'><text>DoclibResponseBanner</text></item></subform>
+

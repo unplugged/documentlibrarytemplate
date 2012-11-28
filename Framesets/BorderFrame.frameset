@@ -1,0 +1,22 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE frameset SYSTEM 'xmlschemas/domino_8_5_3.dtd'>
+<frameset name='BorderFrame' alias='BorderFrame' xmlns='http://www.lotus.com/dxl'
+ version='8.5' maintenanceversion='3.0' replicaid='80257AC2002D6A1A' publicaccess='false'
+ designerversion='6' language='en' columns='12px 94% 12px' spacing='0px' borderwidth='0px'
+ bordercolor='none'>
+<noteinfo noteid='21e' unid='16B1FCDEC4DECB96882569F7000221C4' sequence='5'>
+<created><datetime>20010217T162317,16-08</datetime></created>
+<modified><datetime>20121126T081604,01+00</datetime></modified>
+<revised><datetime dst='true'>20100824T141210,04-04</datetime></revised>
+<lastaccessed><datetime>20121126T081604,01+00</datetime></lastaccessed>
+<addedtofile><datetime>20121126T081604,01+00</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Lotus Notes Template Development/O=Lotus Notes</name></updatedby>
+<wassignedby><name>CN=Lotus Notes Template Development/O=Lotus Notes</name></wassignedby>
+<frame border3d='false' scrolling='never' noresize='true'><namedelementlink
+ type='page' name='White Page'/></frame>
+<frameset rows='12px 1 12px' spacing='0px'>
+<frame scrolling='never' noresize='true'><namedelementlink type='page' name='White Page'/></frame>
+<frame><namedelementlink type='frameset' name='MainFrameset'/></frame>
+<frame scrolling='never' noresize='true'><namedelementlink type='page' name='White Page'/></frame></frameset>
+<frame scrolling='never' noresize='true'><namedelementlink type='page' name='White Page'/></frame></frameset>
+

@@ -1,0 +1,179 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE agent SYSTEM 'xmlschemas/domino_8_5_3.dtd'>
+<agent name='Process Late Reviews' xmlns='http://www.lotus.com/dxl' version='8.5'
+ maintenanceversion='3.0' replicaid='80257AC2002D6A1A' hide='v3' publicaccess='false'
+ designerversion='6' language='en' comment='Selects those documents which are in review and have due dates which have passed.  Based upon the review style of the document, it then either moves it along to the next reviewer, marks it as complete, or simply notifies the current reviewer(s) that their review is overdue.'
+ restrictions='unrestricted' activatable='false' enabled='false'>
+<noteinfo noteid='19a' unid='7EC3C25B7AF294EA852566050050D29E' sequence='10'>
+<created><datetime dst='true'>19980515T104247,98-04</datetime></created>
+<modified><datetime>20121126T081603,37+00</datetime></modified>
+<revised><datetime dst='true'>20100824T141209,44-04</datetime></revised>
+<lastaccessed><datetime>20121126T081603,37+00</datetime></lastaccessed>
+<addedtofile><datetime>20121126T081603,37+00</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Lotus Notes Template Development/O=Lotus Notes</name></updatedby>
+<wassignedby><name>CN=Lotus Notes Template Development/O=Lotus Notes</name></wassignedby>
+<designchange><datetime dst='true'>20100824T141209,15-04</datetime></designchange>
+<trigger type='scheduled'>
+<schedule type='daily' runlocation='any'>
+<starttime><datetime>T010000,00</datetime></starttime></schedule></trigger>
+<documentset type='all'/><code event='options'><lotusscript>Option Public
+
+</lotusscript></code><code event='declarations'><lotusscript>Dim session As NotesSession
+Dim db As NotesDatabase
+Dim view As NotesView
+Dim documents As NotesDocumentCollection
+Dim note As NotesDocument
+Dim parent As NotesDocument
+Dim emaildoc As NotesDocument
+Dim dt As NotesDateTime
+Dim item As NotesItem
+Dim rtitem As NotesRichTextItem
+Dim nam As NotesName
+
+Dim ReviewerList As Variant
+Dim ReviewerNumber As Integer
+Dim ReviewWindow As String
+Dim NextReviewer As String
+
+</lotusscript></code><code event='initialize'><lotusscript>Sub Initialize
+	
+%REM     
+changes:
+ReviewerNumber is 1 based so when Reviewer 1 is reviewing ReviewerNumber = 1.
+Therefore, using a 0 based array, NextReviewer = ReviewerList(ReviewerNumber)
+send the message
+increment next reviewer if necessary
+%END REM
+	
+'While this is similar to the same agent in doclib4, it is slightly different.  The differences are commented
+	
+	Set session = New NotesSession    
+	Set db = session.CurrentDatabase
+	Set documents = db.Search("@Today =&gt; @Date(DueDateTime) &amp; Status = 2", Nothing, 0)
+	If documents.Count = 0 Then Exit Sub
+	
+	For d = 1 To documents.Count
+		Set note = documents.GetNthDocument(d)
+		ReviewWindow = note.ReviewWindow(0)      
+		ReviewerList = note.ReviewerList
+		ReviewerNumber = note.ReviewerNumber(0)
+		Set dt = New NotesDateTime(note.DueDateTime(0))
+		Set nam = New NotesName(note.From(0))
+'ReviewWindow in the Web version has values of 0 (no time limit), 1 (move to next reviewer), and 2 (send notification)         
+		Select Case ReviewWindow
+		Case "1"   'Move to next reviewer
+			SendReminder("WindowExpired")
+			If ReviewerNumber + 1 &lt;= Ubound(ReviewerList) Then 
+				SendReminder("NotifyNextReviewer")
+			Else
+				SendReminder("NotifyOriginator")
+				note.Status = 3
+			End If
+			note.ReviewerNumber = ReviewerNumber + 1               
+		Case "2"   'Send notification to current reviewer
+			SendReminder("Reminder")
+		End Select
+		If note.IsResponse Then note.RemoveItem("DueDateTime")
+		note.Save True, True, True
+	Next
+	
+End Sub
+
+</lotusscript></code><code event='SendReminder'><lotusscript>Sub SendReminder(EmailType)
+	
+	If note.IsResponse Then Exit Sub
+	
+	Set maildoc = New NotesDocument(db)
+	Set rtitem = New NotesRichTextItem(maildoc, "Body")
+	maildoc.InheritedSubject = note.Subject
+	maildoc.InheritedDbTitle = db.Title
+	
+	Select Case EmailType
+	Case "Reminder"
+		If note.ReviewType(0) = "1" Then
+			maildoc.SendTo = ReviewerList(ReviewerNumber)
+		Else
+			Dim URevList As Variant
+			Dim editors As Variant
+			Dim i As Integer
+			editors = note.getitemvalue("CurrentEditor")
+			UEd = Ubound(editors)
+			Redim PSendTo(UEd) As Variant			
+			i=0
+			Forall x In editors
+				PSendTo(i) = x
+				i=i+1
+			End Forall
+			maildoc.sendto = PSendTo
+		End If
+		
+		
+		maildoc.Subject = GetString(1)
+		rtitem.AppendText(GetString(2))
+		Call rtitem.AppendDocLink(note, GetString(3))
+		
+	Case "WindowExpired"
+		
+		maildoc.SendTo = ReviewerList(ReviewerNumber)
+		
+		maildoc.Subject = GetString(4)
+		rtitem.AppendText(GetString(5))
+		Call rtitem.AppendDocLink(note, GetString(3))
+'reset the due date          
+		Set dt = New NotesDateTime("")
+		dt.SetNow
+		ReviewTime = note.ReviewTime(0)
+		If Isnumeric(ReviewTime) Then
+			dt.AdjustDay(ReviewTime)
+			Set note.DueDateTime = dt
+		End If
+	Case "NotifyNextReviewer"
+		maildoc.SendTo = ReviewerList(ReviewerNumber + 1)
+		maildoc.Subject = GetString(6)
+		rtitem.AppendText(GetString(7))
+		Call rtitem.AppendDocLink(note, GetString(8))
+		
+		note.CurrentEditor =	ReviewerList(ReviewerNumber + 1)
+		
+	Case "NotifyOriginator"
+		maildoc.SendTo = note.From
+		maildoc.Subject = GetString(9)
+		rtitem.AppendText(GetString(10))
+		Call rtitem.AppendDocLink(note, GetString(8))
+	End Select
+	
+	maildoc.Form = "Memo"
+	On Error Resume Next
+	Call maildoc.Send (False)
+	
+End Sub
+</lotusscript></code><code event='GetString'><lotusscript>Function GetString(StringType)
+	
+	Select Case StringType
+	Case 1     'Subject of a reminder email
+		GetString = "Overdue Document Review"
+	Case 2     'Body of a reminder email
+		GetString = "Your review of the document entitled " &amp; note.Subject(0) &amp;  " was due on " &amp; dt.DateOnly &amp;_
+		".  Please review the document and mark it as complete, because you will continue to receive these notifications until you do so.  "
+	Case 3     'comment for the AppendDocLink method
+		GetString = "DocLink to Overdue Document"
+	Case 4     'Subject of WindowExpired email
+		GetString = "Document Review Period has Expired"
+	Case 5     'Body of a expired email
+		GetString = "The time limit for your review of the document entitled " &amp; note.Subject(0) &amp;  " expired on " &amp; dt.DateOnly &amp; ".  "
+	Case 6     'Subject for email notifying next reviewer that they need to review this
+		GetString = "Document Requires Review"
+	Case 7     'Body of email to ntes reviewer
+		GetString = nam.Common &amp; " would like you to review the document entitled " &amp; note.Subject(0) &amp; " before " &amp; dt.DateOnly &amp; ".  "
+	Case 8     'comment for the AppendDocLink method
+		GetString = "DocLink to Document requiring review"
+	Case 9     'Subject on email to originator
+		GetString = "Document Review is Complete"
+	Case 10   'Body of expired email to originator
+		GetString = "The time limit for the review of the document entitled " &amp; note.Subject(0) &amp;  " expired on " &amp; dt.DateOnly &amp; ".  "
+	End Select
+	
+End Function</lotusscript></code>
+<rundata processeddocs='0' exitcode='0'>
+<agentmodified><datetime dst='true'>20020507T161445,13-07</datetime></agentmodified></rundata></agent>
+

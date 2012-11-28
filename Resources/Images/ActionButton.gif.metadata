@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?><imageresource across="2" alias="ActionButton" browsercompatible="true" designerversion="6" imagename="docActionButton.gif" language="en" maintenanceversion="3.0" name="ActionButton.gif" publicaccess="false" replicaid="80257AC2002D6A1A" version="8.5" xmlns="http://www.lotus.com/dxl">
+<noteinfo noteid="1fa" sequence="10" unid="ABF6FABF170D00C5882569F6008307E3">
+<created><datetime>20010217T155112,35-08</datetime></created>
+<modified><datetime>20121126T081603,83+00</datetime></modified>
+<revised><datetime dst="true">20100824T141209,86-04</datetime></revised>
+<lastaccessed><datetime>20121126T081603,83+00</datetime></lastaccessed>
+<addedtofile><datetime>20121126T081603,83+00</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Lotus Notes Template Development/O=Lotus Notes</name></updatedby>
+<wassignedby><name>CN=Lotus Notes Template Development/O=Lotus Notes</name></wassignedby>
+<item name="$MimeType" sign="true"><text>image/gif</text></item>
+<item name="$FileModDT" sign="true"><datetime>20010208T092144,00-08</datetime></item>
+</imageresource>

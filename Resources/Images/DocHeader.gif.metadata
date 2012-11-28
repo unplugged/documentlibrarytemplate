@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?><imageresource alias="DocHeader.gif" comment="header in main and resp docs" designerversion="6" imagename="DoclibDocHeader.gif" language="en" maintenanceversion="3.0" name="DocHeader.gif" publicaccess="false" replicaid="80257AC2002D6A1A" version="8.5" xmlns="http://www.lotus.com/dxl">
+<noteinfo noteid="222" sequence="8" unid="80925CE1DB55D0F3882569F80072E7BE">
+<created><datetime>20010219T125504,30-08</datetime></created>
+<modified><datetime>20121126T081604,03+00</datetime></modified>
+<revised><datetime dst="true">20100824T141210,06-04</datetime></revised>
+<lastaccessed><datetime>20121126T081604,03+00</datetime></lastaccessed>
+<addedtofile><datetime>20121126T081604,03+00</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Lotus Notes Template Development/O=Lotus Notes</name></updatedby>
+<wassignedby><name>CN=Lotus Notes Template Development/O=Lotus Notes</name></wassignedby>
+
+<item name="$MimeType" sign="true"><text>image/gif</text></item>
+<item name="$FileModDT" sign="true"><datetime>20010216T033748,00-08</datetime></item></imageresource>

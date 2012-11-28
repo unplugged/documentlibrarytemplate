@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE frameset SYSTEM 'xmlschemas/domino_8_5_3.dtd'>
+<frameset name='MainFramesetWeb' alias='MainFrameset' xmlns='http://www.lotus.com/dxl'
+ version='8.5' maintenanceversion='3.0' replicaid='80257AC2002D6A1A' hide='notes'
+ publicaccess='false' designerversion='6' language='en' columns='215px 1'
+ spacing='0px' borderwidth='1px' bordercolor='black'>
+<noteinfo noteid='21a' unid='ADCDBC13402C64F8882569F700020E1E' sequence='7'>
+<created><datetime>20010217T162226,86-08</datetime></created>
+<modified><datetime>20121126T081603,99+00</datetime></modified>
+<revised><datetime dst='true'>20100824T141210,02-04</datetime></revised>
+<lastaccessed><datetime>20121126T081603,99+00</datetime></lastaccessed>
+<addedtofile><datetime>20121126T081603,99+00</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Lotus Notes Template Development/O=Lotus Notes</name></updatedby>
+<wassignedby><name>CN=Lotus Notes Template Development/O=Lotus Notes</name></wassignedby>
+<frameset rows='61px 1 18px' spacing='0px'>
+<frame scrolling='never' noresize='true' marginwidth='3px'><namedelementlink
+ type='form' name='Template Name'/></frame>
+<frame name='NotesNavigator' targetframe='NotesView' scrolling='never'><namedelementlink
+ type='page' name='Outline Page'/></frame>
+<frame name='Switcher' scrolling='never'><namedelementlink type='page' name='Db Location'/></frame></frameset>
+<frameset rows='1 0%' spacing='0px'>
+<frame name='NotesView'><namedelementlink type='view' name='($All)'/></frame>
+<frame name='NotesPreview'/></frameset></frameset>
+

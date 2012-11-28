@@ -1,0 +1,210 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE agent SYSTEM 'xmlschemas/domino_8_5_3.dtd'>
+<agent name='Upgrade Doclib R4 Documents to New Design' xmlns='http://www.lotus.com/dxl'
+ version='8.5' maintenanceversion='3.0' replicaid='80257AC2002D6A1A' hide='v3'
+ publicaccess='false' designerversion='8.5.2' language='en' restrictions='unrestricted'>
+<noteinfo noteid='1b6' unid='310D334EA68A621D8525665D005522B2' sequence='13'>
+<created><datetime dst='true'>19980811T112954,42-04</datetime></created>
+<modified><datetime>20121126T081603,49+00</datetime></modified>
+<revised><datetime dst='true'>20100824T141209,56-04</datetime></revised>
+<lastaccessed><datetime>20121126T081603,49+00</datetime></lastaccessed>
+<addedtofile><datetime>20121126T081603,49+00</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Lotus Notes Template Development/O=Lotus Notes</name></updatedby>
+<revisions><datetime dst='true'>20051020T131011,30-04</datetime></revisions>
+<wassignedby><name>CN=Lotus Notes Template Development/O=Lotus Notes</name></wassignedby>
+<designchange><datetime dst='true'>20100824T141209,20-04</datetime></designchange>
+<trigger type='actionsmenu'/>
+<documentset type='runonce'/><code event='options'><lotusscript>Option Public 
+Option Declare
+
+</lotusscript></code><code event='declarations'><lotusscript>'Document Library 4.0 Redesign Fix: 
+
+Dim db As notesdatabase
+
+
+'variables to translate
+Const status1 = "New"                             'these are the four default statuses from the DocLib4 template, 
+Const status2 = "Ready for Review"        'found in the InitializeStatusList global function in the subform
+Const status3 = "In Review"
+Const status4 = "Review Complete"
+
+Const none = "None"
+'end variables to translate
+
+
+
+</lotusscript></code><code event='initialize'><lotusscript>Sub Initialize
+	Dim session As New notessession
+	Dim View As NotesView
+	Dim Doc As NotesDocument
+	Dim Item As NotesItem
+	Dim AuthItem As notesitem
+	Dim DocumentReaders As Variant
+	Dim DocumentAuthors As Variant
+	Dim Reviewers As Variant
+	Dim ReviewTime As Variant
+	Dim ReviewStyle As Variant
+	Dim tmpReviewStyle As Variant
+	Dim PreviousReviewers As Variant
+	Dim CurrentReviewers As Variant
+	Dim FutureReviewers As Variant
+	Dim tmpReviewWindow As Variant
+	Dim status As Variant
+	Dim str1 As String
+	Dim str2 As String
+	Dim str3 As String
+	Dim str4 As String
+	Dim str5 As String
+	Dim dbname As String
+	Dim RT As Variant
+	Dim intReviewTime As Variant
+	Dim count As Integer
+	Dim CurRevCount As Integer
+	Dim PrevRevCount As Integer
+	Dim ReviewerNumber(0) As Integer
+	Dim notify As Variant
+	
+'we are supporting the same four status defaults as in the original doclib4 template
+	Dim GetOrigStatus1, GetOrigStatus2, GetOrigStatus3, GetOrigStatus4 As String
+	GetOrigStatus1 = Lcase(status1)
+	GetOrigStatus2 = Lcase(status2)
+	GetOrigStatus3 = Lcase(status3)
+	getOrigStatus4 = Lcase(status4)
+	
+	Set db=session.currentdatabase
+	Set View=Db.GetView("($All)")
+	
+	Dim x As Variant    
+	Set Doc= View.GetFirstDocument
+	
+	str1 = "All&amp;nbspDocuments"
+	str2 = "By&amp;nbspAuthor"
+	str3 = "By&amp;nbspCategory"
+	str4 = "Review&amp;nbspStatus"
+	str5 = "Help"
+	dbname = GetDbPath
+	count = 0
+	
+	While Not(Doc Is Nothing)
+		If doc.form(0) = "Document" And (Not doc.hasitem("CurrentEditor") Or (doc.HasItem("CurrentEditor") And doc.getitemvalue("CurrentEditor")(0) =  "") ) Then  
+			count = count + 1
+			RT = doc.getitemvalue("ReviewTime")  'ReviewTime field in the old docs is a text field
+			
+			If Not RT(0) = " " And Not RT(0) = "" Then  
+				intReviewTime = Cint(RT(0))
+			Else
+				intReviewTime = ""
+			End If
+			
+			tmpReviewStyle = Left(doc.ReviewStyle(0), 1)  'determine if the review style is Parallel or Serial (P or S)
+			If tmpReviewStyle = "P" Then
+				tmpReviewStyle = "2"
+			Else
+				tmpReviewStyle = "1"
+			End If
+			
+'determine the review window of the orig. document
+			tmpReviewWindow = doc.getitemvalue("ReviewWindow")
+               'translate old ReviewWindow to new format
+			If tmpReviewWindow(0) = "NoLimit" Then
+				Set item =  doc.replaceitemvalue("ReviewWindow", "0")
+			Elseif tmpReviewWindow(0) = "MoveOn" Then
+				Set item =  doc.replaceitemvalue("ReviewWindow", "1")
+			Elseif tmpReviewWindow(0) = "Reminder" Then
+				Set item =  doc.replaceitemvalue("ReviewWindow", "2")
+			End If
+			
+'Fix NotifyAfter field
+			notify = doc.getitemvalue("NotifyAfter")
+			If notify(0) = "Final" Then
+				Set item = doc.replaceitemvalue("NotifyAfter", "0")
+			Elseif notify(0) = "Each" Then
+				Set item = doc.replaceitemvalue("NotifyAfter", "1")
+			End If
+			
+'fix status field               
+			status = doc.getitemvalue("Status")
+			
+               'GetOrigStatus1 is "New", translates to the 4.6 status of "New"
+			If Lcase(status(0)) = GetOrigStatus1 Then
+				Set item =  doc.replaceitemvalue("Status", 1)
+				Set item = doc.ReplaceItemValue("Submitted", "0")
+				
+                'GetOrigStatus2 is "Ready for Review", translates to the 4.6 status of "New"
+			Elseif Lcase(status(0)) = GetOrigStatus2  Then
+				Set item = doc.replaceitemvalue("Status", 1)
+				Set item = doc.ReplaceItemValue("Submitted", "0")
+               'GetOrigStatus3 is "In Review", translates to the 4.6 status of "In Review"
+			Elseif Lcase(status(0)) = GetOrigStatus3  Then
+				Set item = doc.replaceitemvalue("Status", 2)
+				Set item = doc.ReplaceItemValue("Submitted", "1")
+               'GetOrigStatus4 is "Review Complete", translates to the 4.6 status of "Review Complete"
+			Elseif Lcase(status(0)) = GetOrigStatus4 Then
+				Set item=doc.replaceitemvalue("Status", 3)
+				Set item = doc.ReplaceItemValue("Submitted", "1")
+			End If
+			
+'determine which reviewer number the document should have               
+               'how many reviewers in the Previous Reviewer list               
+			PreviousReviewers = doc.getitemvalue("PreviousReviewers")               
+			PrevRevCount = 0
+			Forall y In PreviousReviewers
+				If Lcase(y) = Lcase(none) Then
+					PrevRevCount = 0
+				Else
+					PrevRevCount = PrevRevCount + 1
+				End If
+			End Forall
+			
+			ReviewerNumber(0)   = PrevRevCount
+			
+			If PrevRevCount &lt;&gt; 0 Then
+				Set item = doc.ReplaceItemvalue("PrevRev", doc.GetItemvalue("PreviousReviewers"))                    
+			End If
+			
+'make sure the new CurrentEditor field is a Names field
+			Set AuthItem = doc.getfirstitem("CurrentReviewers")
+			If Not authItem Is Nothing Then	
+				Set item = AuthItem.CopyItemToDocument(doc, "CurrentEditor")	
+				item.IsAuthors = True
+				item.IsNames = False               
+			End If			
+			
+'Set the rest of the fields
+			Set item = doc.AppendItemValue("ReviewerNumber", ReviewerNumber(0))
+			Set item = doc.ReplaceItemValue("Readers", doc.GetItemvalue("DocumentReaders"))
+			Set item = doc.ReplaceItemvalue("ReviewerList", doc.GetItemvalue("Reviewers"))
+			Set item = doc.ReplaceItemvalue("ReviewTime", intReviewTime)
+			Set item = doc.ReplaceItemvalue("ReviewType", tmpReviewStyle)
+			Set item  = doc.ReplaceItemValue("Newreviewer", "")
+			Set item = doc.ReplaceItemValue("Resubmit", "0")
+			Set item = doc.ReplaceItemValue("PreviousTitle", "Previous Document")
+			Set item = doc.ReplaceItemValue("NextTitle", "Next Document")
+			Set item = doc.replaceitemvalue("ConvertedR4", "1")
+			Call doc.save(True,False,False)
+		End If
+		Set Doc=View.GetNextdocument(Doc)
+	Wend
+	
+	Msgbox "Processed " &amp; count &amp; " documents."
+	
+End Sub
+</lotusscript></code><code event='GetDBPath'><lotusscript>Function GetDBPath
+'check to see if the database is in a directory and swap the slash directions
+	Dim tmpPath As String     
+	tmpPath = db.filepath
+	Do While Instr(tmpPath,"\") &gt; 0
+		tmpPath = Left$(tmpPath, Instr(tmpPath,"\")-1) + "/" + Right$(tmpPath,Len(tmpPath)-Instr(tmpPath,"\"))
+	Loop
+	
+'check and see if there are any embedded spaces and replace them with +     
+	Do While Instr(tmpPath," ") &gt; 0
+		tmpPath = Left$(tmpPath, Instr(tmpPath," ")-1) + "+" + Right$(tmpPath,Len(tmpPath)-Instr(tmpPath," "))
+	Loop
+	
+	GetDbPath = tmpPath
+	
+End Function</lotusscript></code>
+<rundata processeddocs='0' exitcode='0'>
+<agentmodified><datetime dst='true'>20100824T140849,09-04</datetime></agentmodified></rundata></agent>
+

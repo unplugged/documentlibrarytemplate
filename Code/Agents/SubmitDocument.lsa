@@ -1,0 +1,143 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE agent SYSTEM 'xmlschemas/domino_8_5_3.dtd'>
+<agent name='(SubmitDocument)' xmlns='http://www.lotus.com/dxl' version='8.5'
+ maintenanceversion='3.0' replicaid='80257AC2002D6A1A' hide='v3' runaswebuser='true'
+ publicaccess='false' designerversion='6.5' language='en' comment='Web only'
+ restrictions='unrestricted'>
+<noteinfo noteid='192' unid='89AB4AA6C77E965D85256602006B1C9B' sequence='17'>
+<created><datetime dst='true'>19980512T152956,75-04</datetime></created>
+<modified><datetime>20121126T081603,35+00</datetime></modified>
+<revised><datetime dst='true'>20100824T141209,42-04</datetime></revised>
+<lastaccessed><datetime>20121126T081603,35+00</datetime></lastaccessed>
+<addedtofile><datetime>20121126T081603,35+00</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Lotus Notes Template Development/O=Lotus Notes</name></updatedby>
+<wassignedby><name>CN=Lotus Notes Template Development/O=Lotus Notes</name></wassignedby>
+<designchange><datetime dst='true'>20100824T141209,15-04</datetime></designchange>
+<trigger type='agentlist'/>
+<documentset type='runonce'/><code event='options'><lotusscript>Option Public
+Option Explicit
+Use "SubmitForReview"
+
+</lotusscript></code><code event='initialize'><lotusscript>Sub Initialize
+	
+'logging is for debug purposes
+	Set dbug = New NotesLog("SubmitDocument")
+'to turn off the debug log, set this to False     
+	dbug.LogActions = True
+	dbug.OpenAgentLog
+	
+	On Error Goto StandardError
+	
+	Set session = New NotesSession
+	Set db = session.CurrentDatabase
+	DbName = getdbpath
+	Set note = session.DocumentContext
+	If note.Form(0) &lt;&gt; "Document" Then Goto ExitWithoutSend
+	If note.HasItem("SaveOnly") Then
+		note.RemoveItem("SaveOnly")
+		Exit Sub
+	End If
+	
+	If note.SubmitNow(0) = "1" Or note.submitnow(0) = "2" Then SubmitNow = True
+	
+'If we are not submitting for review, we don't need to do the rest of this     
+	If (Not(SubmitNow) Or note.Status(0) = 3) And note.Resubmit(0) = "0" Then Goto ExitWithoutSend
+	
+'Validate the Originator is not in the ReviewerList
+	If ListIncludesOriginator Then
+		ErrorText = GetString(17)                    
+		Goto ValidationError
+	End If
+	
+'Verify they haven't selected "Move to Next" with a parallel review
+	If note.ReviewWindow(0) = "1" And note.ReviewType(0) = "2" Then
+		ErrorText = GetString(50)
+		FieldName = "Time Limit option"
+		Goto ValidationError
+	End If
+	
+	
+'Validate the Originator is the one submitting the document for review
+	If note.SubmitNow(0) = "1" And OriginatorNotSubmitting Then
+		ErrorText = getString(49)
+		Goto SubmitError
+	End If
+	
+'Validate that ReviewTime has a valid entry if ReviewWindow is not 0
+	
+	If note.ReviewWindow(0) &lt;&gt; "0" Then
+		Dim InvalidReviewTime As Integer
+		Dim tmpReviewTime As Variant
+		tmpReviewTime =note.GetItemValue("ReviewTime")(0)
+		
+'This verifies that it is not 0 or blank or a string
+		
+		If tmpReviewTime = "" Or tmpReviewTime = "0" Or tmpReviewTime Like "*ERROR*" Then
+			InvalidReviewTime = True
+'This verifies that it is a whole number &gt; 0          
+		Elseif tmpReviewTime &lt; 1 Or Int(tmpReviewTime) &lt;&gt; tmpReviewTime Then
+			InvalidReviewTime = True
+		End If
+		If InvalidReviewTime Then     
+			FieldName = "Time Limit"
+			ErrorText = GetString(16)
+			Goto ValidationError
+		End If
+	End If     
+	
+'Validate that ReviewerList is not empty     
+	If note.ReviewerList(0) = "" Then
+		FieldName = "Reviewer List"
+		ErrorText = GetString(19)          
+		Goto ValidationError     
+	End If
+	
+	
+	If note.ReviewType(0)="1" Then
+		note.submitted = "1"
+		SendToNext 'in scriptlib SubmitForReview
+	Elseif note.ReviewType(0)="2" Then
+		note.submitted = "1"
+		If note.submitnow(0) = "2" Then
+			note.complete = "1"
+			note.submitnow = "0"
+		End If
+		SendToAll
+	End If
+	
+	Exit Sub     
+	
+ExitWithoutSend: 'You submitted the form but were not sending anything to anyone
+	Print "&lt;h3&gt;" &amp; GetString(9) &amp; "&lt;/h3&gt;"
+	Goto ViewLinks
+	
+StandardError: 'This is for errors which we are not specifically handling
+	Print "&lt;h2&gt;" &amp; GetString(12) &amp; "&lt;/h2&gt;"
+	Goto ViewLinks
+	
+ValidationError:
+	Print "&lt;h2&gt;" &amp; ErrorText &amp; "&lt;/h2&gt;&lt;hr&gt;"
+	Print "&lt;h3&gt;&lt;a href=/" &amp; DbName &amp; "/($All)/" &amp; note.UniversalId &amp; "?EditDocument&gt;" &amp; GetString(14) &amp; "&lt;/a&gt;" &amp; GetString(15) &amp; "&lt;hr&gt;"
+	
+	Exit Sub
+	
+SubmitError:
+	Print "&lt;h3&gt;" &amp; ErrorText &amp; "&lt;/h3&gt;"
+	Goto ViewLinks
+	
+	Exit Sub
+	
+	
+ViewLinks:
+	Print "&lt;hr&gt;&lt;center&gt;" &amp; _
+	"&lt;b&gt;&lt;a href=/" + DbName + "/($All)?OpenView&gt;" &amp; GetString(30) &amp; "&lt;/a&gt;&lt;/b&gt;&amp;nbsp&amp;nbsp&amp;nbsp" &amp; _
+	"&lt;b&gt;&lt;a href=/" + DbName + "/ByCategory?OpenView&gt;" &amp; GetString(33) &amp; "&lt;/a&gt;&lt;/b&gt;&amp;nbsp&amp;nbsp&amp;nbsp" &amp; _     
+	"&lt;b&gt;&lt;a href=/" + DbName + "/ByAuthor?OpenView&gt;" &amp; GetString(31) &amp; "&lt;/a&gt;&lt;/b&gt;&amp;nbsp&amp;nbsp&amp;nbsp " &amp; _
+	"&lt;b&gt;&lt;a href=/" + Dbname + "/by+Alternate+Name?OpenView&gt;" + getString(51) + "&lt;/a&gt;&lt;/b&gt;&amp;nbsp&amp;nbsp&amp;nbsp" &amp;_
+	"&lt;b&gt;&lt;a href=/" + DbName + "/ReviewStatus?OpenView&gt;" &amp; GetString(32) &amp; "&lt;/a&gt;&lt;/b&gt;" &amp; _
+	"&lt;/center&gt;&lt;hr&gt;"	
+	
+End Sub</lotusscript></code>
+<rundata processeddocs='0' exitcode='0'>
+<agentmodified><datetime>20040315T130859,81-05</datetime></agentmodified></rundata></agent>
+

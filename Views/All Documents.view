@@ -1,0 +1,116 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE view SYSTEM 'xmlschemas/domino_8_5_3.dtd'>
+<view name='All Documents' alias='($All)' xmlns='http://www.lotus.com/dxl'
+ version='8.5' maintenanceversion='3.0' replicaid='80257AC2002D6A1A' showinmenu='false'
+ defaultdesign='true' allowdocselection='true' publicaccess='false' designerversion='6.5'
+ language='en' default='true' unreadmarks='standard' onopengoto='lastopened'
+ onrefresh='displayindicator' headers='simple' opencollapsed='false' showresponsehierarchy='true'
+ showmargin='true' shrinkrows='true' extendlastcolumn='true' showhierarchies='false'
+ unreadcolor='maroon' rowlinecount='4' headerlinecount='1' rowspacing='1.25'
+ haslinkcolumn='true' bgcolor='white' altrowcolor='#efefef' totalscolor='blue'
+ headerbgcolor='#d4c9ba' boldunreadrows='false' evaluateactions='false' allownewdocuments='false'
+ allowcustomizations='true' hidemarginborder='true' marginwidth='0px 0px 1px'
+ marginbgcolor='white' uniquekeys='false'>
+<noteinfo noteid='146' unid='626E6035EADBB4CD85256499006B15A6' sequence='79'>
+<created><datetime dst='true'>19970516T152938,94-04</datetime></created>
+<modified><datetime>20121127T081350,31+00</datetime></modified>
+<revised><datetime dst='true'>20080722T104833,24-04</datetime></revised>
+<lastaccessed><datetime>20121127T081350,31+00</datetime></lastaccessed>
+<addedtofile><datetime>20121126T081603,05+00</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Lotus Notes Template Development/O=Lotus Notes</name></updatedby>
+<wassignedby><name>CN=Lotus Notes Template Development/O=Lotus Notes</name></wassignedby><code
+ event='selection'><formula>SELECT @All</formula></code>
+<actionbar useappletinbrowser='true' bgcolor='#bba58b' bordercolor='black'><actionbarstyle
+ height='4.7500ex'><font size='9pt' name='multilingual'/></actionbarstyle>
+<actionbuttonstyle margintype='fixed' margin='5' bgcolor='#d4c9ba' displayborder='notesstyle'/><font
+ size='9pt' name='multilingual'/><border width='0px 0px 1px'/>
+<action title='Categori_ze' showinbar='false' hide='web' systemcommand='categorize'/>
+<action title='Send Docu_ment' showinmenu='false' showinbar='false' hide='web'
+ systemcommand='send'/>
+<action title='_Move to Folder...' showinbar='false' hide='web' systemcommand='movetofolder'/>
+<action title='_Remove from Folder...' showinmenu='false' showinbar='false'
+ hide='web' systemcommand='removefromfolder'/>
+<action title='_Forward' showinbar='false' hide='web' systemcommand='forward'/>
+<action title='_Edit Document' showinbar='false' hide='web' systemcommand='edit'/>
+<sharedactionref id='17'>
+<action title='New Document' showinmenu='false'><code event='click'><formula
+>viewname := @Subset(@ViewTitle; -1);
+@SetProfileField("tmpProfile"; "viewtitle"; viewname);
+@PostedCommand([Compose]; "Document")</formula></code></action></sharedactionref>
+<sharedactionref id='4'>
+<action title='New Response' showinmenu='false' hide='preview edit previewedit'><code
+ event='click'><formula>viewname := @Subset(@ViewTitle; -1);
+@SetProfileField("tmpProfile"; "viewtitle"; viewname);
+@PostedCommand([Compose];"Response")</formula></code><code event='hidewhen'><formula
+>REM {hide from web if it's in a view};
+@ClientType  != "Notes" &amp; !@IsAvailable(form) | (@IsAvailable(Status) &amp;@IsResponseDoc)</formula></code></action></sharedactionref>
+<sharedactionref id='5'>
+<action title='New Response to Response' showinmenu='false' hide='preview edit previewedit web'><code
+ event='click'><formula>@PostedCommand([Compose];"ResponseToResponse")</formula></code></action></sharedactionref>
+<sharedactionref id='22'>
+<action title='Delete\Move to Trash' showinmenu='false' hide='notes'><code
+ event='click'><formula>@Command([MoveToTrash])</formula></code></action></sharedactionref>
+<sharedactionref id='21'>
+<action title='Delete\EmptyTrash' showinmenu='false' hide='notes' targetframe=''><code
+ event='click'><formula>@Command([EmptyTrash])</formula></code></action></sharedactionref>
+<sharedactionref id='14'>
+<action title='Search' showinmenu='false' hide='notes'><code event='click'><formula
+>REM {Web only};
+@Command([ViewShowSearchBar])</formula></code></action></sharedactionref></actionbar>
+<column sort='descending' resort='ascending' hidedetailrows='false' listseparator='comma'
+ itemname='$106' width='9' resizable='true' separatemultiplevalues='false'
+ sortnoaccent='true' sortnocase='true' showaslinks='false' formatdatatype='datetime'><font
+ size='9pt' color='gray'/><columnheader title='Date'><font size='9pt' name='multilingual'/></columnheader><datetimeformat
+ legacy='true' show='date' date='yearmonthday' time='hourminute' zone='never'/><numberformat
+ legacy='true' format='general' varying='true' digits='1' punctuated='false'
+ parens='false' percent='false' bytes='false'/><code event='value'><formula
+>@If(!@IsResponseDoc;@Created;"")</formula></code></column>
+<column hidedetailrows='false' itemname='$116' width='2' resizable='false'
+ separatemultiplevalues='false' sortnoaccent='true' sortnocase='true' showaslinks='false'><font
+ size='9pt' color='gray'/><columnheader><font size='9pt' name='multilingual'/></columnheader><code
+ event='value'><formula>@If(!@IsResponseDoc;@DocDescendants(""; "%"; "%");"")</formula></code></column>
+<column hidedetailrows='false' itemname='$44' width='2' resizable='false'
+ separatemultiplevalues='false' sortnoaccent='true' sortnocase='true' showaslinks='false'
+ showasicons='true'><columnheader><font size='9pt' name='multilingual'/></columnheader><code
+ event='value'><formula>@If(readers != ""; 62; ExpireDate !=""; 64; _ViewIcon)</formula></code></column>
+<column sort='ascending' hidedetailrows='false' itemname='$121' width='1'
+ resizable='false' separatemultiplevalues='false' sortnoaccent='true' sortnocase='true'
+ showaslinks='false' hidden='true'><font size='9pt' color='gray'/><columnheader
+><font size='9pt' name='multilingual'/></columnheader><code event='value'><formula
+>@Created</formula></code></column>
+<column hidedetailrows='false' listseparator='comma' itemname='$117' width='1.6250'
+ resizable='true' separatemultiplevalues='false' sortnoaccent='true' sortnocase='true'
+ showaslinks='true' responsesonly='true' twisties='true'><font size='9pt'
+ color='gray'/><columnheader><font size='9pt' name='multilingual'/></columnheader><datetimeformat
+ legacy='true' show='date' date='yearmonthday' time='hourminutesecond' zone='never'/><numberformat
+ legacy='true' format='general' digits='2' punctuated='false' parens='false'
+ percent='false' bytes='false'/><code event='value'><formula>REM {the following is for alternate name support};
+REM {the following is for alternate name support};
+CNFrom := @Name([CN]; From);
+CNAltFrom := @Name([CN]; AltFrom);
+Alternatename := @If(AltFrom != "" &amp; AltFrom != From; " [" + CNAltFrom + "]"; "");
+
+@If(readers!= "";"PRIVATE: ";
+        ExpireDate !="";"EXPIRED: ";
+      "")+
+@If(Subject != ""; Subject + "  "; "") + "(" + CNFrom + AlternateName + " " +@Text(@Created;"D2S0")+ ")"</formula></code></column>
+<column hidedetailrows='false' listseparator='comma' itemname='$122' width='36'
+ resizable='true' separatemultiplevalues='false' sortnoaccent='true' sortnocase='true'
+ showaslinks='true' twisties='true'><font size='9pt' color='navy' style='bold'/><columnheader
+ title='Topic'><font size='9pt' name='multilingual'/></columnheader><datetimeformat
+ show='datetime' date='yearmonthday' fourdigityearfor21stcentury='true' time='hourminutesecond'
+ zone='never' dateformat='weekdaymonthdayyear' dayformat='twodigitday' monthformat='twodigitmonth'
+ yearformat='fourdigityear' weekdayformat='shortname' dateseparator1=' ' dateseparator2='/'
+ dateseparator3='/' timeseparator=':' preference='usersetting'/><numberformat
+ format='general' varying='true' punctuated='false' parens='false' percent='false'
+ bytes='false' decimalsym='.' thousandssep=',' currencysymtype='custom' currencysym='$'
+ usecustomsym='false'/><code event='value'><formula>REM {the following is for alternate name support};
+CNFrom := @Name([CN]; From);
+CNAltFrom := @Name([CN]; AltFrom);
+Alternatename := @If(AltFrom != "" &amp; AltFrom != From; " [" + CNAltFrom + "]"; "");
+
+@If(readers!= "";"PRIVATE: ";
+        ExpireDate !="";"EXPIRED: ";
+      "") +
+@If(Subject = ""; "Untitled"; Subject) + " (" + CNFrom + Alternatename + ")"</formula></code></column></view>
+

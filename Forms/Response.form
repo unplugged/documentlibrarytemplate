@@ -1,0 +1,142 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE form SYSTEM 'xmlschemas/domino_8_5_3.dtd'>
+<form name='Response' alias='Response' xmlns='http://www.lotus.com/dxl' version='8.5'
+ maintenanceversion='3.0' replicaid='80257AC2002D6A1A' htmlallfields='true'
+ publicaccess='false' designerversion='7' language='en' type='response' inherit='true'>
+<noteinfo noteid='162' unid='3B50DA1FFE68D6B7852564B40063B021' sequence='89'>
+<created><datetime dst='true'>19970612T140851,53-04</datetime></created>
+<modified><datetime>20121127T081350,11+00</datetime></modified>
+<revised><datetime dst='true'>20080722T104832,96-04</datetime></revised>
+<lastaccessed><datetime>20121127T081350,11+00</datetime></lastaccessed>
+<addedtofile><datetime>20121126T081603,13+00</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Lotus Notes Template Development/O=Lotus Notes</name></updatedby>
+<wassignedby><name>CN=Lotus Notes Template Development/O=Lotus Notes</name></wassignedby><code
+ event='windowtitle'><formula>NewDocTitle := "New Response to \"" + @If(@IsAvailable(OriginalSubject); OriginalSubject; Subject) + "\"";
+StandardTitle := "Response to \"" + OriginalSubject + "\"";
+@If(@IsNewDoc; NewDocTitle; StandardTitle)</formula></code>
+<actionbar useappletinbrowser='true' bgcolor='#bba58b' bordercolor='black'><actionbarstyle
+ height='4.7500ex'><font size='9pt' name='multilingual'/></actionbarstyle>
+<actionbuttonstyle margintype='fixed' margin='5' bgcolor='#d4c9ba' displayborder='notesstyle'
+ widthtype='background'/><font size='9pt' name='multilingual'/><border width='0px 0px 1px'/>
+<action title='_Edit Document' showinmenu='false' showinbar='false' hide='preview edit previewedit web'
+ systemcommand='edit'><code event='hidewhen'><formula>@LowerCase(@Name([CN];From))!=@LowerCase(@Name([CN];@UserName))</formula></code></action>
+<action title='_Forward' showinbar='false' hide='preview previewedit web'
+ systemcommand='forward'/>
+<sharedactionref id='19'>
+<action title='Forward as Bookmark' showinbar='false' hide='preview previewedit web'><code
+ event='click'><formula>@Command([Compose]; @MailDbName; "Bookmark")</formula></code><code
+ event='hidewhen'><formula>@IsNewDoc</formula></code></action></sharedactionref>
+<action title='_Move To Folder...' showinbar='false' hide='web' systemcommand='movetofolder'/>
+<action title='_Remove From Folder' showinbar='false' hide='web' systemcommand='removefromfolder'/>
+<action title='Categori_ze' showinmenu='false' showinbar='false' systemcommand='categorize'/>
+<action title='Send Docu_ment' showinmenu='false' showinbar='false' systemcommand='send'/>
+<sharedactionref id='2'>
+<action title='Edit Document' hide='preview edit previewedit'><code event='click'><formula
+>@Command([EditDocument])</formula></code><code event='hidewhen'><formula
+>!(@LowerCase(@Name([CN]; @UserName)) = @LowerCase(@Name([CN]; From) : @LowerCase(@Name([CN]; CurrentEditor)))) | (@IsAvailable($RefOptions))</formula></code></action></sharedactionref>
+<sharedactionref id='15'>
+<action title='Save &amp; Close' showinmenu='false' hide='preview read previewedit'><code
+ event='click'><formula>REM {Can't use @isvalid on the web};
+@If(
+@ClientType != "Notes";
+@Do(@Command([FileSave]); @Command([FileCloseWindow]));
+@IsValid;
+@Do(@Command([FileSave]); @Command([FileCloseWindow])); "")</formula></code></action></sharedactionref>
+<action title='New Response' showinmenu='false' hide='edit notes'><code event='click'><formula
+>REM {web only};
+@Command([Compose]; "Response")</formula></code></action>
+<action title='New Response to Main' showinmenu='false' hide='preview edit previewedit web'><code
+ event='click'><formula>REM {notes only};
+@Command([Compose];"Response")</formula></code></action>
+<sharedactionref id='5'>
+<action title='New Response to Response' showinmenu='false' hide='preview edit previewedit web'><code
+ event='click'><formula>@PostedCommand([Compose];"ResponseToResponse")</formula></code></action></sharedactionref>
+<sharedactionref id='6'>
+<action title='Mark Private' showinmenu='false' hide='preview read previewedit'><code
+ event='click'><formula>FIELD readers:=@Trim(@Unique(From : @UserName));
+@PostedCommand([RefreshHideFormulas]);@Command([ViewRefreshFields])</formula></code><code
+ event='hidewhen'><formula>@Elements(readers)&gt;0 | status = 2</formula></code></action></sharedactionref>
+<sharedactionref id='7'>
+<action title='Mark Public' showinmenu='false' hide='preview read previewedit'><code
+ event='click'><formula>FIELD readers:=@DeleteField;
+@PostedCommand([RefreshHideFormulas]);@Command([ViewRefreshFields])</formula></code><code
+ event='hidewhen'><formula>@Elements(readers)&lt;1 | status = 2</formula></code></action></sharedactionref>
+<sharedactionref id='9'>
+<action title='Parent Preview' showinmenu='false' hide='preview edit previewedit web'><code
+ event='click'><formula>REM {notes only};
+@Command([ShowHideParentPreview])</formula></code></action></sharedactionref>
+<sharedactionref id='10'>
+<action title='Cancel' showinmenu='false' hide='preview previewedit web'><code
+ event='click'><formula>REM {Notes only};
+FIELD SaveOptions := 0;
+@Command([FileCloseWindow])</formula></code></action></sharedactionref>
+<sharedactionref id='11'>
+<action title='Mark/Unmark Document as Expired' showinmenu='false' hide='read notes'><code
+ event='click'><formula>REM {Web only};
+@Command([FileSave]);
+UNID:=@Text(@DocumentUniqueID );
+
+@If(@TextToNumber(@Version) &lt; 174;
+	@URLOpen("/"+@ReplaceSubstring(@Subset(@DbName; -1);" ";"+")+"/WebExpire?OpenAgent&amp;"+UNID);
+@URLOpen(@WebDbName+"/WebExpire?OpenAgent&amp;"+UNID))</formula></code><code
+ event='hidewhen'><formula>@IsNewDoc</formula></code></action></sharedactionref>
+<sharedactionref id='23'>
+<action title='Cancel' showinmenu='false' hide='notes'><code event='click'><formula
+>REM {web saved docs};
+@Command([FileCloseWindow])</formula></code><code event='hidewhen'><formula
+>@IsNewDoc</formula></code></action></sharedactionref>
+<sharedactionref id='16'>
+<action title='Cancel' showinmenu='false' hide='notes'><code event='click'><formula
+>REM {web new docs};
+CurrentView := @GetProfileField("tmpProfile"; "viewtitle");
+@Command([OpenView]; CurrentView)</formula></code><code event='hidewhen'><formula
+>!@IsNewDoc</formula></code></action></sharedactionref></actionbar>
+<body><richtext>
+<pardef id='1' leftmargin='1in' hide='notes' tabs='L0.5000in L1in L1.5000in L2in L2.5000in L3in L3.5000in L4in'/>
+<par def='1'><run html='true'><font size='8pt'/>&lt;HEAD&gt;</run></par>
+<par def='1'><run html='true'><font size='8pt'/>&lt;STYLE TYPE="text/css"&gt;</run></par>
+<par def='1'><run html='true'><font size='8pt'/> BODY {font-family: "Arial"}</run></par>
+<par def='1'><run html='true'><font size='8pt'/>&lt;/STYLE&gt;</run></par>
+<par def='1'><run html='true'><font size='8pt'/>&lt;/HEAD&gt;</run></par>
+<table widthtype='fitmargins' refwidth='9.5833in'><tablecolumn width='50.0035%'/><tablecolumn
+ width='49.9965%'/>
+<tablerow>
+<tablecell>
+<pardef id='3' leftmargin='1%' hide='read edit preview previewedit' keepwithnext='true'
+ keeptogether='true'/>
+<par def='3'><run><font size='9pt'/>form name (used in RespBanner subform)</run></par></tablecell>
+<tablecell>
+<pardef id='4' leftmargin='1%' hide='read edit preview previewedit' keepwithnext='true'
+ keeptogether='true'/>
+<par def='4'><run><font size='9pt'/></run><run><font size='9pt' color='red'/><field
+ type='text' kind='computed' name='formname'><code event='defaultvalue'><formula
+>REM {DNT};
+"Response"</formula></code></field></run><run><font size='9pt'/></run></par></tablecell></tablerow></table>
+<pardef id='2' leftmargin='1in' hide='read edit preview previewedit'/>
+<par def='2'><run><font color='red'/></run></par>
+<pardef id='5' leftmargin='1in' hide='read edit copy preview previewedit'/><subformref
+ name='Shared Response Header'/>
+<pardef id='6' leftmargin='1in' hide='notes web'/><subformref name='DoclibResponseBanner'/>
+<pardef id='7' align='none' leftmargin='1in' hide='read preview' tabs='L0.5000in L1in L1.5000in L2in L2.5000in L3in L3.5000in L4in'/>
+<par def='7'><run><font size='9pt' style='bold'/>Content:</run></par>
+<pardef id='8' leftmargin='1in' tabs='L1.2500in L1.5000in'/>
+<par def='8'><run><font size='9pt'/></run><run><font size='9pt'/><field useoscontrolinbrowser='true'
+ type='richtext' kind='editable' name='Body' description='Enter your comments, questions, ideas for discussion.'
+ htmlid='Body'><code event='htmlattributes'><formula>"height=\"300\" width=\"625\" rows=\"15\" cols=\"90\""</formula></code></field></run><run
+><font size='9pt'/></run></par>
+<pardef id='9' hide='edit notes'/>
+<par def='9'><run><font size='9pt'/></run></par>
+<par def='9'><run><font size='9pt'/></run><run><font size='9pt'/><sharedfieldref
+ name='ViewList'/></run><run><font size='9pt'/></run></par></richtext></body>
+<item name='$HTMLDocumentStyles' summary='true' sign='true'>
+<rawitemdata type='1'>
+0ggBAAAA/wDSCAEA/wAAANIIAQCAAIAA
+</rawitemdata></item>
+<item name='$SubForm_RepIDs' sign='true'><textlist><text>0000000000000000</text><text
+>0000000000000000</text></textlist></item>
+<item name='ExpireDate' summary='false' sign='true'>
+<rawitemdata type='400'>
+AAAAAAAAAAA=
+</rawitemdata></item>
+<item name='$$ScriptName' summary='false' sign='true'><text>Response</text></item></form>
+

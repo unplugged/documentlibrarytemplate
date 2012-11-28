@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE form SYSTEM 'xmlschemas/domino_8_5_3.dtd'>
+<form name='$$ReturnAuthenticationFailure' xmlns='http://www.lotus.com/dxl'
+ version='8.5' maintenanceversion='3.0' replicaid='80257AC2002D6A1A' nocompose='true'
+ noquery='true' treatashtml='true' publicaccess='false' designerversion='6'
+ language='en'>
+<noteinfo noteid='17a' unid='18431DC6E1A14081852564DC005E9B30' sequence='12'>
+<created><datetime dst='true'>19970722T131321,12-04</datetime></created>
+<modified><datetime>20121126T081603,25+00</datetime></modified>
+<revised><datetime dst='true'>20100824T141209,30-04</datetime></revised>
+<lastaccessed><datetime>20121126T081603,25+00</datetime></lastaccessed>
+<addedtofile><datetime>20121126T081603,25+00</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Lotus Notes Template Development/O=Lotus Notes</name></updatedby>
+<wassignedby><name>CN=Lotus Notes Template Development/O=Lotus Notes</name></wassignedby>
+<body><richtext>
+<pardef id='1' leftmargin='1in'><code event='hidewhen' enabled='false'><formula
+>@TextToNumber(@Version)&lt;141</formula></code></pardef>
+<par def='1'/>
+<par def='1'>&lt;BR&gt;The name and password cannot be authenticated.&lt;HR&gt;</par>
+<par def='1'>&lt;b&gt; &lt;a href=/<field type='text' kind='editable' name='db_1'><code
+ event='htmlattributes'><formula>"Type=Hidden"</formula></code><code event='defaultvalue'><formula
+>DB := @WebDbName;
+db</formula></code></field>/($All)?OpenView&gt; All Documents&lt;/a&gt;&lt;/b&gt;  | &lt;b&gt;&lt;a href=/<field
+ type='text' kind='editable' name='db_2'><code event='htmlattributes'><formula
+>"Type=Hidden"</formula></code><code event='defaultvalue'><formula>DB := @WebDbName;
+db</formula></code></field>/by+Category?OpenView&gt;By Category&lt;/a&gt;&lt;/b&gt; | &lt;b&gt;&lt;a href=/<field
+ type='text' kind='editable' name='db_3'><code event='htmlattributes'><formula
+>"Type=Hidden"</formula></code><code event='defaultvalue'><formula>DB := @WebDbName;
+db</formula></code></field>/by+Author?OpenView&gt;By Author &lt;/a&gt;&lt;/b&gt; | &lt;b&gt;&lt;a href=/<field
+ type='text' kind='editable' name='db_5'><code event='htmlattributes'><formula
+>"Type=Hidden"</formula></code><code event='defaultvalue'><formula>DB := @WebDbName;
+db</formula></code></field>/ReviewStatus?OpenView&gt;Review Status&lt;/a&gt;&lt;/b&gt; &lt;hr&gt;</par>
+<pardef id='2' align='none' leftmargin='1in' tabs='L0.5000in L1in L1.5000in L2in L2.5000in L3in L3.5000in L4in'/>
+<par def='2'/></richtext></body>
+<item name='$Form_RepId' sign='true'><datetime>20000127T155249,69-08</datetime></item>
+<item name='$$ScriptName' summary='false' sign='true'><text>$$ReturnAuthenticationFailure</text></item></form>
+

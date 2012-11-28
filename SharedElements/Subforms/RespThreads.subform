@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE subform SYSTEM 'xmlschemas/domino_8_5_3.dtd'>
+<subform name='RespThreads' xmlns='http://www.lotus.com/dxl' version='8.5'
+ maintenanceversion='3.0' replicaid='80257AC2002D6A1A' norenderv3='false'
+ language='en'>
+<noteinfo noteid='1ca' unid='A43F0D63027936FE8525667C0049E26B' sequence='6'>
+<created><datetime dst='true'>19980911T092700,91-04</datetime></created>
+<modified><datetime>20121126T081603,59+00</datetime></modified>
+<revised><datetime dst='true'>20100824T141209,66-04</datetime></revised>
+<lastaccessed><datetime>20121126T081603,59+00</datetime></lastaccessed>
+<addedtofile><datetime>20121126T081603,59+00</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Lotus Notes Template Development/O=Lotus Notes</name></updatedby>
+<wassignedby><name>CN=Lotus Notes Template Development/O=Lotus Notes</name></wassignedby>
+<body><richtext>
+<pardef id='1' hide='edit notes'/>
+<par def='1'><run><font size='8pt' style='bold'/>Current Thread:</run></par>
+<par def='1'><run><font style='bold'/></run><embeddedview name='(ThreadMaps)'
+ displayusing='html' width='4.5000in' height='1.5000in' scrollbars='true'><code
+ event='showsinglecategory'><formula>RefID := @Text($Ref);
+UseID := @If(form = "ResponseToResponse"; MainIDforRR; RefID);
+Lookup:= @DbLookup("":"Nocache"; ""; "(ThreadMaps)"; UseID; 1);
+@If(@IsNewDoc; ""; @IsError(Lookup); ""; UseID)</formula></code></embeddedview><run
+><font style='bold'/></run></par>
+<par def='1'><run><font style='bold'/></run><run><font size='8pt'/><sharedfieldref
+ name='ViewList'/></run><run><font style='bold'/></run></par></richtext></body>
+<item name='$$ScriptName' summary='false' sign='true'><text>RespThreads</text></item></subform>
+

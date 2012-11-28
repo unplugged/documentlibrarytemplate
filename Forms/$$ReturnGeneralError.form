@@ -1,0 +1,26 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE form SYSTEM 'xmlschemas/domino_8_5_3.dtd'>
+<form name='$$ReturnGeneralError' xmlns='http://www.lotus.com/dxl' version='8.5'
+ maintenanceversion='3.0' replicaid='80257AC2002D6A1A' nocompose='true' noquery='true'
+ treatashtml='true' publicaccess='false' language='en'>
+<noteinfo noteid='182' unid='35B96BD6FEF06B81852564DC005E9B32' sequence='15'>
+<created><datetime dst='true'>19970722T131321,14-04</datetime></created>
+<modified><datetime>20121126T081603,29+00</datetime></modified>
+<revised><datetime dst='true'>20100824T141209,34-04</datetime></revised>
+<lastaccessed><datetime>20121126T081603,29+00</datetime></lastaccessed>
+<addedtofile><datetime>20121126T081603,29+00</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Lotus Notes Template Development/O=Lotus Notes</name></updatedby>
+<wassignedby><name>CN=Lotus Notes Template Development/O=Lotus Notes</name></wassignedby>
+<body><richtext>
+<pardef id='1' leftmargin='1in'><code event='hidewhen' enabled='false'><formula
+>@TextToNumber(@Version)&lt;141</formula></code></pardef>
+<par def='1'><run html='true'>&lt;BODY bgcolor="white"&gt;</run></par>
+<par def='1'>&lt;BR&gt;<run><font name='Arial' pitch='variable' truetype='true'
+ familyid='20'/><field type='text' kind='computed' name='MessageString'><code
+ event='defaultvalue'><formula>MessageString</formula></code></field></run>&lt;HR&gt;</par>
+<pardef id='2' align='none' leftmargin='1in' tabs='L0.5000in L1in L1.5000in L2in L2.5000in L3in L3.5000in L4in'/>
+<par def='2'>&lt;a href="javascript: onClick=history.back()"&gt;<computedtext
+><code event='value'><formula>"Go back"</formula></code></computedtext>&lt;/a&gt;</par>
+<par def='2'/></richtext></body>
+<item name='$$ScriptName' summary='false' sign='true'><text>$$ReturnGeneralError</text></item></form>
+

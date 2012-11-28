@@ -1,0 +1,132 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE view SYSTEM 'xmlschemas/domino_8_5_3.dtd'>
+<view name='Review Status' alias='ReviewStatus' xmlns='http://www.lotus.com/dxl'
+ version='8.5' maintenanceversion='3.0' replicaid='80257AC2002D6A1A' showinmenu='false'
+ allowdocselection='true' publicaccess='false' designerversion='6.5' language='en'
+ unreadmarks='standard' onopengoto='lastopened' onrefresh='displayindicator'
+ headers='simple' opencollapsed='false' showresponsehierarchy='true' showmargin='true'
+ shrinkrows='true' extendlastcolumn='false' showhierarchies='false' unreadcolor='fuchsia'
+ rowlinecount='5' headerlinecount='1' rowspacing='1.25' haslinkcolumn='true'
+ bgcolor='white' altrowcolor='#efefef' totalscolor='blue' headerbgcolor='#d4c9ba'
+ boldunreadrows='false' evaluateactions='false' allownewdocuments='false'
+ allowcustomizations='true' hidemarginborder='true' marginwidth='0px 0px 1px'
+ marginbgcolor='white' uniquekeys='false'>
+<noteinfo noteid='142' unid='769F60F1BE6577AD85256499006B15A5' sequence='73'>
+<created><datetime dst='true'>19970516T152938,93-04</datetime></created>
+<modified><datetime>20121127T081350,18+00</datetime></modified>
+<revised><datetime dst='true'>20080722T104833,14-04</datetime></revised>
+<lastaccessed><datetime>20121127T081350,18+00</datetime></lastaccessed>
+<addedtofile><datetime>20121126T081603,03+00</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Lotus Notes Template Development/O=Lotus Notes</name></updatedby>
+<wassignedby><name>CN=Lotus Notes Template Development/O=Lotus Notes</name></wassignedby><code
+ event='selection'><formula>SELECT !@Contains(@LowerCase(form); "archive")</formula></code>
+<actionbar useappletinbrowser='true' bgcolor='#bba58b' bordercolor='black'><actionbarstyle
+ height='4.7500ex'><font size='9pt' name='multilingual'/></actionbarstyle>
+<actionbuttonstyle margintype='fixed' margin='5' bgcolor='#d4c9ba' displayborder='notesstyle'/><font
+ size='9pt' name='multilingual'/><border width='0px 0px 1px'/>
+<action title='Categori_ze' showinbar='false' hide='previewedit web' systemcommand='categorize'/>
+<action title='Send Docu_ment' showinmenu='false' showinbar='false' hide='previewedit web'
+ systemcommand='send'/>
+<action title='_Move to Folder...' showinbar='false' hide='web' systemcommand='movetofolder'/>
+<action title='_Remove from Folder...' showinmenu='false' showinbar='false'
+ hide='web' systemcommand='removefromfolder'/>
+<action title='_Forward' showinbar='false' hide='previewedit web' systemcommand='forward'/>
+<action title='_Edit Document' showinbar='false' hide='previewedit web' systemcommand='edit'/>
+<sharedactionref id='17'>
+<action title='New Document' showinmenu='false'><code event='click'><formula
+>viewname := @Subset(@ViewTitle; -1);
+@SetProfileField("tmpProfile"; "viewtitle"; viewname);
+@PostedCommand([Compose]; "Document")</formula></code></action></sharedactionref>
+<sharedactionref id='4'>
+<action title='New Response' showinmenu='false' hide='preview edit previewedit'><code
+ event='click'><formula>viewname := @Subset(@ViewTitle; -1);
+@SetProfileField("tmpProfile"; "viewtitle"; viewname);
+@PostedCommand([Compose];"Response")</formula></code><code event='hidewhen'><formula
+>REM {hide from web if it's in a view};
+@ClientType  != "Notes" &amp; !@IsAvailable(form) | (@IsAvailable(Status) &amp;@IsResponseDoc)</formula></code></action></sharedactionref>
+<sharedactionref id='5'>
+<action title='New Response to Response' showinmenu='false' hide='preview edit previewedit web'><code
+ event='click'><formula>@PostedCommand([Compose];"ResponseToResponse")</formula></code></action></sharedactionref>
+<sharedactionref id='22'>
+<action title='Delete\Move to Trash' showinmenu='false' hide='notes'><code
+ event='click'><formula>@Command([MoveToTrash])</formula></code></action></sharedactionref>
+<sharedactionref id='21'>
+<action title='Delete\EmptyTrash' showinmenu='false' hide='notes' targetframe=''><code
+ event='click'><formula>@Command([EmptyTrash])</formula></code></action></sharedactionref>
+<sharedactionref id='14'>
+<action title='Search' showinmenu='false' hide='notes'><code event='click'><formula
+>REM {Web only};
+@Command([ViewShowSearchBar])</formula></code></action></sharedactionref></actionbar>
+<column sort='ascending' hidedetailrows='false' itemname='$50' width='1' resizable='true'
+ separatemultiplevalues='false' sortnoaccent='true' sortnocase='true' showaslinks='false'
+ hidden='true'><columnheader><font size='9pt' name='multilingual'/></columnheader><code
+ event='value'><formula>@If(Submitted != "1"; 0; Status)</formula></code></column>
+<column sort='ascending' hidedetailrows='false' listseparator='comma' itemname='$43'
+ width='1' resizable='false' separatemultiplevalues='true' sortnoaccent='true'
+ sortnocase='true' showaslinks='false' categorized='true' twisties='true'><font
+ color='navy' style='bold'/><columnheader title='  '><font size='9pt' name='multilingual'/></columnheader><datetimeformat
+ legacy='true' show='date' date='yearmonthday' time='hourminutesecond' zone='never'/><numberformat
+ legacy='true' format='general' digits='2' punctuated='false' parens='false'
+ percent='false' bytes='false'/><code event='value'><formula>REM {Variables to translate};
+NotSubmittedTxt := "*Not submitted for review";
+NewTxt := "New";
+InRevTxt := "In Review";
+CompleteTxt := "Complete";
+NoStatTxt := "No Status";
+REM {End variables to translate};
+@If(Submitted != "1"; NotSubmittedTxt; Status = 1; NewTxt; Status = 2; InRevTxt; Status = 3; CompleteTxt; NoSatTxt)</formula></code></column>
+<column hidedetailrows='false' itemname='$44' width='2' resizable='false'
+ separatemultiplevalues='false' sortnoaccent='true' sortnocase='true' showaslinks='false'
+ showasicons='true'><columnheader><font size='9pt' name='multilingual'/></columnheader><code
+ event='value'><formula>@If(readers != ""; 62; ExpireDate !=""; 64; _ViewIcon)</formula></code></column>
+<column hidedetailrows='false' itemname='$49' width='1' resizable='false'
+ separatemultiplevalues='false' sortnoaccent='true' sortnocase='true' showaslinks='true'
+ responsesonly='true' twisties='true'><font size='9pt' color='purple'/><columnheader
+><font size='9pt' name='multilingual'/></columnheader><datetimeformat legacy='true'
+ show='date' date='yearmonthday' time='hourminutesecond' zone='never'/><code
+ event='value'><formula>REM {variable to translate};
+AnonTxt := "Anonymous";
+REM {end variable to translate};
+REM {the following is for alternate name support};
+REM {the following is for alternate name support};
+CNFrom := @Name([Abbreviate]; From);
+CNAltFrom := @Name([Abbreviate]; AltFrom);
+Alternatename := @If(AltFrom != "" &amp; AltFrom != From; " [" + CNAltFrom + "]"; "");
+
+@If(@Contains(Form; "Document");
+    @If(@IsUnavailable($VersionOpt);
+         "Original by "+  CNFrom + AlternateName;
+    @If(ReviewStyle!="";
+         "Review by " +  @Name([CN]; LastEditor);
+    ""));
+@If(Subject = ""; "Untitled"; Subject) + " (" + CNFrom + AlternateName + ")")</formula></code></column>
+<column resort='ascending' resort2='descending' resort2column='6' hidedetailrows='false'
+ listseparator='comma' itemname='$48' width='24.5000' resizable='true' separatemultiplevalues='false'
+ sortnoaccent='true' sortnocase='true' showaslinks='true' twisties='true'><font
+ size='9pt'/><columnheader title='Topic'><font size='9pt' name='multilingual'/></columnheader><datetimeformat
+ legacy='true' show='date' date='yearmonthday' time='hourminutesecond' zone='never'/><numberformat
+ legacy='true' format='general' digits='2' punctuated='false' parens='false'
+ percent='false' bytes='false'/><code event='value'><formula>@If(Subject = ""; "Untitled"; Subject)</formula></code></column>
+<column resort='ascending' hidedetailrows='false' listseparator='comma' itemname='$46'
+ width='11' resizable='true' separatemultiplevalues='false' sortnoaccent='true'
+ sortnocase='true' showaslinks='false'><font size='9pt'/><columnheader title='Created By'><font
+ size='9pt' name='multilingual'/></columnheader><datetimeformat legacy='true'
+ show='date' date='yearmonthday' time='hourminutesecond' zone='never'/><numberformat
+ legacy='true' format='general' digits='2' punctuated='false' parens='false'
+ percent='false' bytes='false'/><code event='value'><formula>@Name([Abbreviate]; From)</formula></code></column>
+<column resort='ascending' hidedetailrows='false' itemname='$47' width='11'
+ resizable='true' separatemultiplevalues='false' sortnoaccent='true' sortnocase='true'
+ showaslinks='false'><font size='9pt'/><columnheader title='Reviewer'><font
+ size='9pt' name='multilingual'/></columnheader><datetimeformat legacy='true'
+ show='date' date='yearmonthday' time='hourminutesecond' zone='never'/><numberformat
+ legacy='true' format='general' digits='2' punctuated='false' parens='false'
+ percent='false' bytes='false'/><code event='value'><formula>@If(Status = 3; ""; @Trim(@Name([Abbreviate]; CurrentEditor)))</formula></code></column>
+<column sort='descending' resort='descending' resort2='ascending' resort2column='6'
+ hidedetailrows='false' listseparator='comma' itemname='DueDateTime' width='9'
+ resizable='true' separatemultiplevalues='false' sortnoaccent='true' sortnocase='true'
+ showaslinks='false' formatdatatype='datetime'><font size='9pt'/><columnheader
+ title='Due'><font size='9pt' name='multilingual'/></columnheader><datetimeformat
+ legacy='true' show='date' date='yearmonthday' time='hourminute' zone='never'/><numberformat
+ legacy='true' format='general' digits='2' punctuated='false' parens='false'
+ percent='false' bytes='false'/></column></view>
+

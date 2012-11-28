@@ -1,0 +1,91 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE folder SYSTEM 'xmlschemas/domino_8_5_3.dtd'>
+<folder name='My Favorites' alias='My Favorite Documents' xmlns='http://www.lotus.com/dxl'
+ version='8.5' maintenanceversion='3.0' replicaid='80257AC2002D6A1A' showinmenu='false'
+ noreplace='true' privatefirstuse='true' publicaccess='false' designerversion='8.5.3'
+ private='true' unreadmarks='none' onopengoto='lastopened' onrefresh='displayindicator'
+ headers='simple' opencollapsed='false' showresponsehierarchy='false' showmargin='true'
+ shrinkrows='true' extendlastcolumn='false' showhierarchies='false' unreadcolor='red'
+ rowlinecount='5' headerlinecount='1' rowspacing='1.25' bgcolor='white' altrowcolor='#efefef'
+ totalscolor='blue' headerbgcolor='#d4c9ba' boldunreadrows='false' evaluateactions='false'
+ allownewdocuments='false' allowcustomizations='true' hidemarginborder='true'
+ marginwidth='0px 0px 1px' marginbgcolor='white' uniquekeys='false' formatnoteid='A63DE43A011F4AFF8525628400741366'>
+<noteinfo noteid='2b6' unid='DE0590619135BBD280257AC2002E0539' sequence='1'>
+<created><datetime>20121126T082239,93+00</datetime></created>
+<modified><datetime>20121126T082239,94+00</datetime></modified>
+<revised><datetime>20121126T082239,93+00</datetime></revised>
+<lastaccessed><datetime>20121126T082239,99+00</datetime></lastaccessed>
+<addedtofile><datetime>20121126T082239,94+00</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Matt White/O=Exhilarate</name></updatedby>
+<wassignedby><name>CN=Matt White/O=Exhilarate</name></wassignedby>
+<actionbar useappletinbrowser='true' bgcolor='#bba58b' bordercolor='black'><actionbarstyle
+ height='4.7500ex'><font size='9pt' name='multilingual'/></actionbarstyle>
+<actionbuttonstyle margintype='fixed' margin='5' bgcolor='#d4c9ba' displayborder='notesstyle'/><border
+ width='0px 0px 1px'/>
+<action title='Categori_ze' showinmenu='false' showinbar='false' hide='previewedit'
+ systemcommand='categorize'/>
+<action title='_Edit Document' showinbar='false' hide='previewedit' systemcommand='edit'/>
+<action title='Send Docu_ment' showinmenu='false' showinbar='false' hide='previewedit'
+ systemcommand='send'/>
+<action title='_Forward' showinbar='false' hide='previewedit' systemcommand='forward'/>
+<action title='_Move to Folder...' showinbar='false' systemcommand='movetofolder'/>
+<action title='_Remove from Folder...' showinbar='false' systemcommand='removefromfolder'/>
+<sharedactionref id='17'>
+<action title='New Document' showinmenu='false'><code event='click'><formula
+>viewname := @Subset(@ViewTitle; -1);
+@SetProfileField("tmpProfile"; "viewtitle"; viewname);
+@PostedCommand([Compose]; "Document")</formula></code></action></sharedactionref>
+<sharedactionref id='4'>
+<action title='New Response' showinmenu='false' hide='preview edit previewedit'><code
+ event='click'><formula>viewname := @Subset(@ViewTitle; -1);
+@SetProfileField("tmpProfile"; "viewtitle"; viewname);
+@PostedCommand([Compose];"Response")</formula></code><code event='hidewhen'><formula
+>REM {hide from web if it's in a view};
+@ClientType  != "Notes" &amp; !@IsAvailable(form) | (@IsAvailable(Status) &amp;@IsResponseDoc)</formula></code></action></sharedactionref>
+<sharedactionref id='5'>
+<action title='New Response to Response' showinmenu='false' hide='preview edit previewedit web'><code
+ event='click'><formula>@PostedCommand([Compose];"ResponseToResponse")</formula></code></action></sharedactionref>
+<sharedactionref id='14'>
+<action title='Search' showinmenu='false' hide='notes'><code event='click'><formula
+>REM {Web only};
+@Command([ViewShowSearchBar])</formula></code></action></sharedactionref></actionbar>
+<column hidedetailrows='false' itemname='$29' width='2' resizable='false'
+ separatemultiplevalues='false' sortnoaccent='true' sortnocase='true' showaslinks='false'
+ showasicons='true'><font size='9pt'/><columnheader><font size='9pt' name='multilingual'/></columnheader><code
+ event='value'><formula>@If( readers != ""; 62; ExpireDate !=""; 64; _ViewIcon)</formula></code></column>
+<column hidedetailrows='false' listseparator='comma' itemname='$30' width='35.5000'
+ resizable='true' separatemultiplevalues='false' sortnoaccent='true' sortnocase='true'
+ showaslinks='false'><font size='9pt'/><columnheader title='Title'><font size='9pt'
+ name='multilingual'/></columnheader><datetimeformat legacy='true' show='date'
+ date='yearmonthday' time='hourminutesecond' zone='never'/><numberformat legacy='true'
+ format='general' digits='2' punctuated='false' parens='false' percent='false'
+ bytes='false'/><code event='value'><formula>@If(@Contains(Form; "Document");
+    @If(Status = "New" | @IsUnavailable(Status);
+        Subject;
+    @IsUnavailable($VersionOpt);
+        Subject + "  (Original document in review cycle)";
+    @Contains(ReviewStyle; "Parallel");
+         Subject + "  (Reviewed by " +  LastEditor + ")";
+    Subject + "  (Reviewed by " + @Implode(PreviousReviewers;", ") + ")");
+@Contains(Form; "Archive");
+    Subject;
+Subject = "";
+     "(Response to " + OriginalSubject +")";
+Subject + " (Response to " + OriginalSubject + ")")</formula></code></column>
+<column sort='ascending' resort='descending' hidedetailrows='false' listseparator='comma'
+ itemname='$27' width='9' resizable='true' separatemultiplevalues='false'
+ sortnoaccent='true' sortnocase='true' showaslinks='false' formatdatatype='datetime'><font
+ size='9pt'/><columnheader title='Date'><font size='9pt' name='multilingual'/></columnheader><datetimeformat
+ legacy='true' show='date' date='yearmonthday' time='hourminute' zone='never'/><numberformat
+ legacy='true' format='general' digits='2' punctuated='false' parens='false'
+ percent='false' bytes='false'/><code event='value'><formula>@Modified</formula></code></column>
+<column resort='ascending' resort2='descending' resort2column='2' hidedetailrows='false'
+ itemname='$31' width='11' resizable='true' separatemultiplevalues='false'
+ sortnoaccent='true' sortnocase='true' showaslinks='false'><font size='9pt'/><columnheader
+ title='Author'><font size='9pt' name='multilingual'/></columnheader><code
+ event='value'><formula>@Name([Abbreviate]; From)</formula></code></column>
+<item name='$Readers' sign='true' readers='true'><text>CN=Matt White/O=Exhilarate</text></item>
+<item name='$Authors' sign='true' authors='true'><text>CN=Matt White/O=Exhilarate</text></item>
+<item name='$Name' sign='true'><text>My Favorites|My Favorite Documents</text></item>
+<item name='$ViewInheritedFrom'><text>My Favorite Documents</text></item></folder>
+

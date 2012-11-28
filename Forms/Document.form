@@ -1,0 +1,872 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE form SYSTEM 'xmlschemas/domino_8_5_3.dtd'>
+<form name='Document' alias='Document' xmlns='http://www.lotus.com/dxl' version='8.5'
+ maintenanceversion='3.0' replicaid='80257AC2002D6A1A' htmlallfields='true'
+ publicaccess='false' designerversion='8.5.2' language='en' default='true'>
+<noteinfo noteid='1a2' unid='CB19A9D7D3B1A06D8525663900485061' sequence='273'>
+<created><datetime dst='true'>19980706T090951,69-04</datetime></created>
+<modified><datetime>20121126T081603,41+00</datetime></modified>
+<revised><datetime dst='true'>20100824T141209,48-04</datetime></revised>
+<lastaccessed><datetime>20121126T081603,41+00</datetime></lastaccessed>
+<addedtofile><datetime>20121126T081603,41+00</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Lotus Notes Template Development/O=Lotus Notes</name></updatedby>
+<revisions><datetime dst='true'>20051020T131011,09-04</datetime><datetime
+>20080519T104215,45+08</datetime><datetime>20091203T140233,96-05</datetime></revisions>
+<wassignedby><name>CN=Lotus Notes Template Development/O=Lotus Notes</name></wassignedby>
+<globals><code event='options'><lotusscript>Option Public
+Option Explicit
+Use "SubmitForReview"
+
+
+</lotusscript></code><code event='declarations'><lotusscript>Dim FormW As NotesUIWorkspace
+Dim FormDoc As NotesUIDocument</lotusscript></code></globals><code event='windowtitle'><formula
+>@If(@IsNewDoc; "New Document"; Subject)</formula></code><code event='webquerysave'><formula
+>@Command([ToolsRunMacro]; "SubmitDocument")</formula></code><code event='webqueryopen'><formula
+>@If(@IsNewDoc | @IsDocBeingEdited; ""; @Command([ToolsRunMacro]; "OpenDocument"))</formula></code><code
+ event='postrecalc'><formula>FIELD ReviewerList := ReviewerList;
+FIELD AltReviewerList := AltReviewerList;
+
+tmpList := @ExpandNameList( @Subset(@DbName;1); ReviewerList);
+
+REM {Replace ReviewerList field with primary names if alternate name mode};
+tmpReviewerList := @If(
+	NamePref = "1" &amp; @TextToNumber(@Version)&gt;166;
+		@Transform(ReviewerList; "name";
+			@If(
+				@NameLookup([ForceUpdate]:[TrustedOnly]; name; "FullName") = @Nothing;
+					name;
+				@NameLookup([ForceUpdate]:[TrustedOnly]; name; "FullName")));
+	ReviewerList);
+
+REM {Use entered values if group is not expanded};
+tmpPriReviewerList := @If(
+@TextToNumber(@Version)&lt;=166;
+tmpList;
+	@Elements(tmpList) = @Elements(tmpReviewerList) &amp; @Sort(tmpList) = @Sort(tmpReviewerList);
+		tmpReviewerList;
+	tmpList);
+
+REM {Set up AltReviewerList. Use entered name if lookup fails};
+tmpAltReviewerList := @If(@TextToNumber(@Version)&gt;166;
+@Transform(tmpPriReviewerList; "name";
+	@If(@NameLookup([ForceUpdate]:[TrustedOnly]; name; "AltFullName") = @Nothing;
+		name;
+	@NameLookup([ForceUpdate]:[TrustedOnly]; name; "AltFullName")
+	)
+);
+tmpPriReviewerList)
+;
+
+@SetField("ReviewerList"; tmpPriReviewerList);
+@SetField("AltReviewerList"; tmpAltReviewerList)</formula></code><code event='querysave'><lotusscript
+>Sub Querysave(Source As Notesuidocument, Continue As Variant)
+	Dim ws As New NotesUIWorkspace     
+	
+	Set session = New NotesSession
+	Set db = session.CurrentDatabase
+	If note Is Nothing Then Set note = source.Document
+	
+	note.RemoveItem("SaveOptions")
+	
+	'reset NSubmit if it was error submiting, user fixed error and did not submit
+	If note.NSubmitNow(0) = "1" Then 
+		NSubmitNow = True
+	Else
+		NSubmitNow=False
+	End If
+	
+	
+'make sure that NotifyAfter is set
+	If note.NotifyAfter(0) = "" Then 	note.NotifyAfter = "0"		
+	
+'ParallelReviewCheck
+	'make sure that if review is complete and status=3 and not submitting  - exit sub
+	If (Not(NSubmitNow)  And note.Status(0) = 3) And note.complete(0)="1" Then Exit Sub
+	
+	If note.ReviewType(0) = "2" And note.complete(0) = "1" Then
+		Goto PContinue
+	End If
+	
+	
+'Serial review check: If we are not submitting for review, we don't need to do the rest of this     
+	If (Not(NSubmitNow)  Or note.Status(0) = 3) And note.Resubmit(0) = "0" Then Exit Sub
+	
+PContinue:     
+'Validate that the ReviewerList does not include the originator     
+	If ListIncludesOriginator Then
+'		Call note.replaceitemvalue("$DocLib", "RevCycle")
+		Messagebox GetString(17) &amp; GetString(18), 0, GetString(41)
+		continue = False
+		If FieldName = "Reviewer List" Then
+			source.GoToField("ReviewerList")
+		Else
+			source.GoToField("NewReviewer")
+		End If
+		Exit Sub
+	End If
+	
+'Validate that ReviewWindow is not blank.  if it is, set to "0" (no time limit)
+	Set item = note.GetFirstItem("ReviewTime")
+	If note.ReviewWindow(0) = "" Then
+		note.ReviewWindow = "0"	
+	End If
+	
+	
+'Validate that ReviewTime has a valid entry if ReviewWindow is not 0
+	Set item = note.GetFirstItem("ReviewTime")
+	If note.ReviewWindow(0) &lt;&gt; "0" Then
+'This verifies that it is not 0 or blank or a string
+		If item.Text = "" Or item.Text = "0" Or item.Text Like "*ERROR*" Then
+			InvalidReviewTime = True
+'This verifies that it is a whole number &gt; 0          
+		Elseif note.ReviewTime(0) &lt; 1 Or Int(note.ReviewTime(0)) &lt;&gt; note.ReviewTime(0) Then
+			InvalidReviewTime = True
+		End If
+		If InvalidReviewTime Then
+			FieldName = "Time Limit"
+			Messagebox GetString(16) &amp; GetString(18), 0, GetString(41)
+			'reset flags when error occured
+			Call note.Removeitem("submitted")			
+			Call note.Removeitem("NSubmitNow")		
+			
+			continue = False
+			source.GoToField("ReviewTime")
+			Exit Sub         
+		End If
+	End If
+	
+'Validate that the ReviewerList is not blank     
+	If note.ReviewerList(0) = "" And note.NSubmitNow(0) = "1" Then
+		FieldName = "Reviewer List"
+		Messagebox GetString(19) &amp; GetString(18), 0, GetString(41)
+		continue = False
+		source.GoToField("ReviewTime")
+		Exit Sub
+	End If
+	
+'Set this global variable so the scriptlib knows whether to put up messageboxes or pages          
+	ClientType = "Notes"
+'If the send (function in the SubmitForReview scriptlib) was successful, then save and close
+'SaveOptions supresses the save prompt          
+	
+	If note.ReviewType(0)="1" Then
+		If SendToNext Then
+			note.SaveOptions = "1"
+			source.Close
+		Else
+			Continue = False
+			source.Refresh
+		End If
+	End If
+	
+	If note.ReviewType(0)="2" Then
+		If SendToAll Then
+			
+			note.SaveOptions = "1"
+			source.Close
+		Else
+			Continue = False
+			source.Refresh
+			
+		End If
+	End If
+	
+finish:
+	ws.ViewRefresh
+End Sub
+</lotusscript></code><code event='queryopen'><lotusscript>Sub Queryopen(Source As Notesuidocument, Mode As Integer, Isnewdoc As Variant, Continue As Variant)
+	If Isnewdoc Then Exit Sub
+	Set note = source.document
+	
+'remove all of these so they can ger resest with default values each time the doc is opened     
+	note.RemoveItem("SaveOptions")
+	note.RemoveItem("CurrentUser")
+	note.RemoveItem("SubmitNow")
+	note.RemoveItem("NSubmitNow")
+	note.RemoveItem("Resubmit")
+	note.RemoveItem("SendError")
+	note.RemoveItem("WebCategories")
+	
+	'prevent openning Original caopy in edit mode when Ctrl-E used
+	
+	If note.IsResponse And Mode=1Then
+		Msgbox GetString(52), 0, Getstring(40)
+		continue=False
+	End If
+End Sub
+</lotusscript></code><code event='queryclose'><lotusscript>Sub Queryclose(Source As Notesuidocument, Continue As Variant)
+	Dim rtitem As Variant
+	
+	If note Is Nothing Then Exit Sub
+	If Not(note.HasItem("CopyBody")) Then Exit Sub
+	
+'we already copied the rest of the document, now we need to copy the body field
+	Set savenote = db.GetDocumentByUNID(note.OriginalSaved(0))
+	If note.HasItem("Body") Then
+		Set rtitem = note.GetFirstItem("Body")
+		savenote.RemoveItem("Body")
+		Call rtitem.CopyItemToDocument(savenote, "Body")
+	End If
+	savenote.save True, True, True
+	note.RemoveItem("CopyBody")
+	note.save True, True, True
+	
+End Sub
+</lotusscript></code><code event='querymodechange'><lotusscript>Sub Querymodechange(Source As Notesuidocument, Continue As Variant)
+	  'prevent putting Original copy in edit mode when Ctrl-E used
+	
+	Dim doc As NotesDocument	
+	Set doc=source.Document	
+	If doc.IsResponse Then
+		Msgbox GetString(52), 0, Getstring(40)
+		continue=False
+	End If
+End Sub</lotusscript></code>
+<actionbar useappletinbrowser='true' bgcolor='#bba58b' bordercolor='black'><actionbarstyle
+ height='4.7500ex'><font size='9pt' name='multilingual'/></actionbarstyle>
+<actionbuttonstyle margintype='fixed' margin='5' bgcolor='#d4c9ba' displayborder='notesstyle'
+ widthtype='background'/><font size='9pt' name='multilingual'/><border width='0px 0px 1px'/>
+<action title='_Edit Document' showinmenu='false' showinbar='false' hide='preview edit previewedit web'
+ systemcommand='edit'><code event='hidewhen'><formula>!(@LowerCase(@Name([CN]; @UserName)) = @LowerCase(@Name([CN]; From) : @Name([CN]; CurrentEditor)))</formula></code></action>
+<action title='Categori_ze' showinmenu='false' showinbar='false' hide='preview previewedit web'
+ systemcommand='categorize'/>
+<action title='_Forward' showinbar='false' hide='preview previewedit web'
+ systemcommand='forward'/>
+<sharedactionref id='19'>
+<action title='Forward as Bookmark' showinbar='false' hide='preview previewedit web'><code
+ event='click'><formula>@Command([Compose]; @MailDbName; "Bookmark")</formula></code><code
+ event='hidewhen'><formula>@IsNewDoc</formula></code></action></sharedactionref>
+<action title='_Move to Folder...' showinbar='false' hide='preview previewedit web'
+ systemcommand='movetofolder'/>
+<action title='_Remove from Folder' showinbar='false' hide='preview previewedit web'
+ systemcommand='removefromfolder'/>
+<action title='Send Docu_ment' showinmenu='false' showinbar='false' hide='web'
+ systemcommand='send'/>
+<sharedactionref id='2'>
+<action title='Edit Document' hide='preview edit previewedit'><code event='click'><formula
+>@Command([EditDocument])</formula></code><code event='hidewhen'><formula
+>!(@LowerCase(@Name([CN]; @UserName)) = @LowerCase(@Name([CN]; From) : @LowerCase(@Name([CN]; CurrentEditor)))) | (@IsAvailable($RefOptions))</formula></code></action></sharedactionref>
+<sharedactionref id='15'>
+<action title='Save &amp; Close' showinmenu='false' hide='preview read previewedit'><code
+ event='click'><formula>REM {Can't use @isvalid on the web};
+@If(
+@ClientType != "Notes";
+@Do(@Command([FileSave]); @Command([FileCloseWindow]));
+@IsValid;
+@Do(@Command([FileSave]); @Command([FileCloseWindow])); "")</formula></code></action></sharedactionref>
+<action title='Submit for Review' hide='preview read previewedit web'><code
+ event='click'><formula>REM {variables to translate};
+title := "Document Library";
+msg1 := "Please indicate who should review this document.";
+msg2 := "The Originator cannot be on the reviewer list.";
+msg3:="Please select type of review.";
+msg4:="You cannot use an internet address as the Reviewer.";
+REM {END variables to translate};
+
+
+REM {BEGIN_DNT};
+@Command([ViewRefreshFields]);
+
+tmpRmvDomain := @LeftBack(ReviewerList; "@");
+valError1 := @ValidateInternetAddress([Address821]; ReviewerList);
+valError2 := @ValidateInternetAddress([Address822]; ReviewerList);
+valError3 := @ValidateInternetAddress([Address821]; tmpRmvDomain);
+valError4 := @ValidateInternetAddress([Address822]; tmpRmvDomain);
+@If (valError1 ="" | valError2 ="" | valError3 = "" | valError4  = "" ; @Return(@Prompt([Ok]; Title; msg4)); "");
+
+
+@If(@Elements(ReviewerList) = 0; @Return(@Do(@Prompt([Ok]; Title ; msg1); @PostedCommand([SectionExpandAll]); @PostedCommand([EditGotoField]; "ReviewerList"))); "");
+@If(@Contains(@LowerCase(ReviewerList); @LowerCase(From)); @Return(@Do(@Prompt([Ok]; Title; msg2); @PostedCommand([SectionExpandAll]); @PostedCommand([EditGotoField]; "ReviewerList"))); "");
+@If (ReviewType=""; @Return(@Do(@Prompt([Ok]; Title; msg3); @PostedCommand([SectionExpandAll]); @PostedCommand([EditGotoField]; "ReviewType"))); ReviewType);
+REM {strip domain, if it's on reviewerlist field};
+domain := @Right(ReviewerList; "@");
+domain2 := "@" + domain;
+finalList := @ReplaceSubstring(ReviewerList; domain2; "");
+FIELD form := "Document";
+FIELD ReviewerList := @Trim(FinalList);
+FIELD PrevRev := @Unavailable;
+FIELD submitted := "1";
+FIELD NSubmitNow := "1";
+FIELD Resubmit := @If(Resubmit = "0" &amp; @IsAvailable(SendError); "1"; Resubmit);
+@PostedCommand([FileSave]);
+REM {END_DNT};</formula></code><code event='hidewhen'><formula>LCNuser := @LowerCase(@Name([CN]; @UserName));
+LCNfrom := @LowerCase(@Name([CN]; From));
+LABuser := @LowerCase(@Name([Abbreviate]; @UserName));
+LABfrom := @LowerCase(@Name([Abbreviate]; From));
+
+REM {Hide if the status is not 'New'};
+REM {Also hide if it's not the author editing the document};
+REM {Also hide if it is response doc};
+
+Status &gt; 1 |
+(Status = 1 &amp; ConvertedR4 = "1" &amp; LCNuser  != LCNfrom) |
+(Status = 1 &amp; ConvertedR4 != "1" &amp; LABuser  != LABfrom) |
+@IsResponseDoc</formula></code></action>
+<action title='My Review is Complete' hide='preview read previewedit web'><code
+ event='click'><formula>FIELD NSubmitNow := NSubmitNow;
+FIELD Complete := Complete;
+FIELD Resubmit := @If(
+Resubmit = "0" &amp; @IsAvailable(SendError);
+@If(@Prompt([YesNo]; "Resubmit"; "Did you want to send notification to " + @Name([CN]; NewReviewer) + "?"); "1"; "0"); Resubmit);
+@If(ReviewType = "1"; @SetField("NSubmitNow"; "1") ; @SetField("complete"; "1"));
+@PostedCommand([FileSave])</formula></code><code event='hidewhen'><formula
+>LCNuser := @LowerCase(@Name([CN]; @UserName));
+LCNfrom := @LowerCase(@Name([CN]; From));
+LABuser := @LowerCase(@Name([Abbreviate]; @UserName));
+LABfrom := @LowerCase(@Name([Abbreviate]; From));
+
+REM {Hide if the status is 'Complete' or if it's a resp (e.g., copy of the original) or ireview list is blank};
+REM {Also hide if the author of the document is editing the doc};
+
+Status = 3 | @IsResponseDoc | ReviewerList = "" |
+
+(ConvertedR4 = "1" &amp; LCNuser = LCNfrom) |
+(ConvertedR4 != "1" &amp; LABuser  = LABfrom)</formula></code></action>
+<action title='Clear Review Cycle' hide='preview read web'><code event='click'><formula
+>revtxt := @NewLine + "Review cycle was cleared on: " + @Text(@Date(@Now));
+
+FIELD Status := Status;
+FIELD ReviewerList := ReviewerList;
+FIELD CurrentEditor := CurrentEditor;
+FIELD reviewerlog := reviewerlog;
+
+@SetField("Status"; 1);
+@SetField("CurrentEditor"; "");
+@SetField("ReviewerList"; "");
+@SetField("ReviewerLog"; ReviewerLog : revtxt);
+@Command([ViewRefreshFields])</formula></code><code event='hidewhen'><formula
+>LCNuser := @LowerCase(@Name([CN]; @UserName));
+LCNfrom := @LowerCase(@Name([CN]; From));
+LABuser := @LowerCase(@Name([Abbreviate]; @UserName));
+LABfrom := @LowerCase(@Name([Abbreviate]; From));
+
+REM {Hide if the document is not 'In Review'};
+REM {Also hide if the document IS 'In Review' and the person editing it is not the author of the doc};
+Status != 2    |
+(Status = 2 &amp; ConvertedR4 = "1" &amp; LCNuser  != LCNfrom) |
+(Status = 2  &amp; ConvertedR4 != "1" &amp; LABuser  != LABfrom)</formula></code></action>
+<sharedactionref id='4'>
+<action title='New Response' showinmenu='false' hide='preview edit previewedit'><code
+ event='click'><formula>viewname := @Subset(@ViewTitle; -1);
+@SetProfileField("tmpProfile"; "viewtitle"; viewname);
+@PostedCommand([Compose];"Response")</formula></code><code event='hidewhen'><formula
+>REM {hide from web if it's in a view};
+@ClientType  != "Notes" &amp; !@IsAvailable(form) | (@IsAvailable(Status) &amp;@IsResponseDoc)</formula></code></action></sharedactionref>
+<sharedactionref id='6'>
+<action title='Mark Private' showinmenu='false' hide='preview read previewedit'><code
+ event='click'><formula>FIELD readers:=@Trim(@Unique(From : @UserName));
+@PostedCommand([RefreshHideFormulas]);@Command([ViewRefreshFields])</formula></code><code
+ event='hidewhen'><formula>@Elements(readers)&gt;0 | status = 2</formula></code></action></sharedactionref>
+<sharedactionref id='7'>
+<action title='Mark Public' showinmenu='false' hide='preview read previewedit'><code
+ event='click'><formula>FIELD readers:=@DeleteField;
+@PostedCommand([RefreshHideFormulas]);@Command([ViewRefreshFields])</formula></code><code
+ event='hidewhen'><formula>@Elements(readers)&lt;1 | status = 2</formula></code></action></sharedactionref>
+<sharedactionref id='11'>
+<action title='Mark/Unmark Document as Expired' showinmenu='false' hide='read notes'><code
+ event='click'><formula>REM {Web only};
+@Command([FileSave]);
+UNID:=@Text(@DocumentUniqueID );
+
+@If(@TextToNumber(@Version) &lt; 174;
+	@URLOpen("/"+@ReplaceSubstring(@Subset(@DbName; -1);" ";"+")+"/WebExpire?OpenAgent&amp;"+UNID);
+@URLOpen(@WebDbName+"/WebExpire?OpenAgent&amp;"+UNID))</formula></code><code
+ event='hidewhen'><formula>@IsNewDoc</formula></code></action></sharedactionref>
+<sharedactionref id='10'>
+<action title='Cancel' showinmenu='false' hide='preview previewedit web'><code
+ event='click'><formula>REM {Notes only};
+FIELD SaveOptions := 0;
+@Command([FileCloseWindow])</formula></code></action></sharedactionref>
+<sharedactionref id='23'>
+<action title='Cancel' showinmenu='false' hide='notes'><code event='click'><formula
+>REM {web saved docs};
+@Command([FileCloseWindow])</formula></code><code event='hidewhen'><formula
+>@IsNewDoc</formula></code></action></sharedactionref>
+<sharedactionref id='16'>
+<action title='Cancel' showinmenu='false' hide='notes'><code event='click'><formula
+>REM {web new docs};
+CurrentView := @GetProfileField("tmpProfile"; "viewtitle");
+@Command([OpenView]; CurrentView)</formula></code><code event='hidewhen'><formula
+>!@IsNewDoc</formula></code></action></sharedactionref></actionbar>
+<body><richtext>
+<pardef id='1' leftmargin='1in' rightmargin='0%' hide='read edit copy preview previewedit'><parstyle
+ name='Comment' incyclekey='true'><font size='8pt' color='green' name='sans-serif'/></parstyle></pardef>
+<pardef id='2' leftmargin='1in' hide='notes' tabs='L0.5000in L1in L1.5000in L2in L2.5000in L3in L3.5000in L4in'/>
+<par def='2'><run html='true'><font size='8pt'/>&lt;HEAD&gt;</run></par>
+<par def='2'><run html='true'><font size='8pt'/>&lt;STYLE TYPE="text/css"&gt;</run></par>
+<par def='2'><run html='true'><font size='8pt'/> BODY {font-family: "Arial"}</run></par>
+<par def='2'><run html='true'><font size='8pt'/>&lt;/STYLE&gt;</run></par>
+<par def='2'><run html='true'><font size='8pt'/>&lt;/HEAD&gt;</run></par>
+<pardef id='3' align='none' leftmargin='1in' hide='notes web' tabs='L5in'/>
+<par def='3'><run><font size='9pt' color='blue'/>note: anything in this color on the form is a link that is used only in a browser.</run></par>
+<table widthtype='fitmargins' user4spacing='true' refwidth='8.4167in'><tablecolumn
+ width='30.0174%'/><tablecolumn width='69.9826%'/>
+<tablerow>
+<tablecell>
+<pardef id='5' leftmargin='5%' rightmargin='99%' hide='notes web' keepwithnext='true'
+ keeptogether='true'/>
+<par def='5'><run><font size='9pt' color='gray'/></run><run><font size='9pt'
+ color='gray'/><field type='authors' kind='computedwhencomposed' name='From'
+ description='Document author name'><code event='defaultvalue'><formula>@UserName</formula></code></field></run><run
+><font size='9pt' color='gray'/> </run></par></tablecell>
+<tablecell>
+<pardef id='6' leftmargin='3%' rightmargin='100%' hide='notes web' keepwithnext='true'
+ keeptogether='true'/>
+<par def='6'><run><font size='9pt' color='gray'/>This = @UserName and the one displayed below is @Name([CN] of this</run></par></tablecell></tablerow>
+<tablerow>
+<tablecell>
+<pardef id='7' leftmargin='2%' hide='notes web' keepwithnext='true' keeptogether='true'/>
+<par def='7'><run><font size='9pt'/></run><run><font size='9pt' color='gray'/><sharedfieldref
+ name='AltFrom'/></run><run><font size='9pt'/></run></par></tablecell>
+<tablecell>
+<pardef id='8' leftmargin='1%' hide='notes web' keepwithnext='true' keeptogether='true'/>
+<par def='8'><run><font size='9pt'/>creator's alternate name</run></par></tablecell></tablerow>
+<tablerow>
+<tablecell>
+<par def='7'><run><font size='9pt'/></run><run><font size='9pt' color='gray'/><sharedfieldref
+ name='AltLang'/></run><run><font size='9pt'/></run></par></tablecell>
+<tablecell>
+<par def='8'><run><font size='9pt'/>creator's alternate language</run></par></tablecell></tablerow>
+<tablerow>
+<tablecell>
+<pardef id='9' leftmargin='2%' hide='notes web' keepwithnext='true' keeptogether='true'/>
+<par def='9'><run><font size='9pt' color='gray'/></run><run><font size='9pt'
+ color='gray'/><field type='text' kind='computedfordisplay' name='NamePref'><code
+ event='defaultvalue'><formula>@LocationGetInfo([NamePreference])</formula></code></field></run><compositedata
+ type='98' prevtype='65418' nexttype='222' afterparcount='10' containertype='65418'
+ aftercontainercount='1' afterbegincount='3'>
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata><run><font size='9pt'
+ color='gray'/></run></par></tablecell>
+<tablecell>
+<pardef id='10' hide='notes web' tabs='L0.5000in L1in L1.5000in L2in L2.5000in L3in L3.5000in L4in'
+ keepwithnext='true' keeptogether='true'/>
+<par def='10'><run><font size='9pt' color='gray'/>   Replace ReviewerList field if alternate name mode</run></par></tablecell></tablerow>
+<tablerow>
+<tablecell>
+<par def='5'><run><font size='9pt' color='gray'/></run><run><font size='9pt'
+ color='gray'/><field type='readers' allowmultivalues='true' kind='computed'
+ name='readers' listinputseparators='comma' listdisplayseparator='comma'><code
+ event='defaultvalue'><formula>@If(readers = ""; ""; @Trim(@Unique(From : @UserName : ReviewerList)))</formula></code></field></run><run
+><font size='9pt' color='gray'/></run></par></tablecell>
+<tablecell>
+<par def='6'><run><font size='9pt' color='gray'/>If doc is private this will contain the username of the author</run></par></tablecell></tablerow>
+<tablerow>
+<tablecell>
+<par def='5'><run><font size='9pt' color='gray'/></run><run><font size='9pt'
+ color='gray'/><field type='number' kind='computedwhencomposed' name='Status'><numberformat
+ format='general' digits='2' punctuated='false' parens='false' percent='false'
+ bytes='false'/><code event='defaultvalue'><formula>REM {1=New,  2=In Review, 3=Review Complete};
+1</formula></code></field></run><run><font size='9pt' color='gray'/></run></par></tablecell>
+<tablecell>
+<par def='6'><run><font size='9pt' color='gray'/>Review Status, 1=New, 2=InReview, 3=ReviewComplete</run></par></tablecell></tablerow>
+<tablerow>
+<tablecell>
+<par def='5'><run><font size='9pt' color='gray'/></run><run><font size='9pt'
+ color='gray'/><field type='authors' allowmultivalues='true' kind='computedwhencomposed'
+ name='CurrentEditor' listinputseparators='comma' listdisplayseparator='comma'><code
+ event='defaultvalue'><formula>CurrentEditor</formula></code></field></run><run
+><font color='gray'/></run></par></tablecell>
+<tablecell>
+<pardef id='11' leftmargin='3%' rightmargin='100%' hide='notes web' keepwithnext='true'
+ keeptogether='true'/>
+<par def='11'><run><font size='9pt' color='gray'/>Author Names field - usually represents the current reviewer</run></par></tablecell></tablerow>
+<tablerow>
+<tablecell>
+<par def='5'><run><font size='9pt' color='gray'/></run><run><font size='9pt'
+ color='gray'/><field type='names' kind='computedwhencomposed' name='CurrentUser'><code
+ event='defaultvalue'><formula>@UserName</formula></code></field></run><run
+><font color='gray'/></run></par></tablecell>
+<tablecell>
+<par def='11'><run><font size='9pt' color='gray'/>Tells WebQuerySave Agent who is the current editor</run><run
+><font color='gray'/> </run></par></tablecell></tablerow>
+<tablerow>
+<tablecell>
+<par def='5'><run><font size='9pt' color='gray'/><field borderstyle='none'
+ lookupeachchar='false' lookupaddressonrefresh='false' type='keyword' kind='editable'
+ name='Resubmit'><keywords columns='3' ui='radiobutton'><textlist><text>Yes|1</text><text
+>No|0</text><text>Skip This Reviewer|2</text></textlist></keywords><code event='defaultvalue'><formula
+>"0"</formula></code></field></run></par></tablecell>
+<tablecell>
+<par def='11'/></tablecell></tablerow>
+<tablerow>
+<tablecell>
+<pardef id='12' leftmargin='2%' rightmargin='99%' hide='notes web' keepwithnext='true'
+ keeptogether='true'/>
+<par def='12'><run><font size='8pt' color='gray'/></run><run><font size='9pt'
+ color='gray'/><field type='text' kind='computedfordisplay' name='testForR4Docs'><code
+ event='defaultvalue'><formula>REM {Variables to translate};
+title := "**ALERT**";
+msg := "This R4.x Doc Lib database has been redesigned using the R5.0 template and you are trying to open an incompatible R4.x document.  You must select \"Actions--Upgrade Doc Lib R4 Documents to New Design\" first.";
+REM {end variables to translate};
+
+REM {If it's an R5 document, we don't need to calculate the rest of the formula.};
+@If(@IsAvailable(ReviewerNumber); @Return(""); "");
+REM {DNT};
+ReviewerList := @Name([Abbreviate]; ReviewerList);
+Curr := @Elements(currentEditor);
+ReviewerNum := ReviewerNumber + 1;
+TEST := @If(@IsNewDoc | (Status = 1 &amp; @IsUnavailable(SendError)); None; ReviewType = "2" &amp; ReviewerNumber = 0; None; ReviewType = "2" &amp; PrevRev != ""; @Trim(PrevRev); ReviewType = "1" &amp; ReviewerNum = 1; None; @Subset(ReviewerList; ReviewerNum - 1));
+@If(@IsError(TEST); @Prompt([Ok]; Title; Msg); "")</formula></code></field></run><compositedata
+ type='98' prevtype='65418' nexttype='222' afterparcount='10' containertype='65418'
+ aftercontainercount='1' afterbegincount='3'>
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata><run><font size='8pt'
+ color='gray'/></run></par></tablecell>
+<tablecell>
+<pardef id='13' leftmargin='1%' rightmargin='100%' hide='notes web' keepwithnext='true'
+ keeptogether='true'/>
+<par def='13'><run><font size='9pt' color='gray'/>if a 4.0 database has been redesigned using 5.0, an error will occur on the tmpPrevReviewers field when the main document is opened.  In this case, the user must run the upgrade agent that we have provided.</run></par></tablecell></tablerow></table>
+<pardef id='14' align='none' leftmargin='1in' hide='notes web' tabs='L0.5000in L1in L1.5000in L2in L2.5000in L3in L3.5000in L4in'/>
+<par def='14'><run><font size='9pt' color='blue'/></run></par>
+<table cellbordercolor='#bba58b' rightmargin='98%' widthtype='fixedleft' refwidth='7.9688in'><tablecolumn
+ width='1.6875in'/><tablecolumn width='6.2813in'/>
+<tablerow>
+<tablecell borderwidth='2px' bgcolor='#e9e3db'>
+<cellbackground repeat='resize'><imageref name='DocHeader.gif'/></cellbackground>
+<pardef id='16' align='center' leftmargin='1%' keepwithnext='true' keeptogether='true'/>
+<par def='16'><run><font size='9pt' style='bold' color='#7f604f'/></run></par>
+<par def='16'><run><font size='18pt' style='bold' color='#7f604f'/>Doc Library</run></par>
+<par def='16'><run><font size='9pt' style='bold' color='#7f604f'/>Main Topic</run></par>
+<par def='16'><run><font size='9pt' style='bold' color='#806210'/></run></par>
+<par def='16'><run><font size='9pt' style='bold'/></run><run><font size='9pt'
+ style='bold'/><sharedfieldref name='tmpFrom'/></run><run><font size='9pt'
+ style='bold'/></run></par>
+<par def='16'><run><font size='9pt'/></run><run><font size='9pt'/><field type='datetime'
+ kind='computedfordisplay' name='Date' description='The date/time when the document was composed'><datetimeformat
+ date='yearmonthday' time='hourminute' zone='never'/><code event='defaultvalue'><formula
+>@Created</formula></code></field></run><run><font size='9pt'/> </run><run
+><font size='9pt'/><field type='datetime' kind='computedfordisplay' name='TimeCreated'><datetimeformat
+ show='time' date='yearmonthday' time='hourminute' zone='never'/><code event='defaultvalue'><formula
+>@Created</formula></code></field></run><run><font size='9pt'/></run></par>
+<par def='16'><run><font size='9pt'/></run></par>
+<par def='16'><run><font size='9pt' style='bold'/></run><run><font size='9pt'
+ style='bold'/><sharedfieldref name='Private'/></run><run><font size='9pt'
+ style='bold'/></run></par>
+<par def='16'><run><font size='9pt' style='bold'/></run><run><font size='9pt'
+ style='bold'/><sharedfieldref name='Expire'/></run><run><font size='9pt'
+ color='#806210'/></run></par></tablecell>
+<tablecell borderwidth='2px' bgcolor='#e9e3db'>
+<pardef id='17' leftmargin='1%' hide='notes web' keepwithnext='true' keeptogether='true'/>
+<par def='17'><run><font size='9pt' color='white'/></run></par>
+<table widthtype='fitmargins' leftmargin='0.1000in' refwidth='6.1813in'><tablecolumn
+ width='0.9000in'/><tablecolumn width='100%'/>
+<tablerow>
+<tablecell borderwidth='0px'>
+<pardef id='19' leftmargin='1%' keepwithnext='true' keeptogether='true'/>
+<par def='19'><run><font size='9pt' style='bold'/></run></par>
+<par def='19'><run><font size='9pt' style='bold'/>Subject:</run></par></tablecell>
+<tablecell borderwidth='0px'>
+<pardef id='20' leftmargin='1%' keepwithnext='true' keeptogether='true'/>
+<par def='20'><run><font size='9pt' color='#004080'/></run></par>
+<pardef id='21' leftmargin='1%' hide='read preview' keepwithnext='true' keeptogether='true'/>
+<par def='21'><run><font size='9pt' color='#004080'/></run><run><font size='9pt'
+ style='bold'/><field defaultfocus='true' usenotesstyle='false' height='0.2000in'
+ width='4in' multiline='true' borderstyle='single' type='text' kind='editable'
+ name='Subject' description='Required: description of this document '><code
+ event='htmlattributes'><formula>"size=50"</formula></code><code event='inputtranslation'><formula
+>@If(Subject = ""; "Untitled"; @Trim(@ReplaceSubstring(subject;"[";" ")))</formula></code></field></run><run
+><font size='9pt' style='bold' color='#00204f'/></run></par>
+<pardef id='22' leftmargin='1%' hide='edit previewedit' keepwithnext='true'
+ keeptogether='true'/>
+<par def='22'><run><font size='9pt'/></run><run><font size='9pt' style='bold'/><field
+ type='text' kind='computedfordisplay' name='dspSubject'><code event='defaultvalue'><formula
+>Subject</formula></code></field></run><compositedata type='98' prevtype='65418'
+ nexttype='222' afterparcount='7' containertype='65418' aftercontainercount='1'
+ afterbegincount='3'>
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata><run><font size='9pt' style='bold' color='#00204f'/></run></par></tablecell></tablerow>
+<tablerow>
+<tablecell borderwidth='0px'>
+<pardef id='23' leftmargin='1%' rightmargin='100%' keepwithnext='true' keeptogether='true'/>
+<par def='23'><run><font size='9pt' style='bold'/>Category:</run></par></tablecell>
+<tablecell borderwidth='0px'>
+<pardef id='24' leftmargin='1%' hide='read notes' keepwithnext='true' keeptogether='true'/>
+<par def='24'><run><font size='9pt'/></run><run><font size='9pt'/><field lookupeachchar='false'
+ lookupaddressonrefresh='false' type='keyword' allowmultivalues='true' kind='editable'
+ name='WebCategories' description='&lt;Size=1>' listinputseparators='comma'
+ listdisplayseparator='comma'><keywords columns='1' ui='dialoglist'><formula
+>@DbColumn("":"nocache"; ""; "ByCategory"; 1)</formula></keywords><code event='htmlattributes'><formula
+>"Size=5"</formula></code></field></run><run><font size='9pt'/></run></par>
+<par def='24'><run><font size='9pt'/>Enter a new category:</run></par>
+<par def='24'><run><font size='9pt'/></run><run><font size='9pt'/><field type='text'
+ allowmultivalues='true' kind='editable' name='NewCats' listinputseparators='comma semicolon'
+ listdisplayseparator='semicolon'/></run><compositedata type='98' prevtype='65418'
+ nexttype='222' afterparcount='6' containertype='65418' aftercontainercount='1'
+ afterbegincount='3'>
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata><run><font size='9pt'/></run></par>
+<pardef id='25' leftmargin='1%' keepwithnext='true' keeptogether='true'><code
+ event='hidewhen'><formula>@ClientType != "Notes" &amp; @IsDocBeingEdited</formula></code></pardef>
+<par def='25'><run><font size='9pt'/></run><run><font size='9pt'/><field type='keyword'
+ allowmultivalues='true' kind='editable' name='Categories' description='Press ENTER for list of keywords or to add a new keyword.'
+ listinputseparators='comma' listdisplayseparator='comma'><keywords ui='dialoglist'
+ allownew='true'><formula>REM {In the case of reading an existing document, it is not necessary to do the @DbColumn because we don't support the use of Keyword Synonyms in this application, and thus translation doesn't need to be done.};
+@If(!@IsNewDoc &amp; @IsDocBeingLoaded; @Unavailable; @DbColumn("":"nocache"; ""; "By Category"; 1))</formula></keywords><code
+ event='inputtranslation'><formula>@If(@ClientType = "Notes"; @Trim(@Unique(Categories : WebCategories : NewCats)); @Trim(@Unique(WebCategories : NewCats)))</formula></code><code
+ event='inputvalidation'><formula>FIELD WebCategories := @If(@ClientType = "Notes"; @DeleteField; @Trim(@Unique(WebCategories : NewCats)));
+FIELD NewCats := @DeleteField;
+@Success</formula></code></field></run></par></tablecell></tablerow>
+<tablerow>
+<tablecell borderwidth='0px'>
+<pardef id='26' hide='read notes' keepwithnext='true' keeptogether='true'/>
+<par def='26'><run><font size='9pt' style='bold'/>Attach a file:</run></par></tablecell>
+<tablecell borderwidth='0px'>
+<pardef id='27' hide='read notes' keepwithnext='true' keeptogether='true'/>
+<par def='27'><run><font size='9pt' style='bold'/></run><embeddedfileuploadcontrol
+/><run><font size='9pt' style='bold'/></run></par></tablecell></tablerow></table>
+<pardef id='28' leftmargin='1%' keepwithnext='true' keeptogether='true'/>
+<par def='28'> </par>
+<table widthtype='fitmargins' htmlid='DocTable' leftmargin='0.1000in' refwidth='6.1813in'><tablecolumn
+ width='21.4792%'/><tablecolumn width='22.0104%'/><tablecolumn width='16.2465%'/><tablecolumn
+ width='40.2639%'/>
+<tablerow>
+<tablecell borderwidth='0px'>
+<pardef id='29' leftmargin='1%' keepwithnext='true' keeptogether='true'><code
+ event='hidewhen'><formula>Status &gt; 1 | @IsResponseDoc | @IsAvailable(SendError)</formula></code></pardef>
+<par def='29'><run><font size='9pt' style='bold'/>Originator</run></par></tablecell>
+<tablecell borderwidth='0px'>
+<pardef id='30' leftmargin='1%' keepwithnext='true' keeptogether='true'><code
+ event='hidewhen'><formula>Status &gt; 1 | @IsResponseDoc | @IsAvailable(SendError)</formula></code></pardef>
+<par def='30'><run><font size='9pt' style='bold'/>Reviewers</run></par></tablecell>
+<tablecell borderwidth='0px' htmlid='DocTable_a'>
+<pardef id='31' align='right' leftmargin='1%' hide='web' keepwithnext='true'
+ keeptogether='true'><code event='hidewhen'><formula>Status &gt; 1 | @IsResponseDoc | @IsAvailable(SendError)</formula></code></pardef>
+<par def='31'><run><font size='9pt' style='bold'/>Review Options</run></par></tablecell>
+<tablecell borderwidth='0px' htmlid='DocTable_f'>
+<pardef id='32' leftmargin='1%' hide='notes' keepwithnext='true' keeptogether='true'><code
+ event='hidewhen'><formula>Status &gt; 1 | @IsResponseDoc | @IsAvailable(SendError)</formula></code></pardef>
+<par def='32'><run><font size='9pt' style='bold'/>Review Options</run></par></tablecell></tablerow>
+<tablerow>
+<tablecell borderwidth='0px'>
+<par def='29'><run><font size='9pt'/><field type='names' kind='computedfordisplay'
+ name='tmpOriginator_1'><code event='defaultvalue'><formula>ver := @TextToNumber(@Version);
+ABFrom := @Name([Abbreviate]; From);
+@If(ver &lt; 160; @Return(ABfrom); "");
+
+LangPref := @LanguagePreference([AlternateName]);
+LocPref := @LocationGetInfo([NamePreference]);
+ABAltFrom := @Name([Abbreviate]; AltFrom);
+@If(@Contains(form; "Anonymous"); "Anonymous";
+LocPref = "" | LocPref = "0"; ABFrom;
+LangPref = "" | AltLang = ""; ABFrom;
+@IsMember(AltLang; LangPref) &amp; AltFrom != ""; ABAltFrom; ABFrom)</formula></code></field></run><run
+><font size='9pt'/></run></par></tablecell>
+<tablecell borderwidth='0px'>
+<pardef id='33' leftmargin='1%' rightmargin='100%' keepwithnext='true' keeptogether='true'><code
+ event='hidewhen'><formula>Status &gt; 1 | @IsResponseDoc | @IsAvailable(SendError)</formula></code></pardef>
+<par def='33'><run><font size='9pt'/><field choicesdialog='addressbook' lookupeachchar='true'
+ lookupaddressonrefresh='false' type='names' allowmultivalues='true' kind='editable'
+ name='ReviewerList' description='The people who need to review this, separated by comma.'
+ listinputseparators='comma newline' listdisplayseparator='newline'/></run><run
+><font size='9pt'/></run></par></tablecell>
+<tablecell borderwidth='0px' htmlid='DocTable_b'>
+<pardef id='34' leftmargin='0.0403in' spaceafter='1.5' hide='web' keepwithnext='true'
+ keeptogether='true'><code event='hidewhen'><formula>Status &gt; 1 | @IsResponseDoc | @IsAvailable(SendError)</formula></code></pardef>
+<par def='34'><run><font size='9pt'/>Type of review:</run></par></tablecell>
+<tablecell borderwidth='0px' htmlid='DocTable_g'>
+<pardef id='35' leftmargin='0' hide='notes' keepwithnext='true' keeptogether='true'><code
+ event='hidewhen'><formula>Status &gt; 1 | @IsResponseDoc | @IsAvailable(SendError)</formula></code></pardef>
+<par def='35'><run><font size='9pt'/>Type of review:</run></par>
+<pardef id='36' leftmargin='0' keepwithnext='true' keeptogether='true'><code
+ event='hidewhen'><formula>Status &gt; 1 | @IsResponseDoc | @IsAvailable(SendError)</formula></code></pardef>
+<par def='36'><run><font size='9pt'/></run><run><font size='9pt'/><field lookupeachchar='false'
+ lookupaddressonrefresh='false' type='keyword' kind='editable' name='ReviewType'
+ description='Select the type of review'><keywords recalconchange='true' columns='1'
+ ui='dialoglist'><textlist><text>One reviewer at a time | 1</text><text>All reviewers simultaneously | 2</text></textlist></keywords><code
+ event='defaultvalue'><formula>"1"</formula></code></field></run><run><font
+ size='9pt'/></run></par></tablecell></tablerow>
+<tablerow>
+<tablecell borderwidth='0px'>
+<par def='29'><run><font size='9pt'/></run></par></tablecell>
+<tablecell borderwidth='0px'>
+<par def='30'><run><font size='9pt'/></run></par></tablecell>
+<tablecell borderwidth='0px' htmlid='DocTable_c'>
+<par def='34'><run><font size='9pt'/>Time Limit Options:</run></par></tablecell>
+<tablecell borderwidth='0px' htmlid='DocTable_h'>
+<par def='35'><run><font size='9pt'/>Time Limit Options:</run></par>
+<par def='36'><run><font size='9pt'/></run><run><font size='9pt'/><field lookupeachchar='false'
+ lookupaddressonrefresh='false' type='keyword' kind='editable' name='ReviewWindow'
+ description='What should happen if the time limit has expired.'><keywords
+ recalconchange='true' recalcchoices='true' columns='1' ui='dialoglist'><formula
+>Serial := "No time limit for each review|0" : "Move to next reviewer after time limit expires|1": "Keep sending reminders after time limit expires|2";
+Parallel := "No time limit for each review|0" : "|1" : "Keep sending reminders after time limit expires|2";
+WebParallel:= "No time limit for each review|0" : "Keep sending reminders after time limit expires|2";
+@If(
+@ClientType !="Notes" &amp; ReviewType="2"; WebParallel;
+ ReviewType = "1"; Serial; ReviewType = "2" ; Parallel; "")</formula></keywords><code
+ event='defaultvalue'><formula>"0"</formula></code></field></run><run><font
+ size='9pt'/></run></par></tablecell></tablerow>
+<tablerow>
+<tablecell borderwidth='0px'>
+<pardef id='37' keepwithnext='true' keeptogether='true'><code event='hidewhen'><formula
+>Status &gt; 1 | @IsResponseDoc | @IsAvailable(SendError) | (!@IsDocBeingEdited &amp; !@IsNumber(ReviewTime)) | ReviewWindow = "0" | ReviewWindow = ""</formula></code></pardef>
+<par def='37'><run><font size='9pt'/></run></par></tablecell>
+<tablecell borderwidth='0px'>
+<pardef id='38' keepwithnext='true' keeptogether='true'><code event='hidewhen'><formula
+>Status &gt; 1 | @IsResponseDoc | @IsAvailable(SendError) | (!@IsDocBeingEdited &amp; !@IsNumber(ReviewTime)) | ReviewWindow = "0" | ReviewWindow = ""</formula></code></pardef>
+<par def='38'><run><font size='9pt'/></run></par></tablecell>
+<tablecell borderwidth='0px' htmlid='DocTable_d'>
+<pardef id='39' leftmargin='0.0403in' spaceafter='1.5' hide='web' keepwithnext='true'
+ keeptogether='true'><code event='hidewhen'><formula>Status &gt; 1 | @IsResponseDoc | @IsAvailable(SendError) | (!@IsDocBeingEdited &amp; !@IsNumber(ReviewTime)) | ReviewWindow = "0" | ReviewWindow = ""</formula></code></pardef>
+<par def='39'><run><font size='9pt'/>Time Limit/Days:</run></par></tablecell>
+<tablecell borderwidth='0px' htmlid='DocTable_i'>
+<pardef id='40' hide='notes' keepwithnext='true' keeptogether='true'><code
+ event='hidewhen'><formula>Status &gt; 1 | @IsResponseDoc | @IsAvailable(SendError) | (!@IsDocBeingEdited &amp; !@IsNumber(ReviewTime)) | ReviewWindow = "0" | ReviewWindow = ""</formula></code></pardef>
+<par def='40'><run><font size='9pt'/>Time Limit (days):</run></par>
+<pardef id='41' keepwithnext='true' keeptogether='true'><code event='hidewhen'><formula
+>Status &gt; 1 | @IsResponseDoc | @IsAvailable(SendError) | (!@IsDocBeingEdited &amp; !@IsNumber(ReviewTime)) | ReviewWindow = "0" | ReviewWindow = ""</formula></code></pardef>
+<par def='41'><run><font size='9pt'/></run><run><font size='9pt'/><field type='number'
+ kind='editable' name='ReviewTime' description='How many days before the review time limit expires.'><keywords
+ columns='1' ui='dialoglist' allownew='true'/><numberformat format='general'
+ digits='2' punctuated='false' parens='false' percent='false' bytes='false'/><code
+ event='htmlattributes'><formula>"size=3 maxlength=3"</formula></code><code
+ event='inputtranslation'><formula>@If(ReviewWindow = "0"; @DeleteField; @IsNumber(ReviewTime); ReviewTime; @DeleteField)</formula></code></field></run><run
+><font size='9pt'/></run></par></tablecell></tablerow>
+<tablerow>
+<tablecell columnspan='2' borderwidth='0px'>
+<pardef id='43' hide='read copy preview notes' keepwithnext='true' keeptogether='true'/>
+<par def='43'><run><font size='9pt' color='teal'/><field borderstyle='none'
+ lookupeachchar='false' lookupaddressonrefresh='false' type='keyword' kind='editable'
+ name='SubmitNow'><keywords columns='1' ui='radiobutton'><formula>@If(@IsNewDoc | Status = 1; "Submit for review now|1" : "Save but do not submit for review|0"; @UserName = From; "Send notification now|1" : "Save, but do not send notification|0"; "My review is complete|2" : "Save but do not mark review as complete|0")</formula></keywords><code
+ event='defaultvalue'><formula>"0"</formula></code><code event='inputtranslation'><formula
+>@If(SubmitNow_1 = ""; SubmitNow; SubmitNow_1)</formula></code></field></run><run
+><font size='9pt' style='bold extrude' color='navy'/></run></par></tablecell>
+<tablecell borderwidth='0px' htmlid='DocTable_e'>
+<pardef id='44' leftmargin='0.0403in' hide='web' keepwithnext='true' keeptogether='true'><code
+ event='hidewhen'><formula>Status &gt; 1 | @IsResponseDoc | @IsAvailable(SendError)</formula></code></pardef>
+<par def='44'><run><font size='9pt'/>Notify originator after: </run></par></tablecell>
+<tablecell borderwidth='0px' htmlid='DocTable_j'>
+<pardef id='45' hide='notes' keepwithnext='true' keeptogether='true'><code
+ event='hidewhen'><formula>Status &gt; 1 | @IsResponseDoc | @IsAvailable(SendError)</formula></code></pardef>
+<par def='45'><run><font size='9pt'/>Notify originator after:</run></par>
+<pardef id='46' keepwithnext='true' keeptogether='true'><code event='hidewhen'><formula
+>Status &gt; 1 | @IsResponseDoc | @IsAvailable(SendError)</formula></code></pardef>
+<par def='46'><run><font size='9pt'/></run><run><font size='9pt'/><field type='keyword'
+ kind='editable' name='NotifyAfter' description='When to notify the originator'><keywords
+ ui='dialoglist'><textlist><text>final reviewer|0</text><text>each reviewer|1</text></textlist></keywords><code
+ event='defaultvalue'><formula>"0"</formula></code></field></run><run><font
+ size='9pt'/></run></par></tablecell></tablerow></table>
+<pardef id='47' leftmargin='1%' hide='web' keepwithnext='true' keeptogether='true'/>
+<par def='47'><run><font size='9pt'/></run></par>
+<table rightmargin='98%' widthtype='fixedleft' refwidth='5.1549in'><tablecolumn
+ width='1.4625in'/><tablecolumn width='1.2500in'/><tablecolumn width='0.9444in'/><tablecolumn
+ width='1.4979in'/>
+<tablerow>
+<tablecell borderwidth='0px'>
+<pardef id='49' leftmargin='1%' keepwithnext='true' keeptogether='true'><code
+ event='hidewhen'><formula>(Status = 1 &amp; @IsUnavailable(SendError)) | @IsResponseDoc</formula></code></pardef>
+<par def='49'/></tablecell>
+<tablecell borderwidth='0px'>
+<pardef id='50' leftmargin='1%' keepwithnext='true' keeptogether='true'><code
+ event='hidewhen'><formula>(Status = 1 &amp; @IsUnavailable(SendError)) | @IsResponseDoc</formula></code></pardef>
+<par def='50'/></tablecell>
+<tablecell borderwidth='0px'>
+<pardef id='51' align='center' leftmargin='1%' keepwithnext='true' keeptogether='true'><code
+ event='hidewhen'><formula>(Status = 1 &amp; @IsUnavailable(SendError)) | @IsResponseDoc</formula></code></pardef>
+<par def='51'><run><font size='9pt' style='bold'/>Reviewers</run></par></tablecell>
+<tablecell borderwidth='0px'>
+<pardef id='52' leftmargin='1%' keepwithnext='true' keeptogether='true'><code
+ event='hidewhen'><formula>(Status = 1 &amp; @IsUnavailable(SendError)) | @IsResponseDoc</formula></code></pardef>
+<par def='52'/></tablecell></tablerow>
+<tablerow>
+<tablecell borderwidth='0px'>
+<par def='49'><run><font size='9pt' style='bold'/>Originator</run></par></tablecell>
+<tablecell borderwidth='0px'>
+<par def='50'><run><font size='9pt' style='underline'/>Previous</run></par></tablecell>
+<tablecell borderwidth='0px'>
+<pardef id='53' leftmargin='1%' keepwithnext='true' keeptogether='true'><code
+ event='hidewhen'><formula>(Status = 1 &amp; @IsUnavailable(SendError)) | @IsResponseDoc</formula></code></pardef>
+<par def='53'><run><font size='9pt' style='underline'/>Current</run></par></tablecell>
+<tablecell borderwidth='0px'>
+<par def='52'><run><font size='9pt' style='underline'/>Future</run></par></tablecell></tablerow>
+<tablerow>
+<tablecell borderwidth='0px'>
+<pardef id='54' leftmargin='1%' keepwithnext='true' keeptogether='true'><code
+ event='hidewhen'><formula>(Status = 1 &amp; @IsUnavailable(SendError)) | @IsResponseDoc</formula></code></pardef>
+<par def='54'><run><font size='9pt'/><field type='names' kind='computedfordisplay'
+ name='tmpOriginator'><code event='defaultvalue'><formula>@Name([Abbreviate]; @If(NamePref = "1" &amp; AltFrom != ""; AltFrom; From))</formula></code></field></run></par></tablecell>
+<tablecell borderwidth='0px'>
+<par def='50'><run><font size='9pt'/><field lookupeachchar='false' lookupaddressonrefresh='false'
+ type='names' allowmultivalues='true' kind='computedfordisplay' name='tmpPrevReviewers'
+ listinputseparators='comma semicolon newline' listdisplayseparator='newline'><code
+ event='defaultvalue'><formula>REM {variables to translate};
+None := "None";
+REM {end variables to translate};
+
+ReviewerList := @Name([Abbreviate]; @If(NamePref = "1" &amp; AltReviewerList != ""; AltReviewerList; ReviewerList));
+Curr := @Elements(currentEditor);
+REM {ReviewerNumber is zero-based, so need to increment by 1 to use in Subset formula};
+ReviewerNum := ReviewerNumber + 1;
+@If(@IsNewDoc | (Status = 1 &amp; @IsUnavailable(SendError)); None; ReviewType = "2" &amp; ReviewerNumber = 0; None; ReviewType = "2" &amp; PrevRev != ""; @Trim(PrevRev); ReviewType = "1" &amp; ReviewerNum = 1; None; @Subset(ReviewerList; ReviewerNum - 1))</formula></code></field></run></par></tablecell>
+<tablecell borderwidth='0px'>
+<pardef id='55' leftmargin='1%' keepwithnext='true' keeptogether='true'><code
+ event='hidewhen'><formula>(Status = 1 &amp; @IsUnavailable(SendError)) | @IsResponseDoc</formula></code></pardef>
+<par def='55'><run><font size='9pt'/><field type='names' allowmultivalues='true'
+ kind='computedfordisplay' name='tmpCurrReviewer' listinputseparators='comma semicolon newline'
+ listdisplayseparator='newline'><code event='defaultvalue'><formula>REM {variables to translate};
+None := "None";
+REM {end variables to translate};
+ReviewerList := @Name([Abbreviate]; @If(NamePref = "1" &amp; AltReviewerList != ""; AltReviewerList; ReviewerList));
+
+CurrEd := @Name([Abbreviate]; CurrentEditor);
+Curr := @Elements(currentEditor);
+REM {ReviewerNumber is zero-based, so need to increment by 1 to use in Subset formula};
+ReviewerNum := ReviewerNumber + 1;
+@If(ReviewType = "2" &amp; Curr = 0; None; ReviewType = "2" &amp; ReviewerNumber = 0; ReviewerList; ReviewType = "2" &amp; CurrentEditor != ""; CurrEd; ReviewType = "2" &amp; CurrentEditor = ""; None; ReviewType = "1" &amp; Status = 1; @Subset(@Subset(ReviewerList; 1); -1); ReviewType = "1" &amp; ReviewerNum &gt; @Elements(ReviewerList); None; @Subset(@Subset(ReviewerList; ReviewerNum); -1))</formula></code></field></run></par></tablecell>
+<tablecell borderwidth='0px'>
+<pardef id='56' leftmargin='1%' keepwithnext='true' keeptogether='true'><code
+ event='hidewhen'><formula>(Status = 1 &amp; @IsUnavailable(SendError)) | @IsResponseDoc</formula></code></pardef>
+<par def='56'><run><font size='9pt'/><field type='names' allowmultivalues='true'
+ kind='computedfordisplay' name='tmpFutReviewers' listinputseparators='comma semicolon newline'
+ listdisplayseparator='newline'><code event='defaultvalue'><formula>REM {variables to translate};
+None := "None";
+REM {end variables to translate};
+ReviewerList := @Name([Abbreviate]; @If(NamePref = "1" &amp; AltReviewerList != ""; AltReviewerList; ReviewerList));
+
+REM {ReviewerNumber is zero-based, so need to increment by 1 to use in Subset formula};
+ReviewerNum := ReviewerNumber + 1;
+Curr := @Elements(currentEditor);
+TotalNumber := @Elements(ReviewerList);
+@If(ReviewType = "2"; None; Status = 1; @If(TotalNumber &gt; 1; @Subset(ReviewerList; (TotalNumber - 1) * -1); None); ReviewerNum &gt;= TotalNumber; None; @Subset(ReviewerList; (TotalNumber - ReviewerNum) * -1))</formula></code></field></run></par></tablecell></tablerow></table>
+<par def='17'> </par></tablecell></tablerow></table>
+<pardef id='57' leftmargin='1in'/>
+<par def='57'><run><font size='4pt' color='#37605e'/></run></par>
+<pardef id='58' align='none' leftmargin='1in' hide='read preview' tabs='L0.5000in L1in L1.5000in L2in L2.5000in L3in L3.5000in L4in'/>
+<par def='58'><run><font size='9pt' style='bold'/>Content:</run></par>
+<pardef id='59' leftmargin='1in' tabs='L1.2500in L1.5000in'/>
+<par def='59'><run><font size='9pt'/></run><run><font size='9pt'/><field useoscontrolinbrowser='true'
+ type='richtext' kind='editable' name='Body' description='Enter your comments, questions, ideas for discussion.'
+ htmlid='Body'><code event='htmlattributes'><formula>"height=\"300\" width=\"625\" rows=\"15\" cols=\"90\""</formula></code></field></run><compositedata
+ type='98' prevtype='65402' nexttype='222' afterparcount='9' containertype='65418'
+ aftercontainercount='2' afterbegincount='5'>
+Yg4BAIQAAAAAAAEAAAA=
+</compositedata><run><font size='9pt'/></run></par>
+<pardef id='60' leftmargin='1in' hide='notes'/>
+<par def='60'><run><font size='9pt'/></run></par>
+<par def='57'><run><font size='9pt' color='blue'/></run></par>
+<par def='57'><run><font size='9pt' color='blue'/></run><run><font size='9pt'
+ color='olive'/><field type='text' allowmultivalues='true' kind='computed'
+ name='ReviewerLog' listinputseparators='comma semicolon newline' listdisplayseparator='newline'><code
+ event='defaultvalue'><formula>ReviewerLog</formula></code></field></run><compositedata
+ type='98' prevtype='65418' nexttype='222' afterparcount='9' containertype='65418'
+ aftercontainercount='1' afterbegincount='3'>
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata><run><font size='9pt'
+ color='blue'/></run></par>
+<par def='60'><run><font size='9pt' color='blue'/></run><run><font size='9pt'/><sharedfieldref
+ name='ViewList'/></run><run><font size='9pt'/></run><actionhotspot hotspotstyle='none'><code
+ event='click'><formula>@URLOpen("/"+@ReplaceSubstring(@Subset(@DbName; -1);" ";"+")+"/$Help?OpenHelp")</formula></code><run
+><font size='9pt'/></run></actionhotspot><run><font size='9pt'/></run></par>
+<par def='60'><run><font size='9pt'/></run></par></richtext></body>
+<item name='$$XMB_2'><text>AA14354966AB34D61C820A3EB8803A42</text></item>
+<item name='$$XMB_3'><text>67843E4301C6054E658E2C2D65E5AC9D</text></item>
+<item name='$HTMLDocumentStyles' summary='true' sign='true'>
+<rawitemdata type='1'>
+0ggBAAAA/wDSCAEA/wAAANIIAQCAAIAA
+</rawitemdata></item>
+<item name='OriginalModTime' sign='true'><datetime dst='true'>20050414T134149,88-07</datetime></item>
+<item name='Status' summary='false' sign='true'><number>0</number></item>
+<item name='ReviewTime' summary='false' sign='true'><number>0</number></item>
+<item name='$$ScriptName' summary='false' sign='true'><text>Document</text></item></form>
+

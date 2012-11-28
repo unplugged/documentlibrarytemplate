@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE sharedfield SYSTEM 'xmlschemas/domino_8_5_3.dtd'>
+<sharedfield name='tmpFrom' xmlns='http://www.lotus.com/dxl' version='8.5'
+ maintenanceversion='3.0' replicaid='80257AC2002D6A1A' language='en'>
+<noteinfo noteid='1c2' unid='27E35C141B279D378525667B004830D3' sequence='9'>
+<created><datetime dst='true'>19980910T090830,91-04</datetime></created>
+<modified><datetime>20121126T081603,55+00</datetime></modified>
+<revised><datetime dst='true'>20100824T141209,62-04</datetime></revised>
+<lastaccessed><datetime>20121126T081603,55+00</datetime></lastaccessed>
+<addedtofile><datetime>20121126T081603,55+00</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Lotus Notes Template Development/O=Lotus Notes</name></updatedby>
+<wassignedby><name>CN=Lotus Notes Template Development/O=Lotus Notes</name></wassignedby><field
+ type='text' kind='computedfordisplay' name='tmpFrom'><code event='defaultvalue'><formula
+>ver := @TextToNumber(@Version);
+ABFrom := @Name([Abbreviate]; From);
+@If(ver &lt; 160; @Return(ABfrom); "");
+
+LangPref := @LanguagePreference([AlternateName]);
+LocPref := @If(@ClientType = "Notes"; @LocationGetInfo([NamePreference]); "1");
+ABAltFrom := @Name([Abbreviate]; AltFrom);
+@If(@Contains(form; "Anonymous"); "Anonymous";
+LocPref = "" | LocPref = "0"; ABFrom;
+LangPref = "" | AltLang = ""; ABFrom;
+@IsMember(AltLang; LangPref) &amp; AltFrom != ""; ABAltFrom; ABFrom)</formula></code></field></sharedfield>
+

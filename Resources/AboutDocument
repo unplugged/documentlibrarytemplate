@@ -1,0 +1,74 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE helpaboutdocument SYSTEM 'xmlschemas/domino_8_5_3.dtd'>
+<helpaboutdocument xmlns='http://www.lotus.com/dxl' version='8.5' maintenanceversion='3.0'
+ replicaid='80257AC2002D6A1A' publicaccess='false' designerversion='6' default='true'>
+<noteinfo noteid='12e' unid='6F5754C598D9F43785256207004F8789' sequence='35'>
+<created><datetime dst='true'>19950728T102840,41-04</datetime></created>
+<modified><datetime>20121126T081602,95+00</datetime></modified>
+<revised><datetime dst='true'>20100824T141209,00-04</datetime></revised>
+<lastaccessed><datetime>20121126T081602,95+00</datetime></lastaccessed>
+<addedtofile><datetime>20121126T081602,95+00</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Lotus Notes Template Development/O=Lotus Notes</name></updatedby>
+<wassignedby><name>CN=Lotus Notes Template Development/O=Lotus Notes</name></wassignedby>
+<body><richtext>
+<pardef id='1' leftmargin='1in' hide='notes'/>
+<par def='1'><run><font size='9pt' style='underline' color='blue'/></run><actionhotspot
+ hotspotstyle='none'><code event='onClick' for='web'><javascript>history.back()</javascript></code><code
+ event='onClick' for='client'><javascript>history.back()</javascript></code><run
+><font size='9pt' style='underline' color='blue'/>Go back</run></actionhotspot><run
+><font size='9pt' style='underline' color='blue'/></run></par>
+<pardef id='2' leftmargin='1in' spacebefore='1.5' hide='web'/>
+<par def='2'><run><font size='9pt' style='underline' color='blue'/></run><actionhotspot
+ hotspotstyle='none'><code event='click'><formula>@Command([FileCloseWindow])</formula></code><run
+><font size='9pt' style='underline' color='blue'/>Close this document to view the database</run></actionhotspot><run
+><font size='9pt' style='underline' color='blue'/></run></par>
+<par def='1'><run><font size='9pt'/></run></par>
+<par def='1'><run><font size='9pt'/></run></par>
+<par def='1'/>
+<pardef id='3' align='center'/>
+<par def='3'><run><font size='18pt' style='bold extrude' color='#400000'/>About Document Library</run></par>
+<pardef id='4' leftmargin='1in' spaceafter='1.5'/>
+<par def='4'><run><font size='9pt' style='bold'/></run></par>
+<par def='4'><run><font size='9pt' style='bold'/>What does this database do?</run></par>
+<pardef id='5' leftmargin='1.2500in' spaceafter='1.5'/>
+<par def='5'><run><font size='9pt'/>A Document Library application is an electronic filing cabinet that stores reference documents for access by a workgroup.  The database might contain anything from environmental impact statements for a group of engineers to financial statements for a group of loan officers.</run></par>
+<par def='4'><run><font size='9pt' style='bold'/></run></par>
+<par def='4'><run><font size='9pt' style='bold'/>Who will use this database?</run></par>
+<par def='5'><run><font size='9pt'/>Anyone who wishes to create a record of a document or review available documents may use this database.</run></par>
+<pardef id='6' align='none' leftmargin='1in' spaceafter='1.5'/>
+<par def='6'><run><font size='9pt'/></run></par>
+<par def='6'><run><font size='9pt' style='bold'/>Important Features</run></par>
+<pardef id='7' align='none' leftmargin='1.2500in'/>
+<par def='7'><run><font size='9pt' style='bold'/>- </run><run><font size='9pt'
+ style='italic'/>Web or Notes client:</run><run><font size='9pt'/> Database can be accessed from either a Web browser or a Notes Client.</run></par>
+<pardef id='8' align='none' leftmargin='1.2500in' spaceafter='1.5'/>
+<par def='8'><run><font size='9pt' style='bold'/>- </run><run><font size='9pt'
+ style='italic'/>Review Cycle:</run><run><font size='9pt'/> Used to route a document to a series of recipients.<break
+/></run><run><font size='9pt' style='bold'/>- </run><run><font size='9pt'
+ style='italic'/>Document Archiving:</run><run><font size='9pt'/> Used to move expired documents to an archive database.</run></par>
+<par def='6'><run><font size='9pt' style='bold'/></run></par>
+<par def='4'><run><font size='9pt' style='bold'/>Suggestions for Modifications</run></par>
+<par def='5'><run><font size='9pt' style='italic'/>Full text search: </run><run
+><font size='9pt'/>If you wish to use Notes' full text search capabilities for a database created with this template, select menu File, Database, Properties, go to the Full Text panel and then select Create Index... to create the full text index.</run></par>
+<par def='4'><run><font size='9pt'/></run></par>
+<par def='4'><run><font size='9pt' style='bold'/>Where to find more information?</run></par>
+<par def='5'><run><font size='9pt'/>More information can be found in the </run><actionhotspot
+ hotspotstyle='none'><code event='click'><formula>@If(@ClientType = "Notes";
+		@Command([HelpUsingDatabase]); 	
+			@URLOpen(@WebDbName+"/$Help?OpenHelp"))</formula></code><run><font size='9pt'
+ style='underline' color='blue'/>Using This Database</run></actionhotspot><run
+><font size='9pt'/> document.</run></par>
+<par def='4'><run><font size='9pt'/></run></par>
+<par def='4'><run><font size='9pt' style='bold'/>Access Control</run></par>
+<par def='5'><run><font size='9pt' style='italic'/>Very Important:  </run><run
+><font size='9pt'/>Access level should be </run><run><font size='9pt' style='bold'/>Author</run><run
+><font size='9pt'/> for all users of this database.  This will prevent unauthorized editing of documents within the database.  The Author fields within the forms govern who will be able to edit/review particular documents.   Errors will occur if someone with Editor access attempts to review a document when they are not an authorized reviewer of that document.  For those accessing the database from a Web browser, the database does not accept Anonymous users.</run></par>
+<par def='4'><run><font size='9pt'/></run></par>
+<par def='4'><run><font size='9pt' style='bold'/>Redesigned Document Library 4.0 Databases</run></par>
+<par def='5'><run><font size='9pt'/>Sometimes, users upgrade the design of their databases using a template provided in a new release of Notes.  There is a problem with Doclib4.ntf databases which are redesigned using the Doclbw50.ntf template (users are unable to open the documents in the database).</run></par>
+<par def='5'><run><font size='9pt' style='bold'/>Doclib4 users:  </run><run
+><font size='9pt'/>After you replace/refresh the design of your database using the Doclbw50 template, select Actions--"Upgrade Doclib R4 Documents to New Design".  This will run on all documents that were created with the R4 design, and upgrade them to the R4.6 design.</run></par>
+<par def='5'><run><font size='9pt'/>If you have created the Document Library using either the Doclbw46.ntf (Std46WebDocLib) or Doclbw50.ntf (StdR50WebDocLib) template, there is no need to use this agent.</run></par>
+<par def='5'><run><font size='9pt' style='bold'/></run></par></richtext></body>
+<item name='$SignatureStatus'><text>1</text></item></helpaboutdocument>
+

@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE page SYSTEM 'xmlschemas/domino_8_5_3.dtd'>
+<page name='Database Location' alias='Db Location' xmlns='http://www.lotus.com/dxl'
+ version='8.5' maintenanceversion='3.0' replicaid='80257AC2002D6A1A' publicaccess='false'
+ designerversion='6.5' language='en' bgcolor='#bba58b' noinitialfocus='true'
+ nofocusonf6='true'>
+<noteinfo noteid='20e' unid='ED6B96F4B57E88C3882569F700018A0E' sequence='9'>
+<created><datetime>20010217T161648,78-08</datetime></created>
+<modified><datetime>20121126T081603,93+00</datetime></modified>
+<revised><datetime dst='true'>20100824T141209,96-04</datetime></revised>
+<lastaccessed><datetime>20121126T081603,93+00</datetime></lastaccessed>
+<addedtofile><datetime>20121126T081603,93+00</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Lotus Notes Template Development/O=Lotus Notes</name></updatedby>
+<wassignedby><name>CN=Lotus Notes Template Development/O=Lotus Notes</name></wassignedby>
+<body><richtext>
+<pardef id='1' align='none' leftmargin='1in' hide='notes' tabs='L0.5000in L1in L1.5000in L2in L2.5000in L3in L3.5000in L4in'/>
+<par def='1'><run html='true'><font size='8pt'/>&lt;HEAD&gt;<break/>&lt;STYLE TYPE="text/css"&gt;</run></par>
+<par def='1'><run html='true'><font size='8pt'/> 	BODY {font-family: "Arial"}</run></par>
+<par def='1'><run html='true'><font size='8pt'/>&lt;/STYLE&gt;<break/>&lt;/HEAD&gt;</run></par>
+<table widthtype='fitwindow' leftmargin='0.7500in' refwidth='8in'><tablecolumn
+ width='100%'/>
+<tablerow>
+<tablecell borderwidth='0px'>
+<pardef id='3' leftmargin='0.1000in' keepwithnext='true' keeptogether='true'/>
+<par def='3'><run><font size='9pt'/></run><run><font size='9pt'/><computedtext
+><code event='value'><formula>LocalTxt:="Local";
+onTxt := "on";
+server := @Subset(@DbName;1);
+serverString := onTxt + " " + @Name([Abbreviate]; server);
+@If(@ClientType="Web"; "on " + @Name([Abbreviate];@ServerName) ;@If(server=""; LocalTxt; serverString))</formula></code></computedtext></run><run
+><font size='9pt'/></run></par></tablecell></tablerow></table>
+<pardef id='4'/>
+<par def='4'/></richtext></body>
+<item name='$$ScriptName' summary='false' sign='true'><text>Db Location</text></item></page>
+

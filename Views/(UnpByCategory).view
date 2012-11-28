@@ -1,0 +1,73 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE view SYSTEM 'xmlschemas/domino_8_5_3.dtd'>
+<view name='(UnpByCategory)' xmlns='http://www.lotus.com/dxl' version='8.5'
+ maintenanceversion='3.0' replicaid='80257AC2002D6A1A' showinmenu='false'
+ publicaccess='false' designerversion='8.5.3' unreadmarks='none' onopengoto='lastopened'
+ onrefresh='displayindicator' headers='beveled' opencollapsed='false' showresponsehierarchy='true'
+ showmargin='true' shrinkrows='false' extendlastcolumn='false' showhierarchies='false'
+ unreadcolor='black' rowlinecount='1' headerlinecount='1' rowspacing='1' bgcolor='white'
+ totalscolor='black' headerbgcolor='white' boldunreadrows='false' evaluateactions='false'
+ allownewdocuments='false' allowcustomizations='false' hidemarginborder='false'
+ marginwidth='0px' marginbgcolor='white' uniquekeys='false'>
+<noteinfo noteid='17ba' unid='132437FFEC368DE380257AC4002FAC97' sequence='6'>
+<created><datetime>20121128T084043,75+00</datetime></created>
+<modified><datetime>20121128T084233,30+00</datetime></modified>
+<revised><datetime>20121128T084233,29+00</datetime></revised>
+<lastaccessed><datetime>20121128T084233,30+00</datetime></lastaccessed>
+<addedtofile><datetime>20121128T084043,76+00</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Matt White/O=Exhilarate</name></updatedby>
+<wassignedby><name>CN=Matt White/O=Exhilarate</name></wassignedby><code event='selection'><formula
+>SELECT !@IsResponseDoc</formula></code>
+<actionbar bgcolor='#f0f0f0' bordercolor='black'>
+<actionbuttonstyle bgcolor='#f0f0f0'/><font color='system'/><border style='solid'
+ width='0px 0px 1px'/>
+<action title='Categori_ze' showinbar='false' systemcommand='categorize'/>
+<action title='_Edit Document' showinbar='false' systemcommand='edit'/>
+<action title='_Send Document' showinbar='false' systemcommand='send'/>
+<action title='_Forward' showinbar='false' systemcommand='forward'/>
+<action title='_Move To Folder...' showinbar='false' systemcommand='movetofolder'/>
+<action title='_Remove From Folder' showinbar='false' systemcommand='removefromfolder'/>
+<action title='_Read' showinbar='false' systemcommand='markread'/>
+<action title='_Unread' showinbar='false' systemcommand='markunread'/>
+<action title='_Open in New Window' showinbar='false' systemcommand='openinnewwindow'/>
+<action title='_Print...' showinbar='false' systemcommand='print'/>
+<action title='_Delete' showinbar='false' systemcommand='delete'/>
+<action title='_Document Properties' showinbar='false' systemcommand='properties'/>
+<action title='C_ut' showinbar='false' systemcommand='cut'/>
+<action title='_Copy' showinbar='false' systemcommand='copy'/>
+<action title='Copy as Document _Link' showinbar='false' systemcommand='copyasdoclink'/>
+<action title='Copy as _Table' showinbar='false' systemcommand='copyastable'/>
+<action title='P_aste' showinbar='false' systemcommand='paste'/>
+<action title='_Open' showinbar='false' systemcommand='open'/>
+<action title='Bookmark' showinbar='false' systemcommand='bookmark'/></actionbar>
+<column sort='ascending' hidedetailrows='false' itemname='$0' width='2' resizable='false'
+ separatemultiplevalues='true' sortnoaccent='true' sortnocase='true' showaslinks='false'
+ categorized='true' twisties='true'><font size='9pt' color='navy' style='bold'/><columnheader
+><font size='9pt' name='multilingual'/></columnheader><code event='value'><formula
+>x:=Categories;
+@If(x=""; "(Blank)"; x)</formula></code></column>
+<column hidedetailrows='false' listseparator='comma' itemname='$118' width='36'
+ resizable='true' separatemultiplevalues='false' sortnoaccent='true' sortnocase='true'
+ showaslinks='true'><font size='9pt' color='gray'/><columnheader title='Topic'><font
+ size='9pt' name='multilingual'/></columnheader><code event='value'><formula
+>REM {variable to translate};
+AnonTxt := "Anonymous";
+REM {end variable to translate};
+REM {the following is for alternate name support};
+CNFrom := @Name([CN]; From);
+CNAltFrom := @Name([CN]; AltFrom);
+Alternatename := @If(AltFrom != "" &amp; AltFrom != From; " [" + CNAltFrom + "]"; "");
+
+@If(readers!= "";"PRIVATE: ";
+        ExpireDate !="";"EXPIRED: ";
+      "")+
+@If(Subject = ""; "Untitled"; Subject) + " (" + CNFrom + Alternatename +  @If(@IsAvailable(From);" ";"") +@Text(@Created;"D0S0")+ ")"</formula></code></column>
+<column sort='descending' hidedetailrows='false' listseparator='comma' itemname='$106'
+ width='9' resizable='true' separatemultiplevalues='false' sortnoaccent='true'
+ sortnocase='true' showaslinks='false' formatdatatype='datetime'><font size='9pt'
+ color='gray'/><columnheader title='Date'><font size='9pt' name='multilingual'/></columnheader><datetimeformat
+ legacy='true' show='date' date='yearmonthday' time='hourminute' zone='never'/><numberformat
+ legacy='true' format='general' varying='true' digits='1' punctuated='false'
+ parens='false' percent='false' bytes='false'/><code event='value'><formula
+>@If(!@IsResponseDoc;@Created;"")</formula></code></column></view>
+

@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE sharedfield SYSTEM 'xmlschemas/domino_8_5_3.dtd'>
+<sharedfield name='Private' xmlns='http://www.lotus.com/dxl' version='8.5'
+ maintenanceversion='3.0' replicaid='80257AC2002D6A1A' language='en'>
+<noteinfo noteid='1d2' unid='47E36B46580DBA128525668A003C55E3' sequence='5'>
+<created><datetime dst='true'>19980925T065901,47-04</datetime></created>
+<modified><datetime>20121126T081603,63+00</datetime></modified>
+<revised><datetime dst='true'>20100824T141210,12-04</datetime></revised>
+<lastaccessed><datetime>20121126T081603,63+00</datetime></lastaccessed>
+<addedtofile><datetime>20121126T081603,63+00</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Lotus Notes Template Development/O=Lotus Notes</name></updatedby>
+<wassignedby><name>CN=Lotus Notes Template Development/O=Lotus Notes</name></wassignedby><field
+ type='text' kind='computedfordisplay' name='Private'><code event='defaultvalue'><formula
+>@If(readers!="";"Private"; "")</formula></code></field></sharedfield>
+

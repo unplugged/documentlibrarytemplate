@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE form SYSTEM 'xmlschemas/domino_8_5_3.dtd'>
+<form name='Template Name' alias='Template Name' xmlns='http://www.lotus.com/dxl'
+ version='8.5' maintenanceversion='3.0' replicaid='80257AC2002D6A1A' nocompose='true'
+ noquery='true' publicaccess='true' designerversion='6' language='en' bgcolor='#d4c9ba'
+ noinitialfocus='true' nofocusonf6='true'>
+<noteinfo noteid='202' unid='390BF2DA7306600A882569F70000CB52' sequence='13'>
+<created><datetime>20010217T160840,50-08</datetime></created>
+<modified><datetime>20121127T081349,75+00</datetime></modified>
+<revised><datetime dst='true'>20080722T104832,57-04</datetime></revised>
+<lastaccessed><datetime>20121127T081349,75+00</datetime></lastaccessed>
+<addedtofile><datetime>20121126T081603,87+00</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Lotus Notes Template Development/O=Lotus Notes</name></updatedby>
+<wassignedby><name>CN=Lotus Notes Template Development/O=Lotus Notes</name></wassignedby>
+<actionbar bgcolor='#bba58b' bordercolor='black'><actionbarstyle height='4.7500ex'><font
+ size='9pt' name='multilingual'/></actionbarstyle>
+<actionbuttonstyle margintype='fixed' margin='5' bgcolor='#bba58b' displayborder='never'
+ widthtype='background'/><font size='12pt' style='bold' name='multilingual'
+ color='system'/><border style='solid' width='0px 0px 1px'/>
+<action title='Document Library' showinmenu='false' hide='web'/></actionbar>
+<body><richtext>
+<pardef id='1' align='none' leftmargin='1in' hide='notes' tabs='L0.5000in L1in L1.5000in L2in L2.5000in L3in L3.5000in L4in'/>
+<par def='1'><run html='true'><font size='8pt'/>&lt;HEAD&gt;<break/>&lt;STYLE TYPE="text/css"&gt;</run></par>
+<par def='1'><run html='true'><font size='8pt'/> 	BODY {font-family: "Arial"}</run></par>
+<par def='1'><run html='true'><font size='8pt'/>&lt;/STYLE&gt;<break/>&lt;/HEAD&gt;</run></par>
+<table widthtype='fitwindow' minrowheight='0.3438in' cellbordercolor='black'
+ leftmargin='0.7500in' refwidth='7.8417in'><tablecolumn width='100%'/>
+<tablerow>
+<tablecell valign='center' borderwidth='0px 0px 1px' bgcolor='#bba58b'>
+<pardef id='3' leftmargin='0.1000in' hide='notes' keepwithnext='true' keeptogether='true'/>
+<par def='3'><run><font size='11pt'/>Document Library</run></par></tablecell></tablerow></table>
+<pardef id='4' hide='notes web'/>
+<par def='4'/>
+<table widthtype='fitwindow' leftmargin='0.7500in' refwidth='7.8417in'><tablecolumn
+ width='100%'/>
+<tablerow>
+<tablecell valign='center' borderwidth='0px'>
+<pardef id='5' leftmargin='0.1000in' keepwithnext='true' keeptogether='true'/>
+<par def='5'><run><font size='9pt'/><computedtext><code event='value'><formula
+>@DbTitle</formula></code></computedtext></run></par></tablecell></tablerow></table>
+<pardef id='6' hide='read edit copy preview previewedit'/>
+<par def='6'><run><font size='9pt' color='green'/>// This field prevents the form from saving a document.</run></par>
+<par def='6'><run><font size='9pt' color='gray'/>SaveOptions: </run><run><font
+ size='9pt' color='gray'/><field type='text' kind='computed' name='SaveOptions'><code
+ event='defaultvalue'><formula>"0"</formula></code></field></run><run><font
+ size='14pt'/></run></par></richtext></body>
+<item name='$$ScriptName' summary='false' sign='true'><text>Template Name</text></item></form>
+

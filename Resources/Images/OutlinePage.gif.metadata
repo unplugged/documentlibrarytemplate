@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?><imageresource alias="OutlinePage.gif" comment="outline page graphic" designerversion="6" imagename="DocOutline.gif" language="en" maintenanceversion="3.0" name="OutlinePage.gif" publicaccess="false" replicaid="80257AC2002D6A1A" version="8.5" xmlns="http://www.lotus.com/dxl">
+<noteinfo noteid="226" sequence="8" unid="D77FC04FE7CEABA9882569F80072FDB6">
+<created><datetime>20010219T125600,54-08</datetime></created>
+<modified><datetime>20121126T081604,05+00</datetime></modified>
+<revised><datetime dst="true">20100824T141210,08-04</datetime></revised>
+<lastaccessed><datetime>20121126T081604,05+00</datetime></lastaccessed>
+<addedtofile><datetime>20121126T081604,05+00</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Lotus Notes Template Development/O=Lotus Notes</name></updatedby>
+<wassignedby><name>CN=Lotus Notes Template Development/O=Lotus Notes</name></wassignedby>
+
+<item name="$MimeType" sign="true"><text>image/gif</text></item>
+<item name="$FileModDT" sign="true"><datetime>20010216T033716,00-08</datetime></item></imageresource>

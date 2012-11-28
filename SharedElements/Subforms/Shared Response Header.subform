@@ -1,0 +1,110 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE subform SYSTEM 'xmlschemas/domino_8_5_3.dtd'>
+<subform name='Shared Response Header' xmlns='http://www.lotus.com/dxl' version='8.5'
+ maintenanceversion='3.0' replicaid='80257AC2002D6A1A' designerversion='5'
+ language='en'>
+<noteinfo noteid='166' unid='D1ACB0E96A50533C852564B40063CF1E' sequence='22'>
+<created><datetime dst='true'>19970612T141010,86-04</datetime></created>
+<modified><datetime>20121126T081603,15+00</datetime></modified>
+<revised><datetime dst='true'>20100824T141209,20-04</datetime></revised>
+<lastaccessed><datetime>20121126T081603,15+00</datetime></lastaccessed>
+<addedtofile><datetime>20121126T081603,15+00</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Lotus Notes Template Development/O=Lotus Notes</name></updatedby>
+<wassignedby><name>CN=Lotus Notes Template Development/O=Lotus Notes</name></wassignedby><code
+ event='querysave'><formula>@Command([RefreshHideFormulas]);1</formula></code>
+<body><richtext>
+<pardef id='1' leftmargin='1in' hide='read edit copy preview previewedit'/>
+<par def='1'><run><font size='9pt' color='gray'/>Begin Hidden Fields </run><run
+><font color='gray'/>-----------------------------</run></par>
+<par def='1'><run><font color='gray'/></run></par>
+<table widthtype='fitmargins' user4spacing='true' refwidth='7.3639in'><tablecolumn
+ width='50%'/><tablecolumn width='50%'/>
+<tablerow>
+<tablecell>
+<pardef id='2' leftmargin='1%' rightmargin='100%' hide='read edit copy preview previewedit'
+ keepwithnext='true' keeptogether='true'/>
+<par def='2'><run><font size='9pt' color='gray'/>Author of the response</run></par></tablecell>
+<tablecell>
+<pardef id='3' leftmargin='1%' rightmargin='100%' hide='read edit copy preview previewedit'
+ keepwithnext='true' keeptogether='true'/>
+<par def='3'><run><font size='9pt' color='gray'/></run><run><font size='9pt'
+ color='gray'/><sharedfieldref name='From'/></run><run><font size='9pt' color='gray'/></run></par></tablecell></tablerow>
+<tablerow>
+<tablecell>
+<pardef id='4' leftmargin='1%' hide='read edit copy preview previewedit' keepwithnext='true'
+ keeptogether='true'/>
+<par def='4'>author's alternate name</par></tablecell>
+<tablecell>
+<pardef id='5' leftmargin='1%' hide='read edit copy preview previewedit' keepwithnext='true'
+ keeptogether='true'/>
+<par def='5'><run><font color='gray'/><sharedfieldref name='AltFrom'/></run></par></tablecell></tablerow>
+<tablerow>
+<tablecell>
+<par def='4'>author's alternate language</par></tablecell>
+<tablecell>
+<par def='5'><run><font color='gray'/><sharedfieldref name='AltLang'/></run></par></tablecell></tablerow>
+<tablerow>
+<tablecell>
+<par def='2'><run><font size='9pt' color='gray'/>Preserves privacy of parent document to child</run></par></tablecell>
+<tablecell>
+<pardef id='6' leftmargin='1%' rightmargin='100%' hide='read edit copy preview previewedit'
+ keepwithnext='true' keeptogether='true'/>
+<par def='6'><run><font size='5pt' style='bold' name='Small Fonts' pitch='variable'
+ truetype='false' familyid='20' color='gray'/></run><run><font size='9pt'
+ color='gray'/><field type='readers' allowmultivalues='true' kind='computed'
+ name='Readers' listinputseparators='comma' listdisplayseparator='comma'><code
+ event='defaultvalue'><formula>@If(@IsNewDoc &amp; @IsDocBeingLoaded; ""; readers)</formula></code></field></run><run
+><font color='gray'/></run></par></tablecell></tablerow>
+<tablerow>
+<tablecell>
+<pardef id='7' leftmargin='1%' rightmargin='100%' hide='read edit copy preview previewedit'
+ keepwithnext='true' keeptogether='true'/>
+<par def='7'><run><font size='9pt' color='gray'/>Hidden fields to store the subject of this document's ancestors.</run></par></tablecell>
+<tablecell>
+<par def='6'><run><font size='9pt' style='underline' color='gray'/></run><run
+><font size='9pt' color='gray'/><field type='text' kind='computedwhencomposed'
+ name='OriginalSubject'><code event='defaultvalue'><formula>@If(@IsAvailable(OriginalSubject); OriginalSubject; Subject)</formula></code></field></run><run
+><font color='gray'/></run></par></tablecell></tablerow>
+<tablerow>
+<tablecell>
+<par def='4'><run><font size='8pt' color='gray'/>for save-confirmation on the web</run></par></tablecell>
+<tablecell>
+<par def='5'><run><font size='9pt' color='gray'/><sharedfieldref name='$$Return'/></run></par></tablecell></tablerow>
+<tablerow>
+<tablecell>
+<par def='7'><run><font size='9pt' color='gray'/>Hidden fields to store the subject of this document's ancestors.</run></par></tablecell>
+<tablecell>
+<par def='6'><run><font color='gray'/></run><run><font size='9pt' color='gray'/><field
+ type='text' kind='computedwhencomposed' name='ImmediateParentSubject'><code
+ event='defaultvalue'><formula>Subject</formula></code></field></run><run
+><font color='gray'/></run></par></tablecell></tablerow>
+<tablerow>
+<tablecell>
+<par def='7'><run><font size='9pt' color='gray'/>Hidden field to store type of form that is the parent document.  Used in Preview Parent action.</run></par></tablecell>
+<tablecell>
+<par def='6'><run><font size='9pt' color='gray'/></run><run><font size='9pt'
+ color='gray'/><field type='text' kind='computedwhencomposed' name='ParentForm'><code
+ event='defaultvalue'><formula>form</formula></code></field></run><run><font
+ color='gray'/></run></par></tablecell></tablerow>
+<tablerow>
+<tablecell>
+<par def='7'><run><font size='9pt' color='gray'/>This is the main UNID of the parent document</run></par></tablecell>
+<tablecell>
+<par def='6'><run><font size='9pt' color='gray'/></run><run><font size='9pt'
+ color='gray'/><field type='text' kind='computedwhencomposed' name='MainID'><code
+ event='defaultvalue'><formula>MainID</formula></code></field></run><run><font
+ color='gray'/></run></par></tablecell></tablerow>
+<tablerow>
+<tablecell>
+<par def='7'><run><font size='9pt' color='gray'/>This allows us to inherit the expire date from the selected document (if the selected doc is expired they shouldn't really be creating an unexpired response, so we default the response to expired and allow them to change it)</run></par></tablecell>
+<tablecell>
+<par def='6'><run><font size='9pt' color='gray'/></run><run><font size='9pt'
+ color='gray'/><field type='datetime' kind='computedwhencomposed' name='ExpireDate'><datetimeformat
+ date='yearmonthday' time='hourminutesecond' zone='never'/><code event='defaultvalue'><formula
+>ExpireDate</formula></code></field></run><run><font size='9pt' color='gray'/></run></par></tablecell></tablerow></table>
+<pardef id='8' leftmargin='2.3750in' firstlineleftmargin='1in' hide='read edit copy preview previewedit'/>
+<par def='8'><run><font size='9pt' color='gray'/>         </run></par>
+<par def='1'><run><font size='9pt' color='gray'/>End Hidden Fields </run><run
+><font color='gray'/>-----------------------------</run></par></richtext></body>
+<item name='$$ScriptName' summary='false' sign='true'><text>Shared Response Header</text></item></subform>
+

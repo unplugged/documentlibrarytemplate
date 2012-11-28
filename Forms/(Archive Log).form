@@ -1,0 +1,147 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE form SYSTEM 'xmlschemas/domino_8_5_3.dtd'>
+<form name='(Archive Log)' alias='Archive Log|ArchiveProfile|Archive Profile|ArchiveLog'
+ xmlns='http://www.lotus.com/dxl' version='8.5' maintenanceversion='3.0' replicaid='80257AC2002D6A1A'
+ nocompose='true' noquery='true' publicaccess='false' designerversion='6'
+ language='en'>
+<noteinfo noteid='1f6' unid='B662274EEFDE96538525671A0060B245' sequence='21'>
+<created><datetime>19990216T123610,93-05</datetime></created>
+<modified><datetime>20121127T081350,23+00</datetime></modified>
+<revised><datetime dst='true'>20080722T104832,53-04</datetime></revised>
+<lastaccessed><datetime>20121127T081350,23+00</datetime></lastaccessed>
+<addedtofile><datetime>20121126T081603,81+00</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Lotus Notes Template Development/O=Lotus Notes</name></updatedby>
+<wassignedby><name>CN=Lotus Notes Template Development/O=Lotus Notes</name></wassignedby><code
+ event='windowtitle'><formula>"Archive Log"</formula></code>
+<actionbar useappletinbrowser='true' bgcolor='#bba58b' bordercolor='black'>
+<actionbuttonstyle heighttype='background' margintype='fixed' margin='6' bgcolor='none'
+ displayborder='never' widthtype='background' textalign='center' internalmargin='3px'><imageref
+ name='ActionButton'/></actionbuttonstyle><border width='0px 0px 1px'/>
+<action title='Categori_ze' showinmenu='false' showinbar='false' systemcommand='categorize'/>
+<action title='_Edit Document' showinmenu='false' showinbar='false' systemcommand='edit'/>
+<action title='Send Docu_ment' showinmenu='false' showinbar='false' systemcommand='send'/>
+<action title='_Forward' showinbar='false' systemcommand='forward'/>
+<action title='_Move to Folder...' showinmenu='false' showinbar='false' systemcommand='movetofolder'/>
+<action title='_Remove from Folder' showinmenu='false' showinbar='false' systemcommand='removefromfolder'/>
+<sharedactionref id='10'>
+<action title='Cancel' showinmenu='false' hide='preview previewedit web'><code
+ event='click'><formula>REM {Notes only};
+FIELD SaveOptions := 0;
+@Command([FileCloseWindow])</formula></code></action></sharedactionref>
+<sharedactionref id='23'>
+<action title='Cancel' showinmenu='false' hide='notes'><code event='click'><formula
+>REM {web saved docs};
+@Command([FileCloseWindow])</formula></code><code event='hidewhen'><formula
+>@IsNewDoc</formula></code></action></sharedactionref></actionbar>
+<body><richtext>
+<pardef id='1' leftmargin='1in' hide='notes' tabs='L0.5000in L1in L1.5000in L2in L2.5000in L3in L3.5000in L4in'/>
+<par def='1'><run html='true'><font size='8pt'/>&lt;HEAD&gt;</run></par>
+<par def='1'><run html='true'><font size='8pt'/>&lt;STYLE TYPE="text/css"&gt;</run></par>
+<par def='1'><run html='true'><font size='8pt'/> BODY {font-family: "Arial"}</run></par>
+<par def='1'><run html='true'><font size='8pt'/>&lt;/STYLE&gt;</run></par>
+<par def='1'><run html='true'><font size='8pt'/>&lt;/HEAD&gt;</run></par>
+<pardef id='2' leftmargin='1in' hide='read edit copy preview previewedit'/>
+<par def='2'><run><font size='9pt'/></run><run><font size='9pt'/><field type='text'
+ kind='computedwhencomposed' name='$MessageType'><code event='defaultvalue'><formula
+>"Log"</formula></code></field></run><run><font size='9pt'/></run></par>
+<table user4spacing='true' rightmargin='98%' widthtype='fixedleft' refwidth='7.9674in'><tablecolumn
+ width='2.1993in'/><tablecolumn width='5.7681in'/>
+<tablerow>
+<tablecell borderwidth='0px'>
+<pardef id='4' leftmargin='6%' rightmargin='95%' keepwithnext='true' keeptogether='true'/>
+<par def='4'> <picture width='165px' height='210px'><imageref name='ArchLog.gif'/></picture></par></tablecell>
+<tablecell borderwidth='0px'>
+<pardef id='5' leftmargin='1%' rightmargin='100%' keeptogether='true'/>
+<par def='5'><run><font name='Times New Roman' pitch='variable' truetype='true'
+ familyid='10' color='olive'/> </run></par>
+<par def='5'><run><font name='Times New Roman' pitch='variable' truetype='true'
+ familyid='10' color='olive'/> </run></par>
+<pardef id='6' leftmargin='1%' rightmargin='100%' keeptogether='true'><code
+ event='hidewhen'><formula>form = "ArchiveProfile" : "Archive Profile"</formula></code></pardef>
+<par def='6'><run><font name='Times New Roman' pitch='variable' truetype='true'
+ familyid='10' color='olive'/> </run></par>
+<par def='6'><run><font name='Times New Roman' pitch='variable' truetype='true'
+ familyid='10' color='olive'/></run></par>
+<par def='6'><run><font size='18pt' color='#7f604f'/>Archive Log </run><run
+><font size='18pt' color='#7f604f'/><field type='text' kind='editable' name='LogCount'
+ htmltitle='Log Count'/></run><run><font size='18pt' color='#7f604f'/> of </run><run
+><font size='18pt' color='#7f604f'/><field type='text' kind='editable' name='LogTotal'
+ htmltitle='Log Total'/></run><run><font size='18pt' color='#7f604f'/> for </run><run
+><font size='18pt' color='#7f604f'/><field type='datetime' kind='editable'
+ name='ArchiveDate' htmltitle='Archive Date'><datetimeformat show='datetime'
+ date='yearmonthday' time='hourminutesecond' zone='never'/></field></run><run
+><font size='18pt' color='#7f604f'/></run></par>
+<par def='5'><run><font size='18pt' name='Times New Roman' pitch='variable'
+ truetype='true' familyid='10' color='#7f604f'/></run><run><font size='14pt'
+ color='#7f604f'/><computedtext><code event='value'><formula>NMsg := "The Archive feature is now accessed by selecting" + @NewLine + "File--Database--Properties and clicking \"Archive Settings\"." + @NewLine + @NewLine +  "Existing Archive settings will be upgraded when you first launch this dialog.";
+WMsg  := "This Feature has been moved to the 'Database Properties' dialog box." + @NewLine + "This dialog box can only be accessed via the Notes client.";
+@If((Form = "ArchiveProfile" | Form = "Archive Profile") &amp; @ClientType = "Notes";
+@NewLine + Nmsg;
+	(Form = "ArchiveProfile" | Form = "Archive Profile") &amp; @ClientType != "Notes";
+		@NewLine + Wmsg;
+	"")</formula></code></computedtext></run><run><font size='18pt' name='Times New Roman'
+ pitch='variable' truetype='true' familyid='10' color='#7f604f'/></run></par></tablecell></tablerow></table>
+<pardef id='7'/>
+<par def='7'><run><font size='9pt' color='navy'/></run></par>
+<pardef id='8' leftmargin='1in' spaceafter='1.5'/>
+<par def='8'><run><font size='9pt' color='navy'/></run><run><font size='9pt'/><field
+ type='richtext' kind='editable' name='Body'><code event='defaultvalue'><formula
+>Body</formula></code></field></run><run><font size='9pt' color='navy'/></run></par>
+<par def='7'><run><font size='9pt' color='teal'/></run></par>
+<par def='7'><run><font size='9pt' color='olive'/></run></par>
+<par def='7'><run><font size='9pt' color='olive'/></run><run><font size='9pt'
+ color='olive'/><field type='text' kind='computed' name='ArchiveTrailer'><code
+ event='defaultvalue'><formula>ArchiveTrailer</formula></code></field></run><run
+><font size='9pt' color='olive'/></run></par>
+<par def='7'><run><font size='9pt' color='olive'/></run></par>
+<par def='7'><run><font size='14pt' color='gray'/></run></par>
+<par def='2'><run><font size='9pt' color='red'/>Hidden:  </run><run><font
+ size='9pt' color='red'/><field type='text' kind='computed' name='Subject'><code
+ event='defaultvalue'><formula>"Archive Log for " + @Text(ArchiveDate)</formula></code></field></run><run
+><font size='9pt' color='red'/></run><run><font size='9pt' color='red'/><field
+ type='text' kind='computedwhencomposed' name='Categories'><code event='defaultvalue'><formula
+>"(Archive)"</formula></code></field></run><run><font size='9pt' color='red'/></run></par></richtext></body>
+<item name='$$XMB'><text>255D2116B7BDFECF1769F57E5917AA29</text></item>
+<item name='$Licensee'><text>Lotus Notes</text></item>
+<item name='DocLife' summary='false' sign='true'><number>0</number></item>
+<item name='$ManualArchivers_O' summary='false' sign='true'>
+<rawitemdata type='500'>
+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
+</rawitemdata></item>
+<item name='ObsoleteLife' summary='false' sign='true'><number>0</number></item>
+<item name='DocumentLife' summary='false' sign='true'><number>0</number></item>
+<item name='$SignatureStatus'><text>1</text></item>
+<item name='$$ScriptName' summary='false' sign='true'><text>ArchiveLog</text></item></form>
+
