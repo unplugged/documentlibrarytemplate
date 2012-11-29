@@ -1,6 +1,7 @@
 $(window).load( function() {
 
 	$(document).ajaxStart($.blockUI).ajaxStop($.unblockUI);
+	$(document).ajaxStop(initiscroll);
 	allowFormsInIscroll();
 	$('.viewsButton').unbind('click');
 	$('.viewsButton').click( function(event) {
