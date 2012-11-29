@@ -159,6 +159,7 @@ function saveDocument(formid, unid, viewxpagename, formname, parentunid) {
 					//					+ "?action=openDocument&documentId="
 					//					+ response, "content");
 					//	initiscroll();
+						$.blockUI();
 						window.location.href = "UnpMain.xsp";
 					} else {
 						alert(response);

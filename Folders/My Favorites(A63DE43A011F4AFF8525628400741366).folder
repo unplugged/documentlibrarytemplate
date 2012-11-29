@@ -2,7 +2,7 @@
 <!DOCTYPE folder SYSTEM 'xmlschemas/domino_8_5_3.dtd'>
 <folder name='My Favorites' alias='My Favorite Documents' xmlns='http://www.lotus.com/dxl'
  version='8.5' maintenanceversion='3.0' replicaid='80257AC2002D6A1A' hide='web'
- showinmenu='false' privatefirstuse='true' publicaccess='false' designerversion='6'
+ showinmenu='false' privatefirstuse='true' publicaccess='false' designerversion='8.5.3'
  language='en' unreadmarks='none' onopengoto='lastopened' onrefresh='displayindicator'
  headers='simple' opencollapsed='false' showresponsehierarchy='false' showmargin='true'
  shrinkrows='true' extendlastcolumn='false' showhierarchies='false' unreadcolor='red'
@@ -11,18 +11,18 @@
  allownewdocuments='false' allowcustomizations='true' hidemarginborder='true'
  marginwidth='0px 0px 1px' marginbgcolor='white' uniquekeys='false' noserverindex='true'
  initialbuildrestricted='false' noemptycategories='false'>
-<noteinfo noteid='12a' unid='A63DE43A011F4AFF8525628400741366' sequence='37'>
+<noteinfo noteid='12a' unid='A63DE43A011F4AFF8525628400741366' sequence='39'>
 <created><datetime>19951130T160751,42-05</datetime></created>
-<modified><datetime>20121127T081349,79+00</datetime></modified>
-<revised><datetime dst='true'>20080722T104833,09-04</datetime></revised>
-<lastaccessed><datetime>20121127T081349,79+00</datetime></lastaccessed>
+<modified><datetime>20121129T080026,46+00</datetime></modified>
+<revised><datetime>20121129T080026,45+00</datetime></revised>
+<lastaccessed><datetime>20121129T080026,46+00</datetime></lastaccessed>
 <addedtofile><datetime>20121126T081602,93+00</datetime></addedtofile></noteinfo>
-<updatedby><name>CN=Lotus Notes Template Development/O=Lotus Notes</name></updatedby>
-<wassignedby><name>CN=Lotus Notes Template Development/O=Lotus Notes</name></wassignedby>
+<updatedby><name>CN=Matt White/O=Exhilarate</name></updatedby>
+<wassignedby><name>CN=Matt White/O=Exhilarate</name></wassignedby>
 <actionbar useappletinbrowser='true' bgcolor='#bba58b' bordercolor='black'><actionbarstyle
  height='4.7500ex'><font size='9pt' name='multilingual'/></actionbarstyle>
-<actionbuttonstyle margintype='fixed' margin='5' bgcolor='#d4c9ba' displayborder='notesstyle'/><border
- width='0px 0px 1px'/>
+<actionbuttonstyle margintype='fixed' margin='5' bgcolor='#d4c9ba' displayborder='notesstyle'/><font
+ size='9pt'/><border width='0px 0px 1px'/>
 <action title='Categori_ze' showinmenu='false' showinbar='false' hide='previewedit'
  systemcommand='categorize'/>
 <action title='_Edit Document' showinbar='false' hide='previewedit' systemcommand='edit'/>

@@ -4,15 +4,15 @@
  maintenanceversion='3.0' replicaid='80257AC2002D6A1A' hide='v3' runaswebuser='true'
  publicaccess='false' designerversion='6.5' language='en' comment='Web only'
  restrictions='unrestricted'>
-<noteinfo noteid='136' unid='E9D2F65C17E2C91C85256482007391DF' sequence='25'>
+<noteinfo noteid='136' unid='E9D2F65C17E2C91C85256482007391DF' sequence='27'>
 <created><datetime dst='true'>19970423T170219,83-04</datetime></created>
-<modified><datetime>20121126T081602,97+00</datetime></modified>
-<revised><datetime dst='true'>20100824T141209,02-04</datetime></revised>
-<lastaccessed><datetime>20121126T081602,97+00</datetime></lastaccessed>
+<modified><datetime>20121129T080028,33+00</datetime></modified>
+<revised><datetime>20121129T080028,32+00</datetime></revised>
+<lastaccessed><datetime>20121129T080028,33+00</datetime></lastaccessed>
 <addedtofile><datetime>20121126T081602,97+00</datetime></addedtofile></noteinfo>
-<updatedby><name>CN=Lotus Notes Template Development/O=Lotus Notes</name></updatedby>
-<wassignedby><name>CN=Lotus Notes Template Development/O=Lotus Notes</name></wassignedby>
-<designchange><datetime dst='true'>20100824T141208,95-04</datetime></designchange>
+<updatedby><name>CN=Matt White/O=Exhilarate</name></updatedby>
+<wassignedby><name>CN=Matt White/O=Exhilarate</name></wassignedby>
+<designchange><datetime>20121129T080015,90+00</datetime></designchange>
 <trigger type='agentlist'/>
 <documentset type='runonce'/><code event='options'><lotusscript>Option Public
 Option Explicit
@@ -46,7 +46,5 @@ StandardError: 'This is for errors which we are not specifically handling
 	Exit Sub
 	
 	
-End Sub</lotusscript></code>
-<rundata processeddocs='0' exitcode='0'>
-<agentmodified><datetime>20040315T130853,68-05</datetime></agentmodified></rundata></agent>
+End Sub</lotusscript></code></agent>
 

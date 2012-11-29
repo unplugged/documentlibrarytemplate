@@ -2,7 +2,7 @@
 <!DOCTYPE view SYSTEM 'xmlschemas/domino_8_5_3.dtd'>
 <view name='By Alternate Name' alias='By Alternate Name' xmlns='http://www.lotus.com/dxl'
  version='8.5' maintenanceversion='3.0' replicaid='80257AC2002D6A1A' showinmenu='false'
- allowdocselection='true' publicaccess='false' designerversion='6.5' language='en'
+ allowdocselection='true' publicaccess='false' designerversion='8.5.3' language='en'
  unreadmarks='standard' onopengoto='lastopened' onrefresh='displayindicator'
  headers='simple' opencollapsed='true' showresponsehierarchy='false' showmargin='true'
  shrinkrows='true' extendlastcolumn='true' showhierarchies='false' unreadcolor='maroon'
@@ -11,15 +11,15 @@
  allownewdocuments='false' allowcustomizations='true' hidemarginborder='true'
  marginwidth='0px 0px 1px' marginbgcolor='white' uniquekeys='false' initialbuildrestricted='false'
  noemptycategories='true'>
-<noteinfo noteid='1c6' unid='6A77541F8CED59858525667B00483538' sequence='41'>
+<noteinfo noteid='1c6' unid='6A77541F8CED59858525667B00483538' sequence='43'>
 <created><datetime dst='true'>19980910T090842,16-04</datetime></created>
-<modified><datetime>20121127T081349,90+00</datetime></modified>
-<revised><datetime dst='true'>20080722T104832,84-04</datetime></revised>
-<lastaccessed><datetime>20121127T081349,90+00</datetime></lastaccessed>
+<modified><datetime>20121129T080003,72+00</datetime></modified>
+<revised><datetime>20121129T080003,71+00</datetime></revised>
+<lastaccessed><datetime>20121129T080003,72+00</datetime></lastaccessed>
 <addedtofile><datetime>20121126T081603,57+00</datetime></addedtofile></noteinfo>
-<updatedby><name>CN=Lotus Notes Template Development/O=Lotus Notes</name></updatedby>
-<wassignedby><name>CN=Lotus Notes Template Development/O=Lotus Notes</name></wassignedby><code
- event='selection'><formula>SELECT  AltFrom != "" &amp; AltLang != ""&amp; !@Contains(@LowerCase(form); "archive")</formula></code>
+<updatedby><name>CN=Matt White/O=Exhilarate</name></updatedby>
+<wassignedby><name>CN=Matt White/O=Exhilarate</name></wassignedby><code event='selection'><formula
+>SELECT  AltFrom != "" &amp; AltLang != ""&amp; !@Contains(@LowerCase(form); "archive")</formula></code>
 <actionbar useappletinbrowser='true' bgcolor='#bba58b' bordercolor='black'><actionbarstyle
  height='4.7500ex'><font size='9pt' name='multilingual'/></actionbarstyle>
 <actionbuttonstyle margintype='fixed' margin='5' bgcolor='#d4c9ba' displayborder='notesstyle'/><font
