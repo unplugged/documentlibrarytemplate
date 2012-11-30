@@ -6,6 +6,7 @@
 		<xp:script src="/unpAccordionLarge.js" clientSide="true"></xp:script>
 		<xp:styleSheet href="/unpAccordianlarge.css"></xp:styleSheet>
 		<xp:styleSheet href="/custom.css"></xp:styleSheet>
+		<xp:styleSheet href="/unplugged.css"></xp:styleSheet>
 	</xp:this.resources>
 	<xc:unpHeader search="database" viewsButton="true"
 		title="Document Library" searchPage="UnpSearch.xsp">
