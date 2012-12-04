@@ -4,15 +4,15 @@
  version='8.5' maintenanceversion='3.0' replicaid='80257AC2002D6A1A' htmlallfields='true'
  publicaccess='false' designerversion='7' language='en' type='responsetoresponse'
  inherit='true'>
-<noteinfo noteid='16a' unid='B357F4284F55D95F852564B40064903C' sequence='83'>
+<noteinfo noteid='16a' unid='B357F4284F55D95F852564B40064903C' sequence='86'>
 <created><datetime dst='true'>19970612T141825,24-04</datetime></created>
-<modified><datetime>20121127T081350,04+00</datetime></modified>
-<revised><datetime dst='true'>20080722T104832,99-04</datetime></revised>
-<lastaccessed><datetime>20121127T081350,04+00</datetime></lastaccessed>
+<modified><datetime>20121204T160914,53+00</datetime></modified>
+<revised><datetime>20121204T160914,52+00</datetime></revised>
+<lastaccessed><datetime>20121204T160914,53+00</datetime></lastaccessed>
 <addedtofile><datetime>20121126T081603,17+00</datetime></addedtofile></noteinfo>
-<updatedby><name>CN=Lotus Notes Template Development/O=Lotus Notes</name></updatedby>
-<wassignedby><name>CN=Lotus Notes Template Development/O=Lotus Notes</name></wassignedby><code
- event='windowtitle'><formula>NewDocTitle := "New Response to \"" + Subject + "\"";
+<updatedby><name>CN=Matt White/O=Exhilarate</name></updatedby>
+<wassignedby><name>CN=Matt White/O=Exhilarate</name></wassignedby><code event='windowtitle'><formula
+>NewDocTitle := "New Response to \"" + Subject + "\"";
 StandardTitle := "Response to \"" + ImmediateParentSubject + "\"";
 @If(@IsNewDoc; NewDocTitle; StandardTitle)</formula></code><code event='webquerysave'><formula
 >@Command([ToolsRunMacro]; "SubmitDocument")</formula></code>
@@ -116,22 +116,22 @@ CurrentView := @GetProfileField("tmpProfile"; "viewtitle");
  type='text' kind='computed' name='formname'><code event='defaultvalue'><formula
 >REM {DNT};
 "ResponseToResponse"</formula></code></field></run><run><font size='9pt'/></run></par></tablecell></tablerow></table>
-<pardef id='2' leftmargin='1in' hide='read edit preview previewedit'/>
-<par def='2'/>
-<pardef id='5' leftmargin='1in' hide='read edit copy preview previewedit'/><subformref
+<pardef id='5' leftmargin='1in' hide='read edit preview previewedit'/>
+<par def='5'/>
+<pardef id='6' leftmargin='1in' hide='read edit copy preview previewedit'/><subformref
  name='Shared Response Header'/>
-<pardef id='6' leftmargin='1in' hide='notes web'/><subformref name='DoclibResponseBanner'/>
-<pardef id='7' align='none' leftmargin='1in' hide='read preview' tabs='L0.5000in L1in L1.5000in L2in L2.5000in L3in L3.5000in L4in'/>
-<par def='7'><run><font size='9pt' style='bold'/>Content:</run></par>
-<pardef id='8' leftmargin='1in' tabs='L1.2500in L1.5000in'/>
-<par def='8'><run><font size='9pt'/></run><run><font size='9pt'/><field useoscontrolinbrowser='true'
+<pardef id='7' leftmargin='1in' hide='notes web'/><subformref name='DoclibResponseBanner'/>
+<pardef id='8' align='none' leftmargin='1in' hide='read preview' tabs='L0.5000in L1in L1.5000in L2in L2.5000in L3in L3.5000in L4in'/>
+<par def='8'><run><font size='9pt' style='bold'/>Content:</run></par>
+<pardef id='9' leftmargin='1in' tabs='L1.2500in L1.5000in'/>
+<par def='9'><run><font size='9pt'/></run><run><font size='9pt'/><field useoscontrolinbrowser='true'
  type='richtext' kind='editable' name='Body' description='Enter your comments, questions, ideas for discussion.'
  htmlid='Body'><code event='htmlattributes'><formula>"height=\"300\" width=\"625\" rows=\"15\" cols=\"90\""</formula></code></field></run><run
 ><font size='9pt'/></run></par>
-<pardef id='9' leftmargin='1in'/>
-<par def='9'><run><font size='9pt'/></run></par>
-<pardef id='10' leftmargin='1in' hide='edit notes'/>
-<par def='10'><run><font size='9pt'/></run><run><font size='9pt'/><sharedfieldref
+<pardef id='10' leftmargin='1in'/>
+<par def='10'><run><font size='9pt'/></run></par>
+<pardef id='11' leftmargin='1in' hide='edit notes'/>
+<par def='11'><run><font size='9pt'/></run><run><font size='9pt'/><sharedfieldref
  name='ViewList'/></run><run><font size='9pt'/></run></par></richtext></body>
 <item name='$HTMLDocumentStyles' summary='true' sign='true'>
 <rawitemdata type='1'>

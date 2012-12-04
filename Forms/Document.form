@@ -3,16 +3,14 @@
 <form name='Document' alias='Document' xmlns='http://www.lotus.com/dxl' version='8.5'
  maintenanceversion='3.0' replicaid='80257AC2002D6A1A' htmlallfields='true'
  publicaccess='false' designerversion='8.5.2' language='en' default='true'>
-<noteinfo noteid='1a2' unid='CB19A9D7D3B1A06D8525663900485061' sequence='273'>
+<noteinfo noteid='1a2' unid='CB19A9D7D3B1A06D8525663900485061' sequence='276'>
 <created><datetime dst='true'>19980706T090951,69-04</datetime></created>
-<modified><datetime>20121126T081603,41+00</datetime></modified>
-<revised><datetime dst='true'>20100824T141209,48-04</datetime></revised>
-<lastaccessed><datetime>20121126T081603,41+00</datetime></lastaccessed>
+<modified><datetime>20121204T160914,19+00</datetime></modified>
+<revised><datetime>20121204T160914,18+00</datetime></revised>
+<lastaccessed><datetime>20121204T160914,19+00</datetime></lastaccessed>
 <addedtofile><datetime>20121126T081603,41+00</datetime></addedtofile></noteinfo>
-<updatedby><name>CN=Lotus Notes Template Development/O=Lotus Notes</name></updatedby>
-<revisions><datetime dst='true'>20051020T131011,09-04</datetime><datetime
->20080519T104215,45+08</datetime><datetime>20091203T140233,96-05</datetime></revisions>
-<wassignedby><name>CN=Lotus Notes Template Development/O=Lotus Notes</name></wassignedby>
+<updatedby><name>CN=Matt White/O=Exhilarate</name></updatedby>
+<wassignedby><name>CN=Matt White/O=Exhilarate</name></wassignedby>
 <globals><code event='options'><lotusscript>Option Public
 Option Explicit
 Use "SubmitForReview"
@@ -221,7 +219,8 @@ End Sub
 		Msgbox GetString(52), 0, Getstring(40)
 		continue=False
 	End If
-End Sub</lotusscript></code>
+End Sub
+</lotusscript></code>
 <actionbar useappletinbrowser='true' bgcolor='#bba58b' bordercolor='black'><actionbarstyle
  height='4.7500ex'><font size='9pt' name='multilingual'/></actionbarstyle>
 <actionbuttonstyle margintype='fixed' margin='5' bgcolor='#d4c9ba' displayborder='notesstyle'
@@ -534,10 +533,16 @@ Yg4BAIQAAAAAAAAAAAA=
  style='bold'/></run></par>
 <par def='16'><run><font size='9pt'/></run><run><font size='9pt'/><field type='datetime'
  kind='computedfordisplay' name='Date' description='The date/time when the document was composed'><datetimeformat
- date='yearmonthday' time='hourminute' zone='never'/><code event='defaultvalue'><formula
+ date='yearmonthday' time='hourminute' zone='never' dateformat='weekdaymonthdayyear'
+ dayformat='twodigitday' monthformat='twodigitmonth' yearformat='fourdigityear'
+ weekdayformat='shortname' dateseparator1=' ' dateseparator2='/' dateseparator3='/'
+ timeseparator=':' preference='usersetting'/><code event='defaultvalue'><formula
 >@Created</formula></code></field></run><run><font size='9pt'/> </run><run
 ><font size='9pt'/><field type='datetime' kind='computedfordisplay' name='TimeCreated'><datetimeformat
- show='time' date='yearmonthday' time='hourminute' zone='never'/><code event='defaultvalue'><formula
+ show='time' date='yearmonthday' time='hourminute' zone='never' dateformat='weekdaymonthdayyear'
+ dayformat='twodigitday' monthformat='twodigitmonth' yearformat='fourdigityear'
+ weekdayformat='shortname' dateseparator1=' ' dateseparator2='/' dateseparator3='/'
+ timeseparator=':' preference='usersetting'/><code event='defaultvalue'><formula
 >@Created</formula></code></field></run><run><font size='9pt'/></run></par>
 <par def='16'><run><font size='9pt'/></run></par>
 <par def='16'><run><font size='9pt' style='bold'/></run><run><font size='9pt'
@@ -622,24 +627,24 @@ FIELD NewCats := @DeleteField;
  width='40.2639%'/>
 <tablerow>
 <tablecell borderwidth='0px'>
-<pardef id='29' leftmargin='1%' keepwithnext='true' keeptogether='true'><code
- event='hidewhen'><formula>Status &gt; 1 | @IsResponseDoc | @IsAvailable(SendError)</formula></code></pardef>
-<par def='29'><run><font size='9pt' style='bold'/>Originator</run></par></tablecell>
-<tablecell borderwidth='0px'>
 <pardef id='30' leftmargin='1%' keepwithnext='true' keeptogether='true'><code
  event='hidewhen'><formula>Status &gt; 1 | @IsResponseDoc | @IsAvailable(SendError)</formula></code></pardef>
-<par def='30'><run><font size='9pt' style='bold'/>Reviewers</run></par></tablecell>
-<tablecell borderwidth='0px' htmlid='DocTable_a'>
-<pardef id='31' align='right' leftmargin='1%' hide='web' keepwithnext='true'
- keeptogether='true'><code event='hidewhen'><formula>Status &gt; 1 | @IsResponseDoc | @IsAvailable(SendError)</formula></code></pardef>
-<par def='31'><run><font size='9pt' style='bold'/>Review Options</run></par></tablecell>
-<tablecell borderwidth='0px' htmlid='DocTable_f'>
-<pardef id='32' leftmargin='1%' hide='notes' keepwithnext='true' keeptogether='true'><code
+<par def='30'><run><font size='9pt' style='bold'/>Originator</run></par></tablecell>
+<tablecell borderwidth='0px'>
+<pardef id='31' leftmargin='1%' keepwithnext='true' keeptogether='true'><code
  event='hidewhen'><formula>Status &gt; 1 | @IsResponseDoc | @IsAvailable(SendError)</formula></code></pardef>
-<par def='32'><run><font size='9pt' style='bold'/>Review Options</run></par></tablecell></tablerow>
+<par def='31'><run><font size='9pt' style='bold'/>Reviewers</run></par></tablecell>
+<tablecell borderwidth='0px' htmlid='DocTable_a'>
+<pardef id='32' align='right' leftmargin='1%' hide='web' keepwithnext='true'
+ keeptogether='true'><code event='hidewhen'><formula>Status &gt; 1 | @IsResponseDoc | @IsAvailable(SendError)</formula></code></pardef>
+<par def='32'><run><font size='9pt' style='bold'/>Review Options</run></par></tablecell>
+<tablecell borderwidth='0px' htmlid='DocTable_f'>
+<pardef id='33' leftmargin='1%' hide='notes' keepwithnext='true' keeptogether='true'><code
+ event='hidewhen'><formula>Status &gt; 1 | @IsResponseDoc | @IsAvailable(SendError)</formula></code></pardef>
+<par def='33'><run><font size='9pt' style='bold'/>Review Options</run></par></tablecell></tablerow>
 <tablerow>
 <tablecell borderwidth='0px'>
-<par def='29'><run><font size='9pt'/><field type='names' kind='computedfordisplay'
+<par def='30'><run><font size='9pt'/><field type='names' kind='computedfordisplay'
  name='tmpOriginator_1'><code event='defaultvalue'><formula>ver := @TextToNumber(@Version);
 ABFrom := @Name([Abbreviate]; From);
 @If(ver &lt; 160; @Return(ABfrom); "");
@@ -653,24 +658,24 @@ LangPref = "" | AltLang = ""; ABFrom;
 @IsMember(AltLang; LangPref) &amp; AltFrom != ""; ABAltFrom; ABFrom)</formula></code></field></run><run
 ><font size='9pt'/></run></par></tablecell>
 <tablecell borderwidth='0px'>
-<pardef id='33' leftmargin='1%' rightmargin='100%' keepwithnext='true' keeptogether='true'><code
+<pardef id='34' leftmargin='1%' rightmargin='100%' keepwithnext='true' keeptogether='true'><code
  event='hidewhen'><formula>Status &gt; 1 | @IsResponseDoc | @IsAvailable(SendError)</formula></code></pardef>
-<par def='33'><run><font size='9pt'/><field choicesdialog='addressbook' lookupeachchar='true'
+<par def='34'><run><font size='9pt'/><field choicesdialog='addressbook' lookupeachchar='true'
  lookupaddressonrefresh='false' type='names' allowmultivalues='true' kind='editable'
  name='ReviewerList' description='The people who need to review this, separated by comma.'
  listinputseparators='comma newline' listdisplayseparator='newline'/></run><run
 ><font size='9pt'/></run></par></tablecell>
 <tablecell borderwidth='0px' htmlid='DocTable_b'>
-<pardef id='34' leftmargin='0.0403in' spaceafter='1.5' hide='web' keepwithnext='true'
+<pardef id='35' leftmargin='0.0403in' spaceafter='1.5' hide='web' keepwithnext='true'
  keeptogether='true'><code event='hidewhen'><formula>Status &gt; 1 | @IsResponseDoc | @IsAvailable(SendError)</formula></code></pardef>
-<par def='34'><run><font size='9pt'/>Type of review:</run></par></tablecell>
+<par def='35'><run><font size='9pt'/>Type of review:</run></par></tablecell>
 <tablecell borderwidth='0px' htmlid='DocTable_g'>
-<pardef id='35' leftmargin='0' hide='notes' keepwithnext='true' keeptogether='true'><code
+<pardef id='36' leftmargin='0' hide='notes' keepwithnext='true' keeptogether='true'><code
  event='hidewhen'><formula>Status &gt; 1 | @IsResponseDoc | @IsAvailable(SendError)</formula></code></pardef>
-<par def='35'><run><font size='9pt'/>Type of review:</run></par>
-<pardef id='36' leftmargin='0' keepwithnext='true' keeptogether='true'><code
+<par def='36'><run><font size='9pt'/>Type of review:</run></par>
+<pardef id='37' leftmargin='0' keepwithnext='true' keeptogether='true'><code
  event='hidewhen'><formula>Status &gt; 1 | @IsResponseDoc | @IsAvailable(SendError)</formula></code></pardef>
-<par def='36'><run><font size='9pt'/></run><run><font size='9pt'/><field lookupeachchar='false'
+<par def='37'><run><font size='9pt'/></run><run><font size='9pt'/><field lookupeachchar='false'
  lookupaddressonrefresh='false' type='keyword' kind='editable' name='ReviewType'
  description='Select the type of review'><keywords recalconchange='true' columns='1'
  ui='dialoglist'><textlist><text>One reviewer at a time | 1</text><text>All reviewers simultaneously | 2</text></textlist></keywords><code
@@ -678,14 +683,14 @@ LangPref = "" | AltLang = ""; ABFrom;
  size='9pt'/></run></par></tablecell></tablerow>
 <tablerow>
 <tablecell borderwidth='0px'>
-<par def='29'><run><font size='9pt'/></run></par></tablecell>
-<tablecell borderwidth='0px'>
 <par def='30'><run><font size='9pt'/></run></par></tablecell>
+<tablecell borderwidth='0px'>
+<par def='31'><run><font size='9pt'/></run></par></tablecell>
 <tablecell borderwidth='0px' htmlid='DocTable_c'>
-<par def='34'><run><font size='9pt'/>Time Limit Options:</run></par></tablecell>
+<par def='35'><run><font size='9pt'/>Time Limit Options:</run></par></tablecell>
 <tablecell borderwidth='0px' htmlid='DocTable_h'>
-<par def='35'><run><font size='9pt'/>Time Limit Options:</run></par>
-<par def='36'><run><font size='9pt'/></run><run><font size='9pt'/><field lookupeachchar='false'
+<par def='36'><run><font size='9pt'/>Time Limit Options:</run></par>
+<par def='37'><run><font size='9pt'/></run><run><font size='9pt'/><field lookupeachchar='false'
  lookupaddressonrefresh='false' type='keyword' kind='editable' name='ReviewWindow'
  description='What should happen if the time limit has expired.'><keywords
  recalconchange='true' recalcchoices='true' columns='1' ui='dialoglist'><formula
@@ -699,24 +704,24 @@ WebParallel:= "No time limit for each review|0" : "Keep sending reminders after 
  size='9pt'/></run></par></tablecell></tablerow>
 <tablerow>
 <tablecell borderwidth='0px'>
-<pardef id='37' keepwithnext='true' keeptogether='true'><code event='hidewhen'><formula
->Status &gt; 1 | @IsResponseDoc | @IsAvailable(SendError) | (!@IsDocBeingEdited &amp; !@IsNumber(ReviewTime)) | ReviewWindow = "0" | ReviewWindow = ""</formula></code></pardef>
-<par def='37'><run><font size='9pt'/></run></par></tablecell>
-<tablecell borderwidth='0px'>
 <pardef id='38' keepwithnext='true' keeptogether='true'><code event='hidewhen'><formula
 >Status &gt; 1 | @IsResponseDoc | @IsAvailable(SendError) | (!@IsDocBeingEdited &amp; !@IsNumber(ReviewTime)) | ReviewWindow = "0" | ReviewWindow = ""</formula></code></pardef>
 <par def='38'><run><font size='9pt'/></run></par></tablecell>
-<tablecell borderwidth='0px' htmlid='DocTable_d'>
-<pardef id='39' leftmargin='0.0403in' spaceafter='1.5' hide='web' keepwithnext='true'
- keeptogether='true'><code event='hidewhen'><formula>Status &gt; 1 | @IsResponseDoc | @IsAvailable(SendError) | (!@IsDocBeingEdited &amp; !@IsNumber(ReviewTime)) | ReviewWindow = "0" | ReviewWindow = ""</formula></code></pardef>
-<par def='39'><run><font size='9pt'/>Time Limit/Days:</run></par></tablecell>
-<tablecell borderwidth='0px' htmlid='DocTable_i'>
-<pardef id='40' hide='notes' keepwithnext='true' keeptogether='true'><code
- event='hidewhen'><formula>Status &gt; 1 | @IsResponseDoc | @IsAvailable(SendError) | (!@IsDocBeingEdited &amp; !@IsNumber(ReviewTime)) | ReviewWindow = "0" | ReviewWindow = ""</formula></code></pardef>
-<par def='40'><run><font size='9pt'/>Time Limit (days):</run></par>
-<pardef id='41' keepwithnext='true' keeptogether='true'><code event='hidewhen'><formula
+<tablecell borderwidth='0px'>
+<pardef id='39' keepwithnext='true' keeptogether='true'><code event='hidewhen'><formula
 >Status &gt; 1 | @IsResponseDoc | @IsAvailable(SendError) | (!@IsDocBeingEdited &amp; !@IsNumber(ReviewTime)) | ReviewWindow = "0" | ReviewWindow = ""</formula></code></pardef>
-<par def='41'><run><font size='9pt'/></run><run><font size='9pt'/><field type='number'
+<par def='39'><run><font size='9pt'/></run></par></tablecell>
+<tablecell borderwidth='0px' htmlid='DocTable_d'>
+<pardef id='40' leftmargin='0.0403in' spaceafter='1.5' hide='web' keepwithnext='true'
+ keeptogether='true'><code event='hidewhen'><formula>Status &gt; 1 | @IsResponseDoc | @IsAvailable(SendError) | (!@IsDocBeingEdited &amp; !@IsNumber(ReviewTime)) | ReviewWindow = "0" | ReviewWindow = ""</formula></code></pardef>
+<par def='40'><run><font size='9pt'/>Time Limit/Days:</run></par></tablecell>
+<tablecell borderwidth='0px' htmlid='DocTable_i'>
+<pardef id='41' hide='notes' keepwithnext='true' keeptogether='true'><code
+ event='hidewhen'><formula>Status &gt; 1 | @IsResponseDoc | @IsAvailable(SendError) | (!@IsDocBeingEdited &amp; !@IsNumber(ReviewTime)) | ReviewWindow = "0" | ReviewWindow = ""</formula></code></pardef>
+<par def='41'><run><font size='9pt'/>Time Limit (days):</run></par>
+<pardef id='42' keepwithnext='true' keeptogether='true'><code event='hidewhen'><formula
+>Status &gt; 1 | @IsResponseDoc | @IsAvailable(SendError) | (!@IsDocBeingEdited &amp; !@IsNumber(ReviewTime)) | ReviewWindow = "0" | ReviewWindow = ""</formula></code></pardef>
+<par def='42'><run><font size='9pt'/></run><run><font size='9pt'/><field type='number'
  kind='editable' name='ReviewTime' description='How many days before the review time limit expires.'><keywords
  columns='1' ui='dialoglist' allownew='true'/><numberformat format='general'
  digits='2' punctuated='false' parens='false' percent='false' bytes='false'/><code
@@ -725,69 +730,69 @@ WebParallel:= "No time limit for each review|0" : "Keep sending reminders after 
 ><font size='9pt'/></run></par></tablecell></tablerow>
 <tablerow>
 <tablecell columnspan='2' borderwidth='0px'>
-<pardef id='43' hide='read copy preview notes' keepwithnext='true' keeptogether='true'/>
-<par def='43'><run><font size='9pt' color='teal'/><field borderstyle='none'
+<pardef id='44' hide='read copy preview notes' keepwithnext='true' keeptogether='true'/>
+<par def='44'><run><font size='9pt' color='teal'/><field borderstyle='none'
  lookupeachchar='false' lookupaddressonrefresh='false' type='keyword' kind='editable'
  name='SubmitNow'><keywords columns='1' ui='radiobutton'><formula>@If(@IsNewDoc | Status = 1; "Submit for review now|1" : "Save but do not submit for review|0"; @UserName = From; "Send notification now|1" : "Save, but do not send notification|0"; "My review is complete|2" : "Save but do not mark review as complete|0")</formula></keywords><code
  event='defaultvalue'><formula>"0"</formula></code><code event='inputtranslation'><formula
 >@If(SubmitNow_1 = ""; SubmitNow; SubmitNow_1)</formula></code></field></run><run
 ><font size='9pt' style='bold extrude' color='navy'/></run></par></tablecell>
 <tablecell borderwidth='0px' htmlid='DocTable_e'>
-<pardef id='44' leftmargin='0.0403in' hide='web' keepwithnext='true' keeptogether='true'><code
+<pardef id='45' leftmargin='0.0403in' hide='web' keepwithnext='true' keeptogether='true'><code
  event='hidewhen'><formula>Status &gt; 1 | @IsResponseDoc | @IsAvailable(SendError)</formula></code></pardef>
-<par def='44'><run><font size='9pt'/>Notify originator after: </run></par></tablecell>
+<par def='45'><run><font size='9pt'/>Notify originator after: </run></par></tablecell>
 <tablecell borderwidth='0px' htmlid='DocTable_j'>
-<pardef id='45' hide='notes' keepwithnext='true' keeptogether='true'><code
+<pardef id='46' hide='notes' keepwithnext='true' keeptogether='true'><code
  event='hidewhen'><formula>Status &gt; 1 | @IsResponseDoc | @IsAvailable(SendError)</formula></code></pardef>
-<par def='45'><run><font size='9pt'/>Notify originator after:</run></par>
-<pardef id='46' keepwithnext='true' keeptogether='true'><code event='hidewhen'><formula
+<par def='46'><run><font size='9pt'/>Notify originator after:</run></par>
+<pardef id='47' keepwithnext='true' keeptogether='true'><code event='hidewhen'><formula
 >Status &gt; 1 | @IsResponseDoc | @IsAvailable(SendError)</formula></code></pardef>
-<par def='46'><run><font size='9pt'/></run><run><font size='9pt'/><field type='keyword'
+<par def='47'><run><font size='9pt'/></run><run><font size='9pt'/><field type='keyword'
  kind='editable' name='NotifyAfter' description='When to notify the originator'><keywords
  ui='dialoglist'><textlist><text>final reviewer|0</text><text>each reviewer|1</text></textlist></keywords><code
  event='defaultvalue'><formula>"0"</formula></code></field></run><run><font
  size='9pt'/></run></par></tablecell></tablerow></table>
-<pardef id='47' leftmargin='1%' hide='web' keepwithnext='true' keeptogether='true'/>
-<par def='47'><run><font size='9pt'/></run></par>
+<pardef id='48' leftmargin='1%' hide='web' keepwithnext='true' keeptogether='true'/>
+<par def='48'><run><font size='9pt'/></run></par>
 <table rightmargin='98%' widthtype='fixedleft' refwidth='5.1549in'><tablecolumn
  width='1.4625in'/><tablecolumn width='1.2500in'/><tablecolumn width='0.9444in'/><tablecolumn
  width='1.4979in'/>
 <tablerow>
 <tablecell borderwidth='0px'>
-<pardef id='49' leftmargin='1%' keepwithnext='true' keeptogether='true'><code
- event='hidewhen'><formula>(Status = 1 &amp; @IsUnavailable(SendError)) | @IsResponseDoc</formula></code></pardef>
-<par def='49'/></tablecell>
-<tablecell borderwidth='0px'>
 <pardef id='50' leftmargin='1%' keepwithnext='true' keeptogether='true'><code
  event='hidewhen'><formula>(Status = 1 &amp; @IsUnavailable(SendError)) | @IsResponseDoc</formula></code></pardef>
 <par def='50'/></tablecell>
 <tablecell borderwidth='0px'>
-<pardef id='51' align='center' leftmargin='1%' keepwithnext='true' keeptogether='true'><code
+<pardef id='51' leftmargin='1%' keepwithnext='true' keeptogether='true'><code
  event='hidewhen'><formula>(Status = 1 &amp; @IsUnavailable(SendError)) | @IsResponseDoc</formula></code></pardef>
-<par def='51'><run><font size='9pt' style='bold'/>Reviewers</run></par></tablecell>
+<par def='51'/></tablecell>
 <tablecell borderwidth='0px'>
-<pardef id='52' leftmargin='1%' keepwithnext='true' keeptogether='true'><code
+<pardef id='52' align='center' leftmargin='1%' keepwithnext='true' keeptogether='true'><code
  event='hidewhen'><formula>(Status = 1 &amp; @IsUnavailable(SendError)) | @IsResponseDoc</formula></code></pardef>
-<par def='52'/></tablecell></tablerow>
-<tablerow>
-<tablecell borderwidth='0px'>
-<par def='49'><run><font size='9pt' style='bold'/>Originator</run></par></tablecell>
-<tablecell borderwidth='0px'>
-<par def='50'><run><font size='9pt' style='underline'/>Previous</run></par></tablecell>
+<par def='52'><run><font size='9pt' style='bold'/>Reviewers</run></par></tablecell>
 <tablecell borderwidth='0px'>
 <pardef id='53' leftmargin='1%' keepwithnext='true' keeptogether='true'><code
  event='hidewhen'><formula>(Status = 1 &amp; @IsUnavailable(SendError)) | @IsResponseDoc</formula></code></pardef>
-<par def='53'><run><font size='9pt' style='underline'/>Current</run></par></tablecell>
-<tablecell borderwidth='0px'>
-<par def='52'><run><font size='9pt' style='underline'/>Future</run></par></tablecell></tablerow>
+<par def='53'/></tablecell></tablerow>
 <tablerow>
+<tablecell borderwidth='0px'>
+<par def='50'><run><font size='9pt' style='bold'/>Originator</run></par></tablecell>
+<tablecell borderwidth='0px'>
+<par def='51'><run><font size='9pt' style='underline'/>Previous</run></par></tablecell>
 <tablecell borderwidth='0px'>
 <pardef id='54' leftmargin='1%' keepwithnext='true' keeptogether='true'><code
  event='hidewhen'><formula>(Status = 1 &amp; @IsUnavailable(SendError)) | @IsResponseDoc</formula></code></pardef>
-<par def='54'><run><font size='9pt'/><field type='names' kind='computedfordisplay'
+<par def='54'><run><font size='9pt' style='underline'/>Current</run></par></tablecell>
+<tablecell borderwidth='0px'>
+<par def='53'><run><font size='9pt' style='underline'/>Future</run></par></tablecell></tablerow>
+<tablerow>
+<tablecell borderwidth='0px'>
+<pardef id='55' leftmargin='1%' keepwithnext='true' keeptogether='true'><code
+ event='hidewhen'><formula>(Status = 1 &amp; @IsUnavailable(SendError)) | @IsResponseDoc</formula></code></pardef>
+<par def='55'><run><font size='9pt'/><field type='names' kind='computedfordisplay'
  name='tmpOriginator'><code event='defaultvalue'><formula>@Name([Abbreviate]; @If(NamePref = "1" &amp; AltFrom != ""; AltFrom; From))</formula></code></field></run></par></tablecell>
 <tablecell borderwidth='0px'>
-<par def='50'><run><font size='9pt'/><field lookupeachchar='false' lookupaddressonrefresh='false'
+<par def='51'><run><font size='9pt'/><field lookupeachchar='false' lookupaddressonrefresh='false'
  type='names' allowmultivalues='true' kind='computedfordisplay' name='tmpPrevReviewers'
  listinputseparators='comma semicolon newline' listdisplayseparator='newline'><code
  event='defaultvalue'><formula>REM {variables to translate};
@@ -800,9 +805,9 @@ REM {ReviewerNumber is zero-based, so need to increment by 1 to use in Subset fo
 ReviewerNum := ReviewerNumber + 1;
 @If(@IsNewDoc | (Status = 1 &amp; @IsUnavailable(SendError)); None; ReviewType = "2" &amp; ReviewerNumber = 0; None; ReviewType = "2" &amp; PrevRev != ""; @Trim(PrevRev); ReviewType = "1" &amp; ReviewerNum = 1; None; @Subset(ReviewerList; ReviewerNum - 1))</formula></code></field></run></par></tablecell>
 <tablecell borderwidth='0px'>
-<pardef id='55' leftmargin='1%' keepwithnext='true' keeptogether='true'><code
+<pardef id='56' leftmargin='1%' keepwithnext='true' keeptogether='true'><code
  event='hidewhen'><formula>(Status = 1 &amp; @IsUnavailable(SendError)) | @IsResponseDoc</formula></code></pardef>
-<par def='55'><run><font size='9pt'/><field type='names' allowmultivalues='true'
+<par def='56'><run><font size='9pt'/><field type='names' allowmultivalues='true'
  kind='computedfordisplay' name='tmpCurrReviewer' listinputseparators='comma semicolon newline'
  listdisplayseparator='newline'><code event='defaultvalue'><formula>REM {variables to translate};
 None := "None";
@@ -815,9 +820,9 @@ REM {ReviewerNumber is zero-based, so need to increment by 1 to use in Subset fo
 ReviewerNum := ReviewerNumber + 1;
 @If(ReviewType = "2" &amp; Curr = 0; None; ReviewType = "2" &amp; ReviewerNumber = 0; ReviewerList; ReviewType = "2" &amp; CurrentEditor != ""; CurrEd; ReviewType = "2" &amp; CurrentEditor = ""; None; ReviewType = "1" &amp; Status = 1; @Subset(@Subset(ReviewerList; 1); -1); ReviewType = "1" &amp; ReviewerNum &gt; @Elements(ReviewerList); None; @Subset(@Subset(ReviewerList; ReviewerNum); -1))</formula></code></field></run></par></tablecell>
 <tablecell borderwidth='0px'>
-<pardef id='56' leftmargin='1%' keepwithnext='true' keeptogether='true'><code
+<pardef id='57' leftmargin='1%' keepwithnext='true' keeptogether='true'><code
  event='hidewhen'><formula>(Status = 1 &amp; @IsUnavailable(SendError)) | @IsResponseDoc</formula></code></pardef>
-<par def='56'><run><font size='9pt'/><field type='names' allowmultivalues='true'
+<par def='57'><run><font size='9pt'/><field type='names' allowmultivalues='true'
  kind='computedfordisplay' name='tmpFutReviewers' listinputseparators='comma semicolon newline'
  listdisplayseparator='newline'><code event='defaultvalue'><formula>REM {variables to translate};
 None := "None";
@@ -830,22 +835,22 @@ Curr := @Elements(currentEditor);
 TotalNumber := @Elements(ReviewerList);
 @If(ReviewType = "2"; None; Status = 1; @If(TotalNumber &gt; 1; @Subset(ReviewerList; (TotalNumber - 1) * -1); None); ReviewerNum &gt;= TotalNumber; None; @Subset(ReviewerList; (TotalNumber - ReviewerNum) * -1))</formula></code></field></run></par></tablecell></tablerow></table>
 <par def='17'> </par></tablecell></tablerow></table>
-<pardef id='57' leftmargin='1in'/>
-<par def='57'><run><font size='4pt' color='#37605e'/></run></par>
-<pardef id='58' align='none' leftmargin='1in' hide='read preview' tabs='L0.5000in L1in L1.5000in L2in L2.5000in L3in L3.5000in L4in'/>
-<par def='58'><run><font size='9pt' style='bold'/>Content:</run></par>
-<pardef id='59' leftmargin='1in' tabs='L1.2500in L1.5000in'/>
-<par def='59'><run><font size='9pt'/></run><run><font size='9pt'/><field useoscontrolinbrowser='true'
+<pardef id='58' leftmargin='1in'/>
+<par def='58'><run><font size='4pt' color='#37605e'/></run></par>
+<pardef id='59' align='none' leftmargin='1in' hide='read preview' tabs='L0.5000in L1in L1.5000in L2in L2.5000in L3in L3.5000in L4in'/>
+<par def='59'><run><font size='9pt' style='bold'/>Content:</run></par>
+<pardef id='60' leftmargin='1in' tabs='L1.2500in L1.5000in'/>
+<par def='60'><run><font size='9pt'/></run><run><font size='9pt'/><field useoscontrolinbrowser='true'
  type='richtext' kind='editable' name='Body' description='Enter your comments, questions, ideas for discussion.'
  htmlid='Body'><code event='htmlattributes'><formula>"height=\"300\" width=\"625\" rows=\"15\" cols=\"90\""</formula></code></field></run><compositedata
  type='98' prevtype='65402' nexttype='222' afterparcount='9' containertype='65418'
  aftercontainercount='2' afterbegincount='5'>
 Yg4BAIQAAAAAAAEAAAA=
 </compositedata><run><font size='9pt'/></run></par>
-<pardef id='60' leftmargin='1in' hide='notes'/>
-<par def='60'><run><font size='9pt'/></run></par>
-<par def='57'><run><font size='9pt' color='blue'/></run></par>
-<par def='57'><run><font size='9pt' color='blue'/></run><run><font size='9pt'
+<pardef id='61' leftmargin='1in' hide='notes'/>
+<par def='61'><run><font size='9pt'/></run></par>
+<par def='58'><run><font size='9pt' color='blue'/></run></par>
+<par def='58'><run><font size='9pt' color='blue'/></run><run><font size='9pt'
  color='olive'/><field type='text' allowmultivalues='true' kind='computed'
  name='ReviewerLog' listinputseparators='comma semicolon newline' listdisplayseparator='newline'><code
  event='defaultvalue'><formula>ReviewerLog</formula></code></field></run><compositedata
@@ -854,11 +859,11 @@ Yg4BAIQAAAAAAAEAAAA=
 Yg4BAIQAAAAAAAAAAAA=
 </compositedata><run><font size='9pt'
  color='blue'/></run></par>
-<par def='60'><run><font size='9pt' color='blue'/></run><run><font size='9pt'/><sharedfieldref
+<par def='61'><run><font size='9pt' color='blue'/></run><run><font size='9pt'/><sharedfieldref
  name='ViewList'/></run><run><font size='9pt'/></run><actionhotspot hotspotstyle='none'><code
  event='click'><formula>@URLOpen("/"+@ReplaceSubstring(@Subset(@DbName; -1);" ";"+")+"/$Help?OpenHelp")</formula></code><run
 ><font size='9pt'/></run></actionhotspot><run><font size='9pt'/></run></par>
-<par def='60'><run><font size='9pt'/></run></par></richtext></body>
+<par def='61'><run><font size='9pt'/></run></par></richtext></body>
 <item name='$$XMB_2'><text>AA14354966AB34D61C820A3EB8803A42</text></item>
 <item name='$$XMB_3'><text>67843E4301C6054E658E2C2D65E5AC9D</text></item>
 <item name='$HTMLDocumentStyles' summary='true' sign='true'>

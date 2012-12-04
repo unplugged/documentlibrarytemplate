@@ -4,19 +4,19 @@
  xmlns='http://www.lotus.com/dxl' version='8.5' maintenanceversion='3.0' replicaid='80257AC2002D6A1A'
  nocompose='true' noquery='true' publicaccess='false' designerversion='6'
  language='en'>
-<noteinfo noteid='1f6' unid='B662274EEFDE96538525671A0060B245' sequence='21'>
+<noteinfo noteid='1f6' unid='B662274EEFDE96538525671A0060B245' sequence='24'>
 <created><datetime>19990216T123610,93-05</datetime></created>
-<modified><datetime>20121127T081350,23+00</datetime></modified>
-<revised><datetime dst='true'>20080722T104832,53-04</datetime></revised>
-<lastaccessed><datetime>20121127T081350,23+00</datetime></lastaccessed>
+<modified><datetime>20121204T160916,43+00</datetime></modified>
+<revised><datetime>20121204T160916,42+00</datetime></revised>
+<lastaccessed><datetime>20121204T160916,43+00</datetime></lastaccessed>
 <addedtofile><datetime>20121126T081603,81+00</datetime></addedtofile></noteinfo>
-<updatedby><name>CN=Lotus Notes Template Development/O=Lotus Notes</name></updatedby>
-<wassignedby><name>CN=Lotus Notes Template Development/O=Lotus Notes</name></wassignedby><code
- event='windowtitle'><formula>"Archive Log"</formula></code>
+<updatedby><name>CN=Matt White/O=Exhilarate</name></updatedby>
+<wassignedby><name>CN=Matt White/O=Exhilarate</name></wassignedby><code event='windowtitle'><formula
+>"Archive Log"</formula></code>
 <actionbar useappletinbrowser='true' bgcolor='#bba58b' bordercolor='black'>
 <actionbuttonstyle heighttype='background' margintype='fixed' margin='6' bgcolor='none'
  displayborder='never' widthtype='background' textalign='center' internalmargin='3px'><imageref
- name='ActionButton'/></actionbuttonstyle><border width='0px 0px 1px'/>
+ name='ActionButton'/></actionbuttonstyle><font size='9pt'/><border width='0px 0px 1px'/>
 <action title='Categori_ze' showinmenu='false' showinbar='false' systemcommand='categorize'/>
 <action title='_Edit Document' showinmenu='false' showinbar='false' systemcommand='edit'/>
 <action title='Send Docu_ment' showinmenu='false' showinbar='false' systemcommand='send'/>
@@ -69,8 +69,11 @@ FIELD SaveOptions := 0;
  htmltitle='Log Total'/></run><run><font size='18pt' color='#7f604f'/> for </run><run
 ><font size='18pt' color='#7f604f'/><field type='datetime' kind='editable'
  name='ArchiveDate' htmltitle='Archive Date'><datetimeformat show='datetime'
- date='yearmonthday' time='hourminutesecond' zone='never'/></field></run><run
-><font size='18pt' color='#7f604f'/></run></par>
+ date='yearmonthday' time='hourminutesecond' zone='never' dateformat='weekdaymonthdayyear'
+ dayformat='twodigitday' monthformat='twodigitmonth' yearformat='fourdigityear'
+ weekdayformat='shortname' dateseparator1=' ' dateseparator2='/' dateseparator3='/'
+ timeseparator=':' preference='usersetting'/></field></run><run><font size='18pt'
+ color='#7f604f'/></run></par>
 <par def='5'><run><font size='18pt' name='Times New Roman' pitch='variable'
  truetype='true' familyid='10' color='#7f604f'/></run><run><font size='14pt'
  color='#7f604f'/><computedtext><code event='value'><formula>NMsg := "The Archive feature is now accessed by selecting" + @NewLine + "File--Database--Properties and clicking \"Archive Settings\"." + @NewLine + @NewLine +  "Existing Archive settings will be upgraded when you first launch this dialog.";

@@ -4,14 +4,14 @@
  version='8.5' maintenanceversion='3.0' replicaid='80257AC2002D6A1A' nocompose='true'
  noquery='true' treatashtml='true' publicaccess='false' designerversion='6'
  language='en'>
-<noteinfo noteid='17e' unid='3D2232854ECF1B9D852564DC005E9B31' sequence='12'>
+<noteinfo noteid='17e' unid='3D2232854ECF1B9D852564DC005E9B31' sequence='15'>
 <created><datetime dst='true'>19970722T131321,13-04</datetime></created>
-<modified><datetime>20121126T081603,27+00</datetime></modified>
-<revised><datetime dst='true'>20100824T141209,32-04</datetime></revised>
-<lastaccessed><datetime>20121126T081603,27+00</datetime></lastaccessed>
+<modified><datetime>20121204T160916,29+00</datetime></modified>
+<revised><datetime>20121204T160916,28+00</datetime></revised>
+<lastaccessed><datetime>20121204T160916,29+00</datetime></lastaccessed>
 <addedtofile><datetime>20121126T081603,27+00</datetime></addedtofile></noteinfo>
-<updatedby><name>CN=Lotus Notes Template Development/O=Lotus Notes</name></updatedby>
-<wassignedby><name>CN=Lotus Notes Template Development/O=Lotus Notes</name></wassignedby>
+<updatedby><name>CN=Matt White/O=Exhilarate</name></updatedby>
+<wassignedby><name>CN=Matt White/O=Exhilarate</name></wassignedby>
 <body><richtext>
 <pardef id='1' leftmargin='1in'><code event='hidewhen' enabled='false'><formula
 >@TextToNumber(@Version)&lt;141</formula></code></pardef>

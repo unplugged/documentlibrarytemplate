@@ -3,14 +3,14 @@
 <page name='White Page' alias='White Page' xmlns='http://www.lotus.com/dxl'
  version='8.5' maintenanceversion='3.0' replicaid='80257AC2002D6A1A' publicaccess='false'
  designerversion='6' language='en' noinitialfocus='true' nofocusonf6='true'>
-<noteinfo noteid='20a' unid='6040243F4CC83863882569F70001852D' sequence='6'>
+<noteinfo noteid='20a' unid='6040243F4CC83863882569F70001852D' sequence='9'>
 <created><datetime>20010217T161636,29-08</datetime></created>
-<modified><datetime>20121126T081603,91+00</datetime></modified>
-<revised><datetime dst='true'>20100824T141209,94-04</datetime></revised>
-<lastaccessed><datetime>20121126T081603,91+00</datetime></lastaccessed>
+<modified><datetime>20121204T160916,15+00</datetime></modified>
+<revised><datetime>20121204T160916,14+00</datetime></revised>
+<lastaccessed><datetime>20121204T160916,15+00</datetime></lastaccessed>
 <addedtofile><datetime>20121126T081603,91+00</datetime></addedtofile></noteinfo>
-<updatedby><name>CN=Lotus Notes Template Development/O=Lotus Notes</name></updatedby>
-<wassignedby><name>CN=Lotus Notes Template Development/O=Lotus Notes</name></wassignedby>
+<updatedby><name>CN=Matt White/O=Exhilarate</name></updatedby>
+<wassignedby><name>CN=Matt White/O=Exhilarate</name></wassignedby>
 <body><richtext>
 <pardef id='1'/>
 <par def='1'/></richtext></body>

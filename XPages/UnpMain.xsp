@@ -5,6 +5,9 @@
 	<xp:this.resources>
 		<xp:styleSheet href="/custom.css"></xp:styleSheet>
 		<xp:styleSheet href="/unplugged.css"></xp:styleSheet>
+		<xp:script src="/unp/jquery-1.7.2.min.js" clientSide="true"></xp:script>
+		<xp:script src="/unp/jquery.blockUI.min.js" clientSide="true"></xp:script>
+		<xp:script src="/unp/iScroll.min.js" clientSide="true"></xp:script>
 	</xp:this.resources>
 	<xc:unpHeader search="database" viewsButton="true"
 		title="Document Library" searchPage="UnpSearch.xsp">

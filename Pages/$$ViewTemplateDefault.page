@@ -3,14 +3,14 @@
 <page name='$$ViewTemplateDefault' alias='AllViewTemplate' xmlns='http://www.lotus.com/dxl'
  version='8.5' maintenanceversion='3.0' replicaid='80257AC2002D6A1A' publicaccess='false'
  designerversion='6.5' language='en'>
-<noteinfo noteid='1ee' unid='CE19B1328E61A07D052566E20041D3F5' sequence='17'>
+<noteinfo noteid='1ee' unid='CE19B1328E61A07D052566E20041D3F5' sequence='20'>
 <created><datetime>19981222T065901,01-05</datetime></created>
-<modified><datetime>20121126T081603,77+00</datetime></modified>
-<revised><datetime dst='true'>20100824T141209,82-04</datetime></revised>
-<lastaccessed><datetime>20121126T081603,77+00</datetime></lastaccessed>
+<modified><datetime>20121204T160916,41+00</datetime></modified>
+<revised><datetime>20121204T160916,40+00</datetime></revised>
+<lastaccessed><datetime>20121204T160916,41+00</datetime></lastaccessed>
 <addedtofile><datetime>20121126T081603,77+00</datetime></addedtofile></noteinfo>
-<updatedby><name>CN=Lotus Notes Template Development/O=Lotus Notes</name></updatedby>
-<wassignedby><name>CN=Lotus Notes Template Development/O=Lotus Notes</name></wassignedby>
+<updatedby><name>CN=Matt White/O=Exhilarate</name></updatedby>
+<wassignedby><name>CN=Matt White/O=Exhilarate</name></wassignedby>
 <body><richtext>
 <pardef id='1'/>
 <par def='1'><run html='true'><font size='8pt'/>&lt;STYLE TYPE="text/css"&gt;</run></par>
