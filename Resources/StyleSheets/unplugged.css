@@ -1191,7 +1191,6 @@ to {
 
 #formholder textarea {
 	height: 150px;
-	overflow-y: visible;
 }
 
 #formholder button {
