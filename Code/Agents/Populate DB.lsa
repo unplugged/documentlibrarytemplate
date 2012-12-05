@@ -2,15 +2,15 @@
 <!DOCTYPE agent SYSTEM 'xmlschemas/domino_8_5_3.dtd'>
 <agent name='Populate DB' xmlns='http://www.lotus.com/dxl' version='8.5' maintenanceversion='3.0'
  replicaid='80257AC2002D6A1A' hide='v3' publicaccess='false' designerversion='8.5.3'>
-<noteinfo noteid='27d2' unid='CC06A7CAEB37AE2A80257AC900351DA0' sequence='12'>
+<noteinfo noteid='27d2' unid='CC06A7CAEB37AE2A80257AC900351DA0' sequence='14'>
 <created><datetime>20121203T094009,92+00</datetime></created>
-<modified><datetime>20121204T160914,43+00</datetime></modified>
-<revised><datetime>20121204T160914,42+00</datetime></revised>
-<lastaccessed><datetime>20121204T160914,43+00</datetime></lastaccessed>
+<modified><datetime>20121205T094323,79+00</datetime></modified>
+<revised><datetime>20121205T094323,78+00</datetime></revised>
+<lastaccessed><datetime>20121205T094323,79+00</datetime></lastaccessed>
 <addedtofile><datetime>20121203T094009,94+00</datetime></addedtofile></noteinfo>
 <updatedby><name>CN=Matt White/O=Exhilarate</name></updatedby>
 <wassignedby><name>CN=Matt White/O=Exhilarate</name></wassignedby>
-<designchange><datetime>20121204T160916,00+00</datetime></designchange>
+<designchange><datetime>20121205T094323,75+00</datetime></designchange>
 <trigger type='actionsmenu'/>
 <documentset type='runonce'/><code event='options'><lotusscript>%REM
 	Agent Populate DB
@@ -77,11 +77,11 @@ Sub Initialize
 		Call body.appendText(getBody())
 		If i Mod 100 = 0 Then
 			Call body.Embedobject(EMBED_ATTACHMENT, "", "c:\lon_con.pdf")
-		ElseIf i Mod 50 = 0 Then
+		Elseif i Mod 50 = 0 Then
 			Call body.Embedobject(EMBED_ATTACHMENT, "", "c:\This is a Word Document.docx")
-		ElseIf i Mod 25 = 0 Then
+		Elseif i Mod 25 = 0 Then
 			Call body.Embedobject(EMBED_ATTACHMENT, "", "c:\This is an Excel Sheet.xlsx")
-		ElseIf (i Mod 2 = 1) Then
+		Elseif (i Mod 2 = 1) Then
 			'Odd number
 			Call body.Embedobject(EMBED_ATTACHMENT, "", "c:\This is a text file.txt")
 			Call body.Embedobject(EMBED_ATTACHMENT, "", "c:\spinner_squares_circle.gif")
@@ -110,12 +110,5 @@ Function getBody() As String
 	msg6 = "Consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
 
 	getBody = msg1 &amp; Chr(13) &amp; msg2 &amp; Chr(13) &amp; msg3 &amp; Chr(13) &amp; msg4 &amp; Chr(13) &amp; msg5 &amp; Chr(13) &amp; msg6
-End Function</lotusscript></code>
-<rundata processeddocs='0' exitcode='0' agentdata='50F193BEC7977D0280257AC90056430C'>
-<agentmodified><datetime>20121203T154208,10+00</datetime></agentmodified>
-<agentrun><datetime>20121203T160212,46+00</datetime></agentrun>
-<runlog>Started running agent 'Populate DB' on 03/12/2012 16:02:04
-Ran LotusScript code
-Done running agent 'Populate DB' on 03/12/2012 16:02:12
-</runlog></rundata></agent>
+End Function</lotusscript></code></agent>
 
