@@ -4,15 +4,15 @@
  replicaid='80257AC2002D6A1A' hide='v3' runaswebuser='true' publicaccess='false'
  designerversion='6.5' language='en' comment='This performs the expiring/unexpiring of document functions for the web user.'
  restrictions='unrestricted'>
-<noteinfo noteid='15e' unid='DFF9A3D034295BE8852564B400622101' sequence='33'>
+<noteinfo noteid='15e' unid='DFF9A3D034295BE8852564B400622101' sequence='34'>
 <created><datetime dst='true'>19970612T135149,77-04</datetime></created>
-<modified><datetime>20121205T094323,54+00</datetime></modified>
-<revised><datetime>20121205T094323,53+00</datetime></revised>
-<lastaccessed><datetime>20121205T094323,54+00</datetime></lastaccessed>
+<modified><datetime>20121206T082302,31+00</datetime></modified>
+<revised><datetime>20121206T082302,30+00</datetime></revised>
+<lastaccessed><datetime>20121206T082302,31+00</datetime></lastaccessed>
 <addedtofile><datetime>20121126T081603,11+00</datetime></addedtofile></noteinfo>
 <updatedby><name>CN=Matt White/O=Exhilarate</name></updatedby>
 <wassignedby><name>CN=Matt White/O=Exhilarate</name></wassignedby>
-<designchange><datetime>20121205T094323,50+00</datetime></designchange>
+<designchange><datetime>20121206T082300,44+00</datetime></designchange>
 <trigger type='agentlist'/>
 <documentset type='runonce'/><code event='options'><lotusscript>Option Public
 Use "wStringResource"

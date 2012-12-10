@@ -3,11 +3,11 @@
 <page name='$$ViewTemplate for By Author' alias='AuthorViewTemplate' xmlns='http://www.lotus.com/dxl'
  version='8.5' maintenanceversion='3.0' replicaid='80257AC2002D6A1A' publicaccess='false'
  designerversion='6.5' language='en'>
-<noteinfo noteid='1e6' unid='2FB2C960C02AD9BA052566E20041D3F3' sequence='20'>
+<noteinfo noteid='1e6' unid='2FB2C960C02AD9BA052566E20041D3F3' sequence='23'>
 <created><datetime>19981222T065900,99-05</datetime></created>
-<modified><datetime>20121204T160916,35+00</datetime></modified>
-<revised><datetime>20121204T160916,34+00</datetime></revised>
-<lastaccessed><datetime>20121204T160916,35+00</datetime></lastaccessed>
+<modified><datetime>20121206T082302,05+00</datetime></modified>
+<revised><datetime>20121206T082302,04+00</datetime></revised>
+<lastaccessed><datetime>20121206T082302,05+00</datetime></lastaccessed>
 <addedtofile><datetime>20121126T081603,73+00</datetime></addedtofile></noteinfo>
 <updatedby><name>CN=Matt White/O=Exhilarate</name></updatedby>
 <wassignedby><name>CN=Matt White/O=Exhilarate</name></wassignedby>
