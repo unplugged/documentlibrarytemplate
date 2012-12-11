@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?><note class="form" maintenanceversion="3.0" replicaid="80257AC2002D6A1A" version="8.5" xmlns="http://www.lotus.com/dxl">
-<noteinfo noteid="817a" sequence="4" unid="5CC250316704DE7280257AD10034E287">
+<noteinfo noteid="817a" sequence="6" unid="5CC250316704DE7280257AD10034E287">
 <created><datetime>20121211T093738,63+00</datetime></created>
-<modified><datetime>20121211T093738,85+00</datetime></modified>
-<revised><datetime>20121211T093738,84+00</datetime></revised>
-<lastaccessed><datetime>20121211T093738,85+00</datetime></lastaccessed>
+<modified><datetime>20121211T093946,90+00</datetime></modified>
+<revised><datetime>20121211T093946,89+00</datetime></revised>
+<lastaccessed><datetime>20121211T093946,90+00</datetime></lastaccessed>
 <addedtofile><datetime>20121211T093738,64+00</datetime></addedtofile></noteinfo>
 <updatedby><name>CN=Matt White/O=Exhilarate</name></updatedby>
 <wassignedby><name>CN=Matt White/O=Exhilarate</name></wassignedby>
@@ -12,5 +12,11 @@
 
 
 <item name="$FileNames" sign="true"><text>unpFlatView.xsp</text></item>
+
+
+<item name="$DesignerVersion"><text>8.5.3</text></item>
+
+
+
 
 </note>
