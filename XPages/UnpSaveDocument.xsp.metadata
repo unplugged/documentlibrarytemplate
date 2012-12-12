@@ -1,20 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?><note class="form" maintenanceversion="3.0" replicaid="80257AC2002D6A1A" version="8.5" xmlns="http://www.lotus.com/dxl">
-<noteinfo noteid="81a6" sequence="4" unid="2935E64E3E124DCA80257AD10034F37C">
-<created><datetime>20121211T093822,04+00</datetime></created>
-<modified><datetime>20121211T093947,15+00</datetime></modified>
-<revised><datetime>20121211T093947,14+00</datetime></revised>
-<lastaccessed><datetime>20121211T093947,15+00</datetime></lastaccessed>
-<addedtofile><datetime>20121211T093822,05+00</datetime></addedtofile></noteinfo>
+<noteinfo noteid="830e" sequence="2" unid="CEAE7EC71EE758AF80257AD200411DAA">
+<created><datetime>20121212T115114,34+00</datetime></created>
+<modified><datetime>20121212T115114,37+00</datetime></modified>
+<revised><datetime>20121212T115114,36+00</datetime></revised>
+<lastaccessed><datetime>20121212T115114,37+00</datetime></lastaccessed>
+<addedtofile><datetime>20121212T115114,35+00</datetime></addedtofile></noteinfo>
 <updatedby><name>CN=Matt White/O=Exhilarate</name></updatedby>
 <wassignedby><name>CN=Matt White/O=Exhilarate</name></wassignedby>
 <item name="$TITLE"><text>UnpSaveDocument.xsp</text></item>
 <item name="$Flags"><text>gC~4K</text></item>
 
 
-<item name="$FileNames" sign="true"><text>UnpSaveDocument.xsp</text></item>
-<item name="$DesignerVersion"><text>8.5</text></item>
-
-
-
-
-</note>
+<item name="$FileNames" sign="true"><text>UnpSaveDocument.xsp</text></item></note>
