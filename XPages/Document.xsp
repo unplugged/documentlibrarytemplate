@@ -7,35 +7,44 @@
 				xp:key="facet_1" newresponsexpagename="ResponseEdit.xsp">
 				<xp:this.facets>
 					<xp:panel xp:key="facet_1">
-						<xp:label value="Topic" id="subjectlabel" for="subject">
-						</xp:label>
-						<xp:text id="subject" value="#{document1.Subject}"></xp:text>
-						<xp:label value="Category" id="categorieslabel" for="categories">
-						</xp:label>
-						<xp:text id="categories" value="#{document1.Categories}">
-						</xp:text>
-						<xp:label value="Created By" id="fromlabel" for="from">
-						</xp:label>
-						<xp:text id="from">
-							<xp:this.value><![CDATA[#{javascript:@Name("[CN]", document1.getItemValueString("From"))}]]></xp:this.value>
-						</xp:text>
-						<xp:label value="Created" id="createdlabel" for="created">
-						</xp:label>
-						<xp:text id="created"
-							value="#{javascript:document1.getDocument().getCreated()}">
-						</xp:text>
-						<xp:label value="Body" id="bodylabel" for="body">
-						</xp:label>
-						<xp:text id="body" value="#{document1.Body}" escape="false">
-						</xp:text>
-						<div class="pullleft">
-							<xc:unpFlatView insetData="false" numberofrows="999"
-								refreshmethod="none"
-								categoryfilter="#{javascript:document1.getDocument().getUniversalID()}"
-								detailColumn="Date" summaryColumn="Topic" title="Responses"
-								viewName="(UnpResponses)" xpageDoc="Response.xsp">
-							</xc:unpFlatView>
-						</div>
+						<ul class="fieldlist">
+							<li>
+								<xp:label value="Topic" id="subjectlabel" for="subject">
+								</xp:label>
+								<xp:text id="subject" value="#{document1.Subject}"></xp:text>
+							</li>
+							<li>
+								<xp:label value="Category" id="categorieslabel" for="categories">
+								</xp:label>
+								<xp:text id="categories" value="#{document1.Categories}">
+								</xp:text>
+							</li>
+							<li>
+								<xp:label value="Created By" id="fromlabel" for="from">
+								</xp:label>
+								<xp:text id="from">
+									<xp:this.value><![CDATA[#{javascript:@Name("[CN]", document1.getItemValueString("From"))}]]></xp:this.value>
+								</xp:text>
+							</li>
+							<li>
+								<xp:label value="Created" id="createdlabel" for="created">
+								</xp:label>
+								<xp:text id="created"
+									value="#{javascript:document1.getDocument().getCreated()}">
+								</xp:text>
+							</li>
+							<li>
+								<xp:text id="body" value="#{document1.Body}" escape="false"
+									styleClass="body_richtext">
+								</xp:text>
+							</li>
+						</ul>
+						<xc:unpFlatView insetData="false" numberofrows="999"
+							refreshmethod="none"
+							categoryfilter="#{javascript:document1.getDocument().getUniversalID()}"
+							detailColumn="Date" summaryColumn="Topic" title="Responses"
+							viewName="(UnpResponses)" xpageDoc="Response.xsp">
+						</xc:unpFlatView>
 					</xp:panel>
 				</xp:this.facets>
 			</xc:unpFormViewer>

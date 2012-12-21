@@ -11,11 +11,11 @@
  boldunreadrows='false' evaluateactions='false' allownewdocuments='false'
  allowcustomizations='true' hidemarginborder='true' marginwidth='0px 0px 1px'
  marginbgcolor='white' uniquekeys='false'>
-<noteinfo noteid='171e' unid='79350E00E2C0B81C80257AC30041A995' sequence='11'>
+<noteinfo noteid='171e' unid='79350E00E2C0B81C80257AC30041A995' sequence='12'>
 <created><datetime>20121127T115712,53+00</datetime></created>
-<modified><datetime>20121206T082302,23+00</datetime></modified>
-<revised><datetime>20121206T082302,22+00</datetime></revised>
-<lastaccessed><datetime>20121206T082302,23+00</datetime></lastaccessed>
+<modified><datetime>20121221T122020,40+00</datetime></modified>
+<revised><datetime>20121221T122020,39+00</datetime></revised>
+<lastaccessed><datetime>20121221T122020,40+00</datetime></lastaccessed>
 <addedtofile><datetime>20121127T115712,57+00</datetime></addedtofile></noteinfo>
 <updatedby><name>CN=Matt White/O=Exhilarate</name></updatedby>
 <wassignedby><name>CN=Matt White/O=Exhilarate</name></wassignedby><code event='selection'><formula
@@ -71,14 +71,6 @@ ABFrom := @Name([Abbreviate]; From);
 
 @If(
 @Contains(form; "Anonymous"); AnonTxt;  ABFrom)</formula></code></column>
-<column sort='descending' hidedetailrows='false' listseparator='comma' itemname='$14'
- width='9' resizable='true' separatemultiplevalues='false' sortnoaccent='true'
- sortnocase='true' showaslinks='false' formatdatatype='datetime'><font size='9pt'
- color='gray'/><columnheader title='Date'><font size='9pt' name='multilingual'/></columnheader><datetimeformat
- legacy='true' show='date' date='yearmonthday' time='hourminute' zone='never'/><numberformat
- legacy='true' format='general' varying='true' digits='1' punctuated='false'
- parens='false' percent='false' bytes='false'/><code event='value'><formula
->@Created</formula></code></column>
 <column hidedetailrows='false' listseparator='comma' itemname='$35' width='34.7500'
  resizable='true' separatemultiplevalues='false' sortnoaccent='true' sortnocase='true'
  showaslinks='true'><font size='9pt' color='gray'/><columnheader title='Topic'><font
@@ -97,5 +89,13 @@ ABFrom := @Name([Abbreviate]; From);
 
 @If(useSubject != "";
         " (RE: "+useSubject + ")";
-    "")</formula></code></column></view>
+    "")</formula></code></column>
+<column sort='descending' hidedetailrows='false' listseparator='comma' itemname='$14'
+ width='9' resizable='true' separatemultiplevalues='false' sortnoaccent='true'
+ sortnocase='true' showaslinks='false' formatdatatype='datetime'><font size='9pt'
+ color='gray'/><columnheader title='Date'><font size='9pt' name='multilingual'/></columnheader><datetimeformat
+ legacy='true' show='date' date='yearmonthday' time='hourminute' zone='never'/><numberformat
+ legacy='true' format='general' varying='true' digits='1' punctuated='false'
+ parens='false' percent='false' bytes='false'/><code event='value'><formula
+>@Created</formula></code></column></view>
 
