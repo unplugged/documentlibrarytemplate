@@ -1,14 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?><note class="form" maintenanceversion="3.0" replicaid="80257AC2002D6A1A" version="8.5" xmlns="http://www.lotus.com/dxl">
-<noteinfo noteid="8b6a" sequence="2" unid="9945A3C1B1F0362980257AE80058FF53">
-<created><datetime>20130103T161205,31+00</datetime></created>
-<modified><datetime>20130103T161205,34+00</datetime></modified>
-<revised><datetime>20130103T161205,33+00</datetime></revised>
-<lastaccessed><datetime>20130103T161205,34+00</datetime></lastaccessed>
-<addedtofile><datetime>20130103T161205,32+00</datetime></addedtofile></noteinfo>
+<noteinfo noteid="8e1a" sequence="4" unid="7999CA1D8799999780257AFB002C513B">
+<created><datetime>20130122T080403,79+00</datetime></created>
+<modified><datetime>20130122T080405,87+00</datetime></modified>
+<revised><datetime>20130122T080405,86+00</datetime></revised>
+<lastaccessed><datetime>20130122T080405,87+00</datetime></lastaccessed>
+<addedtofile><datetime>20130122T080403,81+00</datetime></addedtofile></noteinfo>
 <updatedby><name>CN=Matt White/O=Exhilarate</name></updatedby>
 <wassignedby><name>CN=Matt White/O=Exhilarate</name></wassignedby>
 <item name="$TITLE"><text>UnpFlatViewList.xsp</text></item>
 <item name="$Flags"><text>gC~4K</text></item>
 
 
-<item name="$FileNames" sign="true"><text>UnpFlatViewList.xsp</text></item></note>
+<item name="$FileNames" sign="true"><text>UnpFlatViewList.xsp</text></item>
+<item name="$DesignerVersion"><text>8.5.3</text></item>
+
+
+
+
+</note>
