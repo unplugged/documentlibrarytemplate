@@ -10,7 +10,8 @@ the specific language governing permissions and limitations under the License
  -->
 
 <xp:view xmlns:xp="http://www.ibm.com/xsp/core"
-	xmlns:xc="http://www.ibm.com/xsp/custom">
+	xmlns:xc="http://www.ibm.com/xsp/custom"
+	xmlns:unp="http://unplugged.teamstudio.com">
 
 	<xp:this.resources>
 		<xp:styleSheet href="/custom.css"></xp:styleSheet>
@@ -19,38 +20,38 @@ the specific language governing permissions and limitations under the License
 		<xp:script src="/unp/jquery.blockUI.min.js" clientSide="true"></xp:script>
 		<xp:script src="/unp/iScroll.min.js" clientSide="true"></xp:script>
 	</xp:this.resources>
-	<xc:unpHeader search="database" viewsButton="true"
+	<unp:unpHeader search="database" viewsButton="true"
 		title="Document Library" searchPage="UnpSearch.xsp">
-	</xc:unpHeader>
-	<xc:unpNavigator>
-		<xc:this.menuItem>
-			<xc:menuItem label="All Documents" page="/UnpMain.xsp"
+	</unp:unpHeader>
+	<unp:unpNavigator>
+		<unp:this.menuItem>
+			<unp:menuItem label="All Documents" page="/UnpMain.xsp"
 				ajaxtargetid="content" ajaxloadid="contentwrapper">
-			</xc:menuItem>
-			<xc:menuItem label="By Author" page="/UnpAuthor.xsp"
+			</unp:menuItem>
+			<unp:menuItem label="By Author" page="/UnpAuthor.xsp"
 				ajaxtargetid="content" ajaxloadid="contentwrapper">
-			</xc:menuItem>
-			<xc:menuItem label="By Alternate Name"
+			</unp:menuItem>
+			<unp:menuItem label="By Alternate Name"
 				page="/UnpAlternateName.xsp" ajaxtargetid="content"
 				ajaxloadid="contentwrapper">
-			</xc:menuItem>
-			<xc:menuItem label="By Category" page="/UnpCategory.xsp"
+			</unp:menuItem>
+			<unp:menuItem label="By Category" page="/UnpCategory.xsp"
 				ajaxtargetid="content" ajaxloadid="contentwrapper">
-			</xc:menuItem>
-		</xc:this.menuItem>
-	</xc:unpNavigator>
+			</unp:menuItem>
+		</unp:this.menuItem>
+	</unp:unpNavigator>
 	<div id="content">
-		<xc:unpScrollableArea>
+		<unp:unpScrollableArea>
 			<xp:this.facets>
-				<xc:unpFlatView insetData="true" detailColumn="Date"
+				<unp:unpFlatView insetData="true" detailColumn="Date"
 					summaryColumn="Topic" title="All Documents"
 					viewName="(UnpAllDocuments)" xpageDoc="Document.xsp"
 					xp:key="facet_1" numberofrows="20" refreshmethod="pull">
-				</xc:unpFlatView>
+				</unp:unpFlatView>
 			</xp:this.facets>
-		</xc:unpScrollableArea>
+		</unp:unpScrollableArea>
 	</div>
-	<xc:unpFooter newDocTarget="DocumentEdit.xsp" newDocLoadType="ajax"
+	<unp:unpFooter newDocTarget="DocumentEdit.xsp" newDocLoadType="ajax"
 		synctype="currentdb">
-	</xc:unpFooter>
+	</unp:unpFooter>
 </xp:view>
