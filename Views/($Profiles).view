@@ -1,48 +1,48 @@
 <?xml version='1.0' encoding='utf-8'?>
-<!DOCTYPE view SYSTEM 'xmlschemas/domino_8_5_3.dtd'>
-<view name='($Profiles)' alias='($Profiles)' xmlns='http://www.lotus.com/dxl'
- version='8.5' maintenanceversion='3.0' replicaid='80257AC2002D6A1A' showinmenu='false'
- publicaccess='false' designerversion='8.5.3' language='en' unreadmarks='standard'
- onopengoto='lastopened' onrefresh='displayindicator' headers='simple' opencollapsed='false'
- showresponsehierarchy='false' showmargin='true' shrinkrows='false' extendlastcolumn='false'
- showhierarchies='false' unreadcolor='maroon' rowlinecount='1' headerlinecount='1'
- rowspacing='1' bgcolor='white' altrowcolor='#efefef' totalscolor='blue' headerbgcolor='#d4c9ba'
- boldunreadrows='false' evaluateactions='false' allownewdocuments='false'
- allowcustomizations='true' hidemarginborder='true' marginwidth='0px 0px 1px'
- marginbgcolor='white' uniquekeys='false' indexrefresh='automatic' initialbuildrestricted='false'
- noemptycategories='false'>
-<noteinfo noteid='14a' unid='4B2BCA5148AF67E8852564B400610779' sequence='22'>
+<note class='view' xmlns='http://www.lotus.com/dxl' version='9.0' replicaid='80257AC2002D6A1A'>
+<noteinfo noteid='48a' unid='4B2BCA5148AF67E8852564B400610779' sequence='24'>
 <created><datetime dst='true'>19970612T133949,05-04</datetime></created>
-<modified><datetime>20130219T091918,10+00</datetime></modified>
-<revised><datetime>20130219T091918,09+00</datetime></revised>
-<lastaccessed><datetime>20130219T091918,10+00</datetime></lastaccessed>
-<addedtofile><datetime>20121126T081603,07+00</datetime></addedtofile></noteinfo>
+<modified><datetime dst='true'>20130408T134735,10+01</datetime></modified>
+<revised><datetime dst='true'>20130408T134735,09+01</datetime></revised>
+<lastaccessed><datetime dst='true'>20130408T135934,19+01</datetime></lastaccessed>
+<addedtofile><datetime dst='true'>20130408T134324,84+01</datetime></addedtofile></noteinfo>
 <updatedby><name>CN=Matt White/O=Exhilarate</name></updatedby>
-<wassignedby><name>CN=Matt White/O=Exhilarate</name></wassignedby><code event='selection'><formula
->SELECT @Contains(Form; "Profile")</formula></code>
-<actionbar useappletinbrowser='true' bgcolor='#bba58b' bordercolor='black'>
-<actionbuttonstyle heighttype='background' margintype='fixed' margin='6' bgcolor='none'
- displayborder='never' widthtype='background' textalign='center' internalmargin='3px'><imageref
- name='ActionButton'/></actionbuttonstyle><font size='9pt'/>
-<action title='_Forward' showinmenu='false' showinbar='false' hide='previewedit'
- systemcommand='forward'/>
-<action title='Categori_ze' showinmenu='false' showinbar='false' hide='previewedit'
- systemcommand='categorize'/>
-<action title='Edit Message' showinmenu='false' showinbar='false' hide='previewedit'
- systemcommand='edit'/>
-<action title='Send' showinmenu='false' showinbar='false' hide='previewedit'
- systemcommand='send'/>
-<action title='_Move to Folder...' showinmenu='false' showinbar='false' systemcommand='movetofolder'/>
-<action title='_Remove from Folder...' showinmenu='false' showinbar='false'
- systemcommand='removefromfolder'/></actionbar>
-<column sort='ascending' hidedetailrows='false' itemname='$70' width='30'
- resizable='true' separatemultiplevalues='false' sortnoaccent='true' sortnocase='true'
- showaslinks='false'><font size='9pt' color='gray'/><columnheader title='Type'><font
- size='8pt' style='bold'/></columnheader><datetimeformat legacy='true' show='date'
- date='yearmonthday' time='hourminutesecond' zone='never'/><code event='value'><formula
->Form + PersonName</formula></code></column>
-<column sort='ascending' hidedetailrows='false' itemname='PersonName' width='20'
- resizable='true' separatemultiplevalues='false' sortnoaccent='true' sortnocase='true'
- showaslinks='false'><font size='9pt' color='navy'/><columnheader title='Person Name'><font
- size='8pt' style='bold'/></columnheader></column></view>
+<wassignedby><name>CN=Matt White/O=Exhilarate</name></wassignedby>
+<item name='$LANGUAGE' sign='true'><text>en</text></item>
+<item name='$FormulaClass' sign='true'><text>1</text></item>
+<item name='$V5ACTIONS' sign='true'>
+<rawitemdata type='1'>
+vRzTAAAAAQABAAAA1R0AAAAAAAABAAAJAAAGAHn/bAABALuliwABAAAAAAABAAAAAAAFAP///wAC
+AB8AAAABAQAAAwADAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAPb/LgAAAAAAAwATAAwAAAAAAAAAAAAAAAAAAAAAAAAAAABB
+Y3Rpb25CdXR0b26+/yIAAAAFAAAAnAAAAAgAAAAAAAAAX0ZvcndhcmQBAAQKvv8mAAAABQAAAJwA
+AAALAAAAAAAAAENhdGVnb3JpX3plAAIATny+/yYAAAAFAAAAnAAAAAwAAAAAAAAARWRpdCBNZXNz
+YWdlAwACCr7/HgAAAAUAAACcAAAABAAAAAAAAABTZW5kBAADCr7/LAAAAAUAAACcAQAAEgAAAAAA
+AABfTW92ZSB0byBGb2xkZXIuLi4FAD18vv8wAAAABQAAAJwBAAAWAAAAAAAAAF9SZW1vdmUgZnJv
+bSBGb2xkZXIuLi4GAD58
+</rawitemdata></item>
+<item name='$TITLE' sign='true'><text>($Profiles)|($Profiles)</text></item>
+<item name='$Index' sign='true'><text>/O</text></item>
+<item name='$Formula' summary='true' sign='true'><formula compiled='true'>
+dgACACQAAwAkNzAABQAEAEZvcm0FAAoAUGVyc29uTmFtZSICAwAFACQAIAADAAMACgAJACQ3MFBl
+cnNvbk5hbWUkQ29uZmxpY3QEAAQAAAAcAAUABABGb3JtAQAHAFByb2ZpbGUARwIDAAcADAAGAAlM
+MVM1Uw==
+</formula></item>
+<item name='$Collation' summary='true'>
+<rawitemdata type='2'>
+IQACAABEAGYAAAADAABmAAMACgAkNzBQZXJzb25OYW1l
+</rawitemdata></item>
+<item name='$VIEWFORMAT' summary='true' sign='true'>
+<rawitemdata type='5'>
+AQACAAAAjgQAAFZDAQADAAQAMgAAAPAAAQAOCQAAAAAAAAAAAAACAAAAVkMBAAoACwAAAAAAoAAB
+AAoJAAAAAAAAAAAAAgIAAAAkNzBUeXBlMgACACQAAwAkNzAABQAEAEZvcm0FAAoAUGVyc29uTmFt
+ZSICAwAHAAwABQAJMVMyUwBQZXJzb25OYW1lUGVyc29uIE5hbWUmAAEAAAABAQAJAQAICgEBBAoA
+AD8ArSsBAAEAAQAAAAAAAAAAAFdDAQEACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP//AAAAAAAA
+AAAAAAAAAABXQwEBAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD//wAAAAAAAAAAAAAAAAAAQgBA
+AAAAAQD///8AAQDv7+8AAQAAAAAAAAAAAAAAAQABAP///wABANTJugAAAAEAgAAAAAEAAAD/AAEA
+AAAAAAAACAAAAAAAAQA=
+</rawitemdata></item>
+<item name='$Comment' sign='true'><text/></item>
+<item name='$DesignerVersion'><text>8.5.3</text></item>
+<item name='$Flags'><text>Y</text></item></note>
 
