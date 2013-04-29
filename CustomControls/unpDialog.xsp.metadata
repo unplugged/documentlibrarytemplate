@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?><note xmlns="http://www.lotus.com/dxl" class="form" replicaid="80257AC2002D6A1A" version="9.0">
-<noteinfo noteid="353e" sequence="4" unid="3ED1F13993C6BE8680257B5C002AC81E">
+<noteinfo noteid="353e" sequence="8" unid="3ED1F13993C6BE8680257B5C002AC81E">
 <created><datetime dst="true">20130429T084717,42+01</datetime></created>
-<modified><datetime dst="true">20130429T084717,94+01</datetime></modified>
-<revised><datetime dst="true">20130429T084717,93+01</datetime></revised>
-<lastaccessed><datetime dst="true">20130429T084717,94+01</datetime></lastaccessed>
+<modified><datetime dst="true">20130429T095006,31+01</datetime></modified>
+<revised><datetime dst="true">20130429T095006,30+01</datetime></revised>
+<lastaccessed><datetime dst="true">20130429T095006,31+01</datetime></lastaccessed>
 <addedtofile><datetime dst="true">20130429T084717,43+01</datetime></addedtofile></noteinfo>
 <updatedby><name>CN=Matt White/O=Exhilarate</name></updatedby>
 <wassignedby><name>CN=Matt White/O=Exhilarate</name></wassignedby>
@@ -12,5 +12,11 @@
 
 
 <item name="$FileNames" sign="true"><text>unpDialog.xsp</text></item>
+
+
+<item name="$DesignerVersion"><text>8.5.3</text></item>
+
+
+
 
 </note>
