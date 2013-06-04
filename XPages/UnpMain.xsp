@@ -22,7 +22,7 @@ the specific language governing permissions and limitations under the License
 	</xp:this.resources>
 	<unp:unpHeader search="database" viewsButton="true"
 		title="Doc Library" searchPage="UnpSearch.xsp"
-		appVersion="v1.4.1 (May 2013)">
+		appVersion="v1.5.0 (May 2013)">
 	</unp:unpHeader>
 	<unp:unpNavigator>
 		<unp:this.menuItem>
