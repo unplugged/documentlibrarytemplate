@@ -1,67 +1,68 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-Copyright 2013 Teamstudio Inc 
-Licensed under the Apache License, Version 2.0 (the "License"); 
-you may not use this file except in compliance with the License. You may obtain a copy of the License at
-http://www.apache.org/licenses/LICENSE-2.0 
-Unless required by applicable law or agreed to in writing, software distributed under the License is distributed 
-on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for 
-the specific language governing permissions and limitations under the License
- -->
+	<!--
+		Copyright 2013 Teamstudio Inc Licensed under the Apache License,
+		Version 2.0 (the "License"); you may not use this file except in
+		compliance with the License. You may obtain a copy of the License at
+		http://www.apache.org/licenses/LICENSE-2.0 Unless required by
+		applicable law or agreed to in writing, software distributed under the
+		License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+		CONDITIONS OF ANY KIND, either express or implied. See the License for
+		the specific language governing permissions and limitations under the
+		License
+	-->
 
-<xp:view xmlns:xp="http://www.ibm.com/xsp/core"
-	xmlns:xc="http://www.ibm.com/xsp/custom"
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom"
 	xmlns:unp="http://unplugged.teamstudio.com">
-	<unp:unpScrollableArea>
+	<xc:layout>
 		<xp:this.facets>
-			<unp:unpFormEditor showbuttons="yes" position="menu-aligned"
-				closexpagename="UnpMain.xsp" viewxpagename="Document.xsp"
-				formname="Document" title="Document" xp:key="facet_1">
-				<xp:this.facets>
-					<xp:panel xp:key="facet_1">
-						<ul class="fieldlist">
-							<li>
-								<xp:label value="Topic"
-									id="subjectlabel" for="subject">
-								</xp:label>
-								<xp:inputText id="subject"
-									value="#{document1.Subject}"
-									styleClass="required xspInputFieldEditBox deletable">
-								</xp:inputText>
-							</li>
-							<li>
-								<xp:label value="Category"
-									id="categorieslabel" for="categories">
-								</xp:label>
-								<xp:listBox id="categories"
-									value="#{document1.Categories}" multiple="false"
-									styleClass="xspListBox">
-									<xp:selectItems>
-										<xp:this.value><![CDATA[#{javascript:@Unique(@Trim(@DbColumn(@DbName(), "(UnpByCategory)", 1)))}]]></xp:this.value>
-									</xp:selectItems>
-								</xp:listBox>
-							</li>
-							<li>
-								<xp:label value="Details"
-									id="detailslabel" for="description" styleClass="widelabel">
-								</xp:label>
-								<xp:inputTextarea id="body"
-									styleClass="richtextfield" value="#{document1.Body}">
-								</xp:inputTextarea>
-							</li>
-						</ul>
-						<xp:inputText id="from"
-							value="#{document1.From}" style="display: none;"
-							defaultValue="#{javascript:@UserName()}">
-						</xp:inputText>
-						<xp:inputText id="altfrom"
-							value="#{document1.AltFrom}" style="display: none;"
-							defaultValue="#{javascript:@UserName()}">
-						</xp:inputText>
-					</xp:panel>
-				</xp:this.facets>
-			</unp:unpFormEditor>
-		</xp:this.facets>
-	</unp:unpScrollableArea>
+			<xp:panel xp:key="facet_1">
 
+				<unp:unpScrollableArea>
+					<xp:this.facets>
+						<unp:unpFormEditor showbuttons="yes" position="menu-aligned"
+							closexpagename="UnpMain.xsp" viewxpagename="Document.xsp"
+							formname="Document" title="Document" xp:key="facet_1">
+							<xp:this.facets>
+								<xp:panel xp:key="facet_1">
+									<ul class="fieldlist">
+										<li>
+											<xp:label value="Topic" id="subjectlabel" for="subject">
+											</xp:label>
+											<xp:inputText id="subject" value="#{document1.Subject}"
+												styleClass="required xspInputFieldEditBox deletable">
+											</xp:inputText>
+										</li>
+										<li>
+											<xp:label value="Category" id="categorieslabel" for="categories">
+											</xp:label>
+											<xp:listBox id="categories" value="#{document1.Categories}"
+												multiple="false" styleClass="xspListBox">
+												<xp:selectItems>
+													<xp:this.value><![CDATA[#{javascript:@Unique(@Trim(@DbColumn(@DbName(), "(UnpByCategory)", 1)))}]]></xp:this.value>
+												</xp:selectItems>
+											</xp:listBox>
+										</li>
+										<li>
+											<xp:label value="Details" id="detailslabel" for="description"
+												styleClass="widelabel">
+											</xp:label>
+											<xp:inputTextarea id="body" styleClass="richtextfield"
+												value="#{document1.Body}">
+											</xp:inputTextarea>
+										</li>
+									</ul>
+									<xp:inputText id="from" value="#{document1.From}"
+										style="display: none;" defaultValue="#{javascript:@UserName()}">
+									</xp:inputText>
+									<xp:inputText id="altfrom" value="#{document1.AltFrom}"
+										style="display: none;" defaultValue="#{javascript:@UserName()}">
+									</xp:inputText>
+								</xp:panel>
+							</xp:this.facets>
+						</unp:unpFormEditor>
+					</xp:this.facets>
+				</unp:unpScrollableArea>
+			</xp:panel>
+		</xp:this.facets>
+	</xc:layout>
 </xp:view>

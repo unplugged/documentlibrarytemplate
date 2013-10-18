@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?><note xmlns="http://www.lotus.com/dxl" class="form" replicaid="80257AC2002D6A1A" version="9.0">
-<noteinfo noteid="38da" sequence="1" unid="7B6C5055004DF2D880257BAC00535E16">
-<created><datetime dst="true">20130718T161035,74+01</datetime></created>
-<modified><datetime dst="true">20130718T161036,79+01</datetime></modified>
-<revised><datetime dst="true">20130718T161036,78+01</datetime></revised>
-<lastaccessed><datetime dst="true">20130718T161036,79+01</datetime></lastaccessed>
-<addedtofile><datetime dst="true">20130718T161036,79+01</datetime></addedtofile></noteinfo>
+<noteinfo noteid="3c96" sequence="1" unid="F63664C06DD0F18680257BE100248E74">
+<created><datetime dst="true">20130909T073917,64+01</datetime></created>
+<modified><datetime dst="true">20130909T073918,95+01</datetime></modified>
+<revised><datetime dst="true">20130909T073918,94+01</datetime></revised>
+<lastaccessed><datetime dst="true">20130909T073918,95+01</datetime></lastaccessed>
+<addedtofile><datetime dst="true">20130909T073918,95+01</datetime></addedtofile></noteinfo>
 <updatedby><name>CN=Matt White/O=Exhilarate</name></updatedby>
 <wassignedby><name>CN=Matt White/O=Exhilarate</name></wassignedby>
-<item name="$Flags"><text>D34CiQ</text></item>
 <item name="$FlagsExt"><text>D</text></item>
 <item name="$ImagesWide" sign="true"><number>1</number></item>
 <item name="$ImagesHigh" sign="true"><number>1</number></item>
 <item name="$ImagesColorize" sign="true"><number>0</number></item>
+<item name="$TITLE" sign="true"><text>unp/glyphicons_211_right_arrow@2x.png</text></item>
+<item name="$DesignerVersion"><text>8.5.3</text></item>
 
 
 <item name="$MimeType" sign="true"><text>image/png</text></item>
-<item name="$FileModDT" sign="true"><datetime dst="true">20121006T015426,00+01</datetime></item>
-<item name="$ImageNames" sign="true"><text>glyphicons_211_right_arrow@2x.png</text></item>
-<item name="$TITLE" sign="true"><textlist><text>unp/glyphicons_211_right_arrow@2x.png</text></textlist></item>
-<item name="$DesignerVersion"><text>8.5.3</text></item></note>
+<item name="$FileModDT" sign="true"><datetime dst="true">20130905T090556,00+01</datetime></item>
+<item name="$Flags"><text>D34CiQ</text></item>
+<item name="$ImageNames" sign="true"><text>glyphicons_211_right_arrow@2x.png</text></item></note>

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?><note xmlns="http://www.lotus.com/dxl" class="form" replicaid="80257AC2002D6A1A" version="9.0">
-<noteinfo noteid="3892" sequence="1" unid="8696E09E6A5513BA80257BAC00535E04">
-<created><datetime dst="true">20130718T161035,56+01</datetime></created>
-<modified><datetime dst="true">20130718T161035,96+01</datetime></modified>
-<revised><datetime dst="true">20130718T161035,95+01</datetime></revised>
-<lastaccessed><datetime dst="true">20130718T161035,96+01</datetime></lastaccessed>
-<addedtofile><datetime dst="true">20130718T161035,96+01</datetime></addedtofile></noteinfo>
+<noteinfo noteid="3c4e" sequence="1" unid="934B45F74A1178CC80257BE100248E62">
+<created><datetime dst="true">20130909T073917,46+01</datetime></created>
+<modified><datetime dst="true">20130909T073917,95+01</datetime></modified>
+<revised><datetime dst="true">20130909T073917,94+01</datetime></revised>
+<lastaccessed><datetime dst="true">20130909T073917,95+01</datetime></lastaccessed>
+<addedtofile><datetime dst="true">20130909T073917,95+01</datetime></addedtofile></noteinfo>
 <updatedby><name>CN=Matt White/O=Exhilarate</name></updatedby>
 <wassignedby><name>CN=Matt White/O=Exhilarate</name></wassignedby>
 <item name="$TITLE" sign="true"><text>icons/magnifying_glass.png</text></item>
