@@ -1,20 +1,18 @@
-<?xml version="1.0" encoding="UTF-8"?><note xmlns="http://www.lotus.com/dxl" class="form" replicaid="80257AC2002D6A1A" version="9.0">
-<noteinfo noteid="3efe" sequence="1" unid="A63022210CAC878C80257C0800423515">
-<created><datetime dst="true">20131018T130309,65+01</datetime></created>
-<modified><datetime dst="true">20131018T130310,67+01</datetime></modified>
-<revised><datetime dst="true">20131018T130310,66+01</datetime></revised>
-<lastaccessed><datetime dst="true">20131018T130310,67+01</datetime></lastaccessed>
-<addedtofile><datetime dst="true">20131018T130310,67+01</datetime></addedtofile></noteinfo>
+<?xml version="1.0" encoding="UTF-8"?><note xmlns="http://www.lotus.com/dxl" class="form" maintenanceversion="1.0" replicaid="80257AC2002D6A1A" version="9.0">
+<noteinfo noteid="476a" sequence="1" unid="19E4AF7F538BCC9580257C310048BC06">
+<created><datetime>20131128T131427,26+00</datetime></created>
+<modified><datetime>20131128T131429,95+00</datetime></modified>
+<revised><datetime>20131128T131429,94+00</datetime></revised>
+<lastaccessed><datetime>20131128T131429,95+00</datetime></lastaccessed>
+<addedtofile><datetime>20131128T131429,95+00</datetime></addedtofile></noteinfo>
 <updatedby><name>CN=Matt White/O=Exhilarate</name></updatedby>
 <wassignedby><name>CN=Matt White/O=Exhilarate</name></wassignedby>
 <item name="$TITLE"><text>unplugged.less</text></item>
 <item name="$FlagsExt"><text>D</text></item>
-<item name="$FileModDT" sign="true"><datetime dst="true">20130708T150222,00+01</datetime></item>
+<item name="$EditFilePath"><text>C:\Users\whitemx\AppData\Local\Temp\notes95E17C\~unplugged6.less</text></item>
+<item name="$Flags"><text>345CgQ</text></item>
+<item name="$FileModDT"><datetime>20131126T093924,23+00</datetime></item>
 <item name="$DesignerVersion"><text>8.5.3</text></item>
 
 
-
-
-<item name="$FileNames" sign="true"><text>unplugged.less</text></item>
-<item name="$EditFilePath"><text>C:\Users\whitemx\AppData\Local\Temp\notes95E17C\~unplugged5.less</text></item>
-<item name="$Flags"><text>345CgQ</text></item></note>
+<item name="$FileNames" sign="true"><text>unplugged.less</text></item></note>

@@ -16,11 +16,14 @@
 	<xc:layout>
 		<xp:this.facets>
 			<xp:panel xp:key="facet_1">
+	<xc:layout>
+		<xp:this.facets>
+			<xp:panel xp:key="facet_1">
 
 				<unp:unpScrollableArea>
 					<xp:this.facets>
 						<unp:unpFormViewer showbuttons="true" position="menu-aligned"
-							closexpagename="UnpMain.xsp" editxpagename="DocumentEdit.xsp"
+							editxpagename="DocumentEdit.xsp"
 							formname="Document" title="Document" xp:key="facet_1"
 							newresponsexpagename="ResponseEdit.xsp">
 							<xp:this.facets>
@@ -71,5 +74,8 @@
 				</unp:unpScrollableArea>
 			</xp:panel>
 		</xp:this.facets>
+	</xc:layout>
+	</xp:panel>
+	</xp:this.facets>
 	</xc:layout>
 </xp:view>

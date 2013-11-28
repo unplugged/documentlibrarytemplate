@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?><note xmlns="http://www.lotus.com/dxl" class="form" maintenanceversion="1.0" replicaid="80257AC2002D6A1A" version="9.0">
+<noteinfo noteid="46b2" sequence="1" unid="1F5120F5B5A2E27080257C310048B3A9">
+<created><datetime>20131128T131405,85+00</datetime></created>
+<modified><datetime>20131128T131406,12+00</datetime></modified>
+<revised><datetime>20131128T131406,11+00</datetime></revised>
+<lastaccessed><datetime>20131128T131406,12+00</datetime></lastaccessed>
+<addedtofile><datetime>20131128T131406,12+00</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Matt White/O=Exhilarate</name></updatedby>
+<wassignedby><name>CN=Matt White/O=Exhilarate</name></wassignedby>
+<item name="$TITLE"><text>unplugged-ios7.css</text></item>
+<item name="$Flags"><text>34C=Q</text></item>
+<item name="$FileModDT"><datetime>20131126T094527,18+00</datetime></item>
+<item name="$DesignerVersion"><text>8.5.3</text></item>
+
+
+
+
+
+<item name="$FileNames" sign="true"><text>unplugged-ios7.css</text></item></note>

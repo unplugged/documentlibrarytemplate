@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="UTF-8"?><note xmlns="http://www.lotus.com/dxl" class="form" replicaid="80257AC2002D6A1A" version="9.0">
-<noteinfo noteid="3c8e" sequence="1" unid="B5FC209C3BDB471280257BE100248E72">
-<created><datetime dst="true">20130909T073917,62+01</datetime></created>
-<modified><datetime dst="true">20130909T073918,82+01</datetime></modified>
-<revised><datetime dst="true">20130909T073918,81+01</datetime></revised>
-<lastaccessed><datetime dst="true">20130909T073918,82+01</datetime></lastaccessed>
-<addedtofile><datetime dst="true">20130909T073918,82+01</datetime></addedtofile></noteinfo>
+<?xml version="1.0" encoding="UTF-8"?><note xmlns="http://www.lotus.com/dxl" class="form" maintenanceversion="1.0" replicaid="80257AC2002D6A1A" version="9.0">
+<noteinfo noteid="47da" sequence="1" unid="937F2725B6802F5780257C310048CC91">
+<created><datetime>20131128T131509,61+00</datetime></created>
+<modified><datetime>20131128T131511,11+00</datetime></modified>
+<revised><datetime>20131128T131511,10+00</datetime></revised>
+<lastaccessed><datetime>20131128T131511,11+00</datetime></lastaccessed>
+<addedtofile><datetime>20131128T131511,11+00</datetime></addedtofile></noteinfo>
 <updatedby><name>CN=Matt White/O=Exhilarate</name></updatedby>
 <wassignedby><name>CN=Matt White/O=Exhilarate</name></wassignedby>
 <item name="$FlagsExt"><text>D</text></item>
@@ -12,10 +12,9 @@
 <item name="$ImagesHigh" sign="true"><number>1</number></item>
 <item name="$ImagesColorize" sign="true"><number>0</number></item>
 <item name="$TITLE" sign="true"><text>unp/glyphicons_210_left_arrow@2x.png</text></item>
-<item name="$DesignerVersion"><text>8.5.3</text></item>
-
-
-<item name="$MimeType" sign="true"><text>image/png</text></item>
 <item name="$FileModDT" sign="true"><datetime dst="true">20130905T090232,00+01</datetime></item>
 <item name="$Flags"><text>D34CiQ</text></item>
-<item name="$ImageNames" sign="true"><text>glyphicons_210_left_arrow@2x.png</text></item></note>
+<item name="$ImageNames" sign="true"><text>glyphicons_210_left_arrow@2x.png</text></item>
+<item name="$DesignerVersion"><text>8.5.3</text></item>
+
+</note>
