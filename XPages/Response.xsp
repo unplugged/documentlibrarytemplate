@@ -24,7 +24,7 @@ the specific language governing permissions and limitations under the License
 				<xp:this.facets>
 					<xp:panel xp:key="facet_1">
 						<ul class="buttons">
-							<xp:panel tagName="li" styleClass="proceedButton">
+							<xp:panel tagName="li" styleClass="button">
 								<xp:this.attrs>
 									<xp:attr name="onclick">
 										<xp:this.value><![CDATA[#{javascript:"openDocument('Document.xsp?action=openDocument&documentId=" + document1.getDocument().getParentDocumentUNID() + "', 'content')"}]]></xp:this.value>
