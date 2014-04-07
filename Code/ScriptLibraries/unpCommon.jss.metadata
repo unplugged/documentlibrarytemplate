@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?><note xmlns="http://www.lotus.com/dxl" class="filter" maintenanceversion="1.0" replicaid="80257AC2002D6A1A" version="9.0">
-<noteinfo noteid="4926" sequence="1" unid="48C52A7E2FBD66BB80257C310048E3BA">
-<created><datetime>20131128T131608,90+00</datetime></created>
-<modified><datetime>20131128T131609,01+00</datetime></modified>
-<revised><datetime>20131128T131609,00+00</datetime></revised>
-<lastaccessed><datetime>20131128T131609,01+00</datetime></lastaccessed>
-<addedtofile><datetime>20131128T131609,01+00</datetime></addedtofile></noteinfo>
+<noteinfo noteid="525a" sequence="1" unid="B2EEE102D333D39380257CB3003FF9A5">
+<created><datetime dst="true">20140407T123846,77+01</datetime></created>
+<modified><datetime dst="true">20140407T123846,88+01</datetime></modified>
+<revised><datetime dst="true">20140407T123846,87+01</datetime></revised>
+<lastaccessed><datetime dst="true">20140407T123846,88+01</datetime></lastaccessed>
+<addedtofile><datetime dst="true">20140407T123846,88+01</datetime></addedtofile></noteinfo>
 <updatedby><name>CN=Matt White/O=Exhilarate</name></updatedby>
 <wassignedby><name>CN=Matt White/O=Exhilarate</name></wassignedby>
 <item name="$TITLE" sign="true"><text>unpCommon</text></item>

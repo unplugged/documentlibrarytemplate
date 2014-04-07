@@ -19,25 +19,15 @@
 	<unp:unpHeader search="database" viewsButton="true"
 		title="Doc Library" searchPage="UnpSearch.xsp">
 	</unp:unpHeader>
-	<unp:unpNavigator>
-		<unp:this.menuItem>
-			<unp:menuItem label="All Documents" page="/UnpMain.xsp"
-				ajaxtargetid="content" ajaxloadid="contentwrapper">
-			</unp:menuItem>
-			<unp:menuItem label="By Author" page="/UnpAuthor.xsp"
-				ajaxtargetid="content" ajaxloadid="contentwrapper">
-			</unp:menuItem>
-			<unp:menuItem label="By Alternate Name" page="/UnpAlternateName.xsp"
-				ajaxtargetid="content" ajaxloadid="contentwrapper">
-			</unp:menuItem>
-			<unp:menuItem label="By Category" page="/UnpCategory.xsp"
-				ajaxtargetid="content" ajaxloadid="contentwrapper">
-			</unp:menuItem>
-			<unp:menuItem ajaxloadid="contentwrapper" ajaxtargetid="content"
-				submenu="no" disabled="no" label="About" page="/UnpAbout.xsp">
-			</unp:menuItem>
-		</unp:this.menuItem>
-	</unp:unpNavigator>
+	<unp:unpNavigatorComputed>
+		<unp:this.computedmenuitems><![CDATA[#{javascript:[
+        {label: "All Documents", hasSubMenu: false, page: "/UnpMain.xsp", ajaxloadid: "contentwrapper", ajaxtargetid: "content"},
+        {label: "By Author", hasSubMenu: false, page: "/UnpAuthor.xsp", ajaxloadid: "contentwrapper", ajaxtargetid: "content"},
+        {label: "By Alternate Name", hasSubMenu: false, page: "/UnpAlternateName.xsp", ajaxloadid: "contentwrapper", ajaxtargetid: "content"},
+        {label: "By Category", hasSubMenu: false, page: "/UnpCategory.xsp", ajaxloadid: "contentwrapper", ajaxtargetid: "content"},
+        {label: "About", hasSubMenu: false, page: "/UnpAbout.xsp", ajaxloadid: "contentwrapper", ajaxtargetid: "content"}
+]}]]></unp:this.computedmenuitems>
+	</unp:unpNavigatorComputed>
 	<div id="content">
 		<div id="contentwrapper">
 			<xp:callback facetName="facet_1" id="callback1"></xp:callback>

@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?><note xmlns="http://www.lotus.com/dxl" class="form" maintenanceversion="1.0" replicaid="80257AC2002D6A1A" version="9.0">
-<noteinfo noteid="50fa" sequence="1" unid="8A2B456411CA514480257C7E0053AD63">
-<created><datetime>20140213T151358,75+00</datetime></created>
-<modified><datetime>20140213T151402,17+00</datetime></modified>
-<revised><datetime>20140213T151402,16+00</datetime></revised>
-<lastaccessed><datetime>20140213T151402,17+00</datetime></lastaccessed>
-<addedtofile><datetime>20140213T151402,17+00</datetime></addedtofile></noteinfo>
+<noteinfo noteid="5302" sequence="1" unid="D884E2A28608062B80257CB300401C0C">
+<created><datetime dst="true">20140407T124014,84+01</datetime></created>
+<modified><datetime dst="true">20140407T124014,87+01</datetime></modified>
+<revised><datetime dst="true">20140407T124014,86+01</datetime></revised>
+<lastaccessed><datetime dst="true">20140407T124014,87+01</datetime></lastaccessed>
+<addedtofile><datetime dst="true">20140407T124014,87+01</datetime></addedtofile></noteinfo>
 <updatedby><name>CN=Matt White/O=Exhilarate</name></updatedby>
 <wassignedby><name>CN=Matt White/O=Exhilarate</name></wassignedby>
 <item name="$TITLE"><text>grouped.less</text></item>
 <item name="$Flags"><text>345CgQ</text></item>
 <item name="$FlagsExt"><text>D</text></item>
-
 <item name="$FileModDT" sign="true"><datetime>20131129T144205,00+00</datetime></item>
+<item name="$DesignerVersion"><text>8.5.3</text></item>
 
 
 
-<item name="$FileNames" sign="true"><text>grouped.less</text></item>
-<item name="$DesignerVersion"><text>8.5.3</text></item></note>
+
+<item name="$FileNames" sign="true"><text>grouped.less</text></item></note>

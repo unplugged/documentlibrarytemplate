@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?><note xmlns="http://www.lotus.com/dxl" class="filter" maintenanceversion="1.0" replicaid="80257AC2002D6A1A" version="9.0">
-<noteinfo noteid="493a" sequence="1" unid="A43CBAB1A0CCEBDA80257C310048E3BF">
-<created><datetime>20131128T131608,95+00</datetime></created>
-<modified><datetime>20131128T131609,36+00</datetime></modified>
-<revised><datetime>20131128T131609,35+00</datetime></revised>
-<lastaccessed><datetime>20131128T131609,36+00</datetime></lastaccessed>
-<addedtofile><datetime>20131128T131609,36+00</datetime></addedtofile></noteinfo>
+<noteinfo noteid="526e" sequence="1" unid="C4A9AF6B3D7F719780257CB3003FF9AA">
+<created><datetime dst="true">20140407T123846,82+01</datetime></created>
+<modified><datetime dst="true">20140407T123847,27+01</datetime></modified>
+<revised><datetime dst="true">20140407T123847,26+01</datetime></revised>
+<lastaccessed><datetime dst="true">20140407T123847,27+01</datetime></lastaccessed>
+<addedtofile><datetime dst="true">20140407T123847,27+01</datetime></addedtofile></noteinfo>
 <updatedby><name>CN=Matt White/O=Exhilarate</name></updatedby>
 <wassignedby><name>CN=Matt White/O=Exhilarate</name></wassignedby>
 <item name="$TITLE" sign="true"><text>unpSearchLocal.js</text></item>
